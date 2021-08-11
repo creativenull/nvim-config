@@ -12,7 +12,8 @@
 -- =============================================================================
 
 -- Initialize
-require('cnull.core').setup({
+local core = require('cnull.core')
+core.setup({
   config = {
     leader = ' ',
 
