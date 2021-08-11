@@ -7,7 +7,7 @@ local M = {
     git = 'https://github.com/wbthomason/packer.nvim.git',
     pack = 'packer.nvim',
     selfcare = 'wbthomason/packer.nvim',
-    installpath = stdpath('data') .. '/site/packer/pack/packer/opt/packer.nvim',
+    installpath = stdpath('data') .. '/site/pack/packer/opt/packer.nvim',
     init = nil,
   },
   modlist = {},
