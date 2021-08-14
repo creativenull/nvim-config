@@ -1,4 +1,4 @@
-local nmap = require('cnull.core').keymap.nmap
+local nmap = require('cnull.core.keymap').nmap
 
 require('nvim-biscuits').setup {
   default_config = {

@@ -7,7 +7,7 @@ local M = {
     {'folke/todo-comments.nvim', opt = true, requires = {'nvim-lua/plenary.nvim'}},
     {'glepnir/galaxyline.nvim', branch = 'main', requires = {'kyazdani42/nvim-web-devicons'}},
     {'code-biscuits/nvim-biscuits', requires = {'nvim-treesitter/nvim-treesitter'}},
-    {'plasticboy/vim-markdown', opt = true}
+    {'plasticboy/vim-markdown', opt = true},
   },
 }
 
