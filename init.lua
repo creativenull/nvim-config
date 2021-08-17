@@ -35,7 +35,7 @@ core.setup({
     leader = ' ',
 
     theme = {
-      name = 'material',
+      name = 'nightfox',
       transparent = false,
 
       -- Events

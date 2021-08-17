@@ -3,6 +3,7 @@ local M = {
     {'norcalli/nvim-colorizer.lua', opt = true},
     {'bluz71/vim-moonfly-colors'},
     {'marko-cerovac/material.nvim'},
+    {'EdenEast/nightfox.nvim'},
   },
 }
 
