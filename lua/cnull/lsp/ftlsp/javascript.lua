@@ -21,15 +21,24 @@ local deno_root = fn.getcwd() .. '/import_map.json'
 local is_node = fn.filereadable(node_root) == 1
 local is_deno = fn.filereadable(deno_root) == 1
 if is_node then
-  require('cnull.core.lsp').setup('tsserver', {
+  local config = {
     filetypes = filetypes,
     root_dir = root_pattern('package.json', 'jsconfig.json'),
     flags = {
       debounce_text_changes = 500,
     },
-  })
+  }
+
+  vim.schedule(function()
+    if coq then
+      require('cnull.core.lsp').setup('tsserver', coq.lsp_ensure_capabilities(config))
+    else
+      require('cnull.core.lsp').setup('tsserver', config)
+    end
+  end)
+
 elseif is_deno then
-  require('cnull.core.lsp').setup('denols', {
+  local config = {
     filetypes = filetypes,
     root_dir = root_pattern('import_map.json', '.denols'),
     init_options = {
@@ -41,5 +50,13 @@ elseif is_deno then
     flags = {
       debounce_text_changes = 500,
     },
-  })
+  }
+
+  vim.schedule(function()
+    if coq then
+      require('cnull.core.lsp').setup('denols', coq.lsp_ensure_capabilities(config))
+    else
+      require('cnull.core.lsp').setup('denols', config)
+    end
+  end)
 end

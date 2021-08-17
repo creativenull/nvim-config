@@ -11,8 +11,8 @@ local lua_rtp = vim.split(package.path, ';')
 table.insert(lua_rtp, 'lua/?.lua')
 table.insert(lua_rtp, 'lua/?/init.lua')
 
-require('cnull.core.lsp').setup('sumneko_lua', {
-  cmd = { 'luals' },
+local config = {
+  cmd = {'luals'},
   settings = {
     Lua = {
       runtime = {
@@ -23,7 +23,7 @@ require('cnull.core.lsp').setup('sumneko_lua', {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = {'vim', 'coq'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -35,4 +35,12 @@ require('cnull.core.lsp').setup('sumneko_lua', {
       },
     },
   },
-})
+}
+
+vim.schedule(function()
+  if coq then
+    require('cnull.core.lsp').setup('sumneko_lua', coq.lsp_ensure_capabilities(config))
+  else
+    require('cnull.core.lsp').setup('sumneko_lua', config)
+  end
+end)
