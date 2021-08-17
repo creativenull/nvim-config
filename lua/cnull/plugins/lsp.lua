@@ -6,8 +6,8 @@ local M = {
 }
 
 function M.after()
-  local corelsp = require('cnull.core.lsp')
   local nmap = require('cnull.core.keymap').nmap
+  local corelsp = require('cnull.core.lsp')
 
   local function on_attach(_, bufnr)
     local diag_opts = '{ width = 80, focusable = false, border = "single" }'
