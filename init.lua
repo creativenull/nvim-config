@@ -11,6 +11,23 @@
 -- Currently, tested on a Linux machine (maybe macOS, Windows is a bit of a stretch)
 -- =============================================================================
 
+-- Load packages on the filetype event in `after/ftplugin`
+function _G.LoadCommonPackages()
+  vim.cmd('packadd vim-abolish')
+  vim.cmd('packadd vim-surround')
+  vim.cmd('packadd kommentary')
+  vim.cmd('packadd ultisnips')
+  vim.cmd('packadd vim-snippets')
+
+  vim.cmd('packadd indent-blankline.nvim')
+  require('cnull.plugins.ui.indent_blankline')
+
+  vim.cmd('packadd todo-comments.nvim')
+  require('todo-comments').setup()
+
+  require('cnull.plugins.autocompletion.coq')
+end
+
 -- Initialize
 local core = require('cnull.core')
 core.setup({
@@ -18,10 +35,12 @@ core.setup({
     leader = ' ',
 
     theme = {
-      name = 'moonfly',
+      name = 'material',
       transparent = false,
-      setup = function()
-        -- vim.g.tokyonight_style = 'night'
+
+      -- Events
+      on_before = function()
+        vim.g.material_style = 'darker'
       end,
     },
 
@@ -33,7 +52,7 @@ core.setup({
   },
 
   -- Events
-  before = function()
+  on_before = function()
     local autocmd = require('cnull.core.event').autocmd
 
     -- Highlight text yank
@@ -46,21 +65,7 @@ core.setup({
     })
   end,
 
-  after = function()
-    function _G.LoadCommonPackages()
-      vim.cmd('packadd vim-abolish')
-      vim.cmd('packadd vim-surround')
-      vim.cmd('packadd kommentary')
-      vim.cmd('packadd ultisnips')
-      vim.cmd('packadd vim-snippets')
-
-      vim.cmd('packadd indent-blankline.nvim')
-      require('cnull.plugins.ui.indent_blankline')
-
-      vim.cmd('packadd todo-comments.nvim')
-      require('todo-comments').setup()
-    end
-
+  on_after = function()
     require('cnull.user.keymaps')
     require('cnull.user.conceal')
     require('cnull.user.codeshot')
