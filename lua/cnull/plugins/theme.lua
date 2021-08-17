@@ -1,9 +1,8 @@
 local M = {
   plugins = {
-    {'norcalli/nvim-colorizer.lua'},
-    {'folke/tokyonight.nvim'},
-    {'glepnir/zephyr-nvim'},
+    {'norcalli/nvim-colorizer.lua', opt = true},
     {'bluz71/vim-moonfly-colors'},
+    {'marko-cerovac/material.nvim'},
   },
 }
 
@@ -16,6 +15,7 @@ function M.after()
     {
       event = 'ColorScheme',
       exec = function()
+        vim.cmd('packadd nvim-colorizer.lua')
         require('colorizer').setup()
       end,
     },
