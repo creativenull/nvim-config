@@ -1,9 +1,6 @@
-local fn = vim.fn
-local api = vim.api
-
 local exec = 'luals'
-if fn.executable(exec) == 0 then
-  api.nvim_err_writeln(string.format('lsp: %q is not installed', exec))
+if vim.fn.executable(exec) == 0 then
+  vim.api.nvim_err_writeln(string.format('lsp: %q is not installed', exec))
   return
 end
 
@@ -11,7 +8,7 @@ local lua_rtp = vim.split(package.path, ';')
 table.insert(lua_rtp, 'lua/?.lua')
 table.insert(lua_rtp, 'lua/?/init.lua')
 
-local config = {
+require('cnull.core.lsp').setup('sumneko_lua', {
   cmd = {'luals'},
   settings = {
     Lua = {
@@ -27,7 +24,7 @@ local config = {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = api.nvim_get_runtime_file('', true),
+        library = vim.api.nvim_get_runtime_file('', true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
@@ -35,12 +32,4 @@ local config = {
       },
     },
   },
-}
-
-vim.schedule(function()
-  if coq then
-    require('cnull.core.lsp').setup('sumneko_lua', coq.lsp_ensure_capabilities(config))
-  else
-    require('cnull.core.lsp').setup('sumneko_lua', config)
-  end
-end)
+})
