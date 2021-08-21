@@ -1,20 +1,17 @@
 local imap = require('cnull.core.keymap').imap
 
-vim.g.coq_settings = {
-  ['keymap.recommended'] = false,
-  ['keymap.jump_to_mark'] = '<C-j>',
-  ['clients.tmux.enabled'] = false,
-  ['clients.tree_sitter.enabled'] = false,
-  ['clients.tags.enabled'] = false,
-  ['display.preview.positions'] = {
-    east = 1,
-    north = 2,
-    south = 3,
-    west = 4,
-  },
-}
+local function get_termcode(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
--- imap('<Tab>', [[pumvisible() ? "\<C-y>" : "\<Tab>"]], { expr = true, silent = true })
-imap('<Tab>', [=[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><Tab>" : "\<C-y>") : "\<Tab>"]=], { expr = true, silent = true})
+function _G.TabCompletionExpr(default_key)
+  if vim.fn.pumvisible() == 1 then
+    return get_termcode('<C-y>')
+  else
+    return get_termcode(default_key)
+  end
+end
 
-vim.cmd([[COQnow --shut-up]])
+imap('<Tab>', [=[v:lua.TabCompletionExpr('<Tab>')]=] , { expr = true, silent = true })
+
+vim.cmd('COQnow')
