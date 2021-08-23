@@ -64,6 +64,8 @@ core.setup({
       end,
     })
 
+    -- coq_nvim Config
+    -- ---
     vim.g.coq_settings = {
       ['auto_start'] = false,
       ['keymap.recommended'] = false,
