@@ -36,11 +36,11 @@ core.setup({
 
     theme = {
       name = 'moonfly',
-      transparent = false,
+      transparent = true,
 
       -- Events
       on_before = function()
-        vim.g.nightfox_italic_comments = true
+        -- vim.g.nightfox_italic_comments = true
       end,
     },
 
@@ -63,23 +63,6 @@ core.setup({
         vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })
       end,
     })
-
-    -- coq_nvim Config
-    -- ---
-    vim.g.coq_settings = {
-      ['auto_start'] = false,
-      ['keymap.recommended'] = false,
-      ['keymap.jump_to_mark'] = '<C-j>',
-      ['clients.tmux.enabled'] = false,
-      ['clients.tree_sitter.enabled'] = false,
-      ['clients.tags.enabled'] = false,
-      ['display.preview.positions'] = {
-        east = 1,
-        north = 3,
-        south = 4,
-        west = 2,
-      },
-    }
   end,
 
   on_after = function()
