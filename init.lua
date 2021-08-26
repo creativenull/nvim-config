@@ -24,8 +24,6 @@ function _G.LoadCommonPackages()
 
   vim.cmd('packadd todo-comments.nvim')
   require('todo-comments').setup()
-
-  require('cnull.plugins.autocompletion.coq')
 end
 
 -- Initialize
@@ -71,5 +69,6 @@ core.setup({
     require('cnull.user.codeshot')
     require('cnull.user.options')
     require('cnull.user.commands')
+    require('cnull.user.completion')
   end,
 })
