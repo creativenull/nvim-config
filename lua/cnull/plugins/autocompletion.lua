@@ -1,46 +1,41 @@
 local M = {
   plugins = {
+    -- nvim-compe
     -- {'hrsh7th/nvim-compe'},
-    {'ms-jpq/coq_nvim', branch = 'coq'},
-    {'ms-jpq/coq.artifacts', branch = 'artifacts'},
+
+    -- nvim-cmp
+    {'hrsh7th/nvim-cmp'},
+    {'hrsh7th/cmp-buffer'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'quangnguyen30192/cmp-nvim-ultisnips'},
+
+    -- coq_nvim
+    -- {'ms-jpq/coq_nvim', opt = true, branch = 'coq'},
+    -- {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
+
+    -- ddc.vim
+    -- {'Shougo/ddc.vim', requires = {'vim-denops/denops.vim'}},
+    -- {'Shougo/ddc-sorter_rank', requires = {'Shougo/ddc.vim'}},
+    -- {'matsui54/ddc-matcher_fuzzy', requires = {'Shougo/ddc.vim'}},
+    -- {'Shougo/ddc-around', requires = {'Shougo/ddc.vim'}},
+    -- {'Shougo/ddc-nvim-lsp', requires = {'Shougo/ddc.vim'}},
+    -- {'matsui54/ddc-ultisnips', requires = {'Shougo/ddc.vim'}},
+    -- {'matsui54/ddc-nvim-lsp-doc', requires = {'Shougo/ddc.vim'}},
   },
 }
 
-function M.before()
-  -- coq_nvim Config
+function M.after()
+  -- ddc.vim Config
   -- ---
-  vim.g.coq_settings = {
-    ['auto_start'] = false,
-    ['keymap.recommended'] = false,
-    ['keymap.jump_to_mark'] = '<C-j>',
-    ['clients.tmux.enabled'] = false,
-    ['clients.tree_sitter.enabled'] = false,
-    ['clients.tags.enabled'] = false,
-    ['display.preview.positions'] = {
-      east = 1,
-      north = 3,
-      south = 4,
-      west = 2,
-    },
-  }
-end
-
---[[ function M.after()
-  local imap = require('cnull.core.keymap').imap
+  -- require('cnull.plugins.autocompletions.ddc')
 
   -- compe.nvim Config
   -- ---
-  require('compe').setup({
-    source = {
-      nvim_lsp  = true,
-      ultisnips = true,
-    },
-  })
+  -- require('cnull.plugins.autocompletions.compe')
 
-  vim.opt.pumheight = 10
-
-  imap('<C-Space>', [=[compe#complete()]=], { expr = true, noremap = false })
-  imap('<Tab>', [=[compe#confirm('<Tab>')]=], { expr = true, noremap = false })
-end ]]
+  -- nvim-cmp Config
+  -- ---
+  require('cnull.plugins.autocompletions.cmp')
+end
 
 return M
