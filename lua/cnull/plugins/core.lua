@@ -10,6 +10,12 @@ local M = {
   },
 }
 
+function M.before()
+  vim.g.projectlocal = {
+    projectConfig = '.vim/init.lua',
+  }
+end
+
 function M.after()
   local nmap = require('cnull.core.keymap').nmap
 
