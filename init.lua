@@ -14,6 +14,7 @@
 -- Load packages on the filetype event in `after/ftplugin`
 function _G.LoadCommonPackages()
   vim.cmd('packadd vim-abolish')
+  vim.cmd('packadd vim-repeat')
   vim.cmd('packadd vim-surround')
   vim.cmd('packadd kommentary')
   vim.cmd('packadd ultisnips')

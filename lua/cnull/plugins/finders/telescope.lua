@@ -4,9 +4,7 @@ local telescope_builtin = require('telescope.builtin')
 
 telescope.setup({
   defaults = {
-    layout_config = {
-      prompt_position = 'top',
-    },
+    layout_config = { prompt_position = 'top' },
     layout_strategy = 'horizontal',
     sorting_strategy = 'ascending',
     use_less = false,
@@ -20,13 +18,15 @@ local function find_files()
     previewer = false,
   })
 end
-nmap('<Leader>p', find_files)
+
+nmap('<C-p>', find_files)
 
 -- Code finder
 local function live_grep()
   telescope_builtin.live_grep({})
 end
-nmap('<Leader>t', live_grep)
+
+nmap('<C-t>', live_grep)
 
 -- Config file finder
 local function find_config_files()
@@ -36,4 +36,5 @@ local function find_config_files()
     previewer = false,
   })
 end
-nmap('<leader>vf', find_config_files)
+
+nmap('<Leader>vf', find_config_files)

@@ -16,15 +16,15 @@ function M.after()
     },
   }
 
-  function _G.RipgrepCall(qargs, bang)
+  function _G.FzfVimGrep(qargs, bang)
     local sh = 'rg --column --line-number --no-heading --color=always --smart-case -- ' .. vim.fn.shellescape(qargs)
     fzf.vim.grep(sh, 1, fzf.vim.with_preview('right:50%', 'ctrl-/'), bang)
   end
 
-  command('Rg', 'lua _G.RipgrepCall(<q-args>, <bang>0)', {'-nargs=*', '-bang'})
+  command('Rg', 'lua FzfVimGrep(<q-args>, <bang>0)', {'-nargs=*', '-bang'})
 
-  nmap('<Leader>p', '<Cmd>Files<CR>')
-  nmap('<Leader>t', '<Cmd>Rg<CR>')
+  nmap('<C-p>', '<Cmd>Files<CR>')
+  nmap('<C-t>', '<Cmd>Rg<CR>')
 end
 
 return M
