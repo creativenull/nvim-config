@@ -42,12 +42,6 @@ core.setup({
         -- vim.g.nightfox_italic_comments = true
       end,
     },
-
-    plugins_config = {
-      init = {
-        compile_path = string.format('%s/packer_compiled.lua', vim.fn.stdpath('data')),
-      },
-    },
   },
 
   -- Events
