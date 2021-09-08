@@ -1,38 +1,20 @@
-local function indent_blankline_highlights()
-  local fn = vim.fn
-  local bg = fn.synIDattr(fn.synIDtrans(fn.hlID('Normal')), 'bg')
-  local first = '#aaaaaa'
-  local second = '#7F1D1D'
-  local third = '#064E3B'
-  local fourth = '#1E3A8A'
+local synIDattr = vim.fn.synIDattr
+local synIDtrans = vim.fn.synIDtrans
+local hlID = vim.fn.hlID
+local bg = synIDattr(synIDtrans(hlID('Normal')), 'bg')
+local indent_hi = '#aaaaaa'
 
-  if _G.CNull.config.theme.transparent then
-    bg = 'NONE'
-  end
-
-  if bg == '' then
-    bg = 'NONE'
-  end
-
-  vim.cmd(string.format('highlight IndentBlanklineFirstLine guifg=%s guibg=%s', first, bg))
-  vim.cmd(string.format('highlight IndentBlanklineSecondLine guifg=%s guibg=%s', second, bg))
-  vim.cmd(string.format('highlight IndentBlanklineThirdLine guifg=%s guibg=%s', third, bg))
-  vim.cmd(string.format('highlight IndentBlanklineFourthLine guifg=%s guibg=%s', fourth, bg))
+if _G.CNull.config.theme.transparent then
+  bg = 'NONE'
 end
 
--- Used to call it on startup, but now using 'opt' type
---[[ augroup('user_indent_blankline_events', {
-  { event = 'ColorScheme', exec = indent_blankline_highlights },
-}) ]]
+if bg == '' then
+  bg = 'NONE'
+end
 
-indent_blankline_highlights()
+vim.cmd(string.format('highlight IndentBlanklineHighlight guifg=%s guibg=%s', indent_hi, bg))
 
 vim.g.indent_blankline_char = '│'
 vim.g.indent_blankline_filetype_exclude = {'help', 'markdown'}
 vim.g.indent_blankline_show_first_indent_level = false
-vim.g.indent_blankline_char_highlight_list = {
-  'IndentBlanklineFirstLine',
-  'IndentBlanklineSecondLine',
-  'IndentBlanklineThirdLine',
-  'IndentBlanklineFourthLine',
-}
+vim.g.indent_blankline_char_highlight_list = {'IndentBlanklineHighlight'}
