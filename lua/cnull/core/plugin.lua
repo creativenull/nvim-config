@@ -15,8 +15,7 @@ local M = {
 }
 
 -- Trigger any before() function in a plugin file
--- @param table config
--- @return nil
+-- @param config table
 function M.trigger_before(config)
   for _,modname in pairs(M.modlist) do
     local mod = require(modname)
@@ -27,6 +26,7 @@ function M.trigger_before(config)
 end
 
 -- Trigger any before
+-- @param config table
 function M.trigger_after(config)
   for _,modname in pairs(M.modlist) do
     local mod = require(modname)
@@ -36,6 +36,7 @@ function M.trigger_after(config)
   end
 end
 
+-- Load all the plugins from plugin manager
 function M.loadplugins()
   local paq = require('paq')
   local plugin_names = {}
@@ -66,6 +67,8 @@ function M.loadplugins()
   end
 end
 
+-- Initial setup of the plugin manager
+-- @param config table
 function M.setup(config)
   M.config = vim.tbl_extend('force', M.config, config.plugins_config)
   M.modlist = getmodlist(M.config.modname, { runtimepath = config.runtimepath })
@@ -94,9 +97,6 @@ function M.setup(config)
   if not installing then
     M.trigger_after(config)
   end
-
-  -- TODO: Register plugin template
-  api.nvim_command([[iabbrev cnpl local M = {<CR>plugins = {<CR>{'plugin/name'},<CR>},<CR>}<CR><CR> function M.before()<CR>end<CR><CR> function M.after()<CR>end<CR><CR> return M]])
 end
 
 return M

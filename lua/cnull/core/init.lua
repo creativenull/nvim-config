@@ -1,5 +1,7 @@
 local M = {}
 
+-- Set some defaults not needed for this config
+-- @param cfg table
 local function set_defaults(cfg)
   vim.g.loaded_python_provider = 0
   vim.g.loaded_ruby_provider = 0
@@ -15,9 +17,8 @@ local function set_defaults(cfg)
   vim.g.maplocalleader = cfg.localleader
 end
 
--- Core setup
--- @param table cfg
--- @return nil
+-- Initial core setup
+-- @param cfg table
 function M.setup(opts)
   local colorscheme = require('cnull.core.colorscheme')
   local command = require('cnull.core.command')

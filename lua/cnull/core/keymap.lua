@@ -1,11 +1,11 @@
-local storefn = require('cnull.core.lib.storefn')
+local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
+local store_vlua_fn = require('cnull.core.lib.storefn').store_vlua_fn
 local DEFAULT_OPTS = { noremap = true, silent = true }
 local M = {}
 
 -- Validate args for mapper()
--- @param string input
--- @param string|function exec
--- @return nil
+-- @param input string
+-- @param exec string|function
 local function validate(input, exec)
   local valid_strfn = type(exec) == 'string' or type(exec) == 'function'
   vim.validate({
@@ -20,7 +20,7 @@ local function validate(input, exec)
 end
 
 -- Merge opts with default keymap options
--- @param table opts
+-- @param opts table
 -- @return table
 local function merge_opts(opts)
   if opts and type(opts) == 'table' then
@@ -33,28 +33,31 @@ local function merge_opts(opts)
 end
 
 -- Set the right-hand-side as string or function
--- @param string input
--- @param string|function exec
+-- @param input string
+-- @param exec string|function
 -- @return string
-local function set_exec(input, exec)
+local function set_exec(input, exec, opts)
   local execfn = nil
   if type(exec) == 'function' then
-    execfn = string.format('<Cmd>%s<CR>', storefn('keymaps', input, exec))
+    if opts.expr then
+      execfn = store_vlua_fn('keymaps', input, exec)
+    else
+      execfn = string.format('<Cmd>%s<CR>', store_lua_fn('keymaps', input, exec))
+    end
   end
   exec = execfn or exec
   return exec
 end
 
 -- Generic key mapper to map keys globally or in buffer
--- @param string mode
--- @param string input
--- @param string|function exec
--- @param table|nil opts
--- @return nil
+-- @param mode string
+-- @param input string
+-- @param exec string|function
+-- @param opts table|nil
 local function mapper(mode, input, exec, opts)
   validate(input, exec)
   opts = merge_opts(opts)
-  exec = set_exec(input, exec)
+  exec = set_exec(input, exec, opts)
 
   if opts.bufnr then
     local bufnr = opts.bufnr

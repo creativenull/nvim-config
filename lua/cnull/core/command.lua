@@ -1,9 +1,9 @@
-local storefn = require('cnull.core.lib.storefn')
+local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
 local M = {}
 
 -- Validate options
--- @param string cmd
--- @param string|function exec
+-- @param cmd string
+-- @param exec funtion|string
 -- @return nil
 local function validate(cmd, exec)
   local tableorstring = type(exec) == 'function' or type(exec) == 'string'
@@ -14,7 +14,7 @@ local function validate(cmd, exec)
 end
 
 -- Merge attributes with defaults
--- @param table attrs
+-- @param attrs table
 -- @return table
 local function merge_attrs(attrs)
   attrs = attrs or ''
@@ -26,13 +26,13 @@ local function merge_attrs(attrs)
 end
 
 -- Set the execution of command
--- @param string cmd
--- @param string|function exec
+-- @param cmd string
+-- @param exec funtion|string
 -- @return string
 local function get_exec(cmd, exec)
   local execfn = nil
   if type(exec) == 'function' then
-    execfn = storefn('commands', cmd, exec)
+    execfn = store_lua_fn('commands', cmd, exec)
   end
 
   exec = execfn or exec
@@ -41,15 +41,9 @@ end
 
 -- Create a :command! given a `cmd` and `exec` with optional `attrs`
 -- check :help E174.
--- opts table:
--- {
---   cmd (string) = (required)
---   exec (string|function) = (required)
---   attrs (string|table) = '' (default)
--- }
---
--- @param table opts
--- @return nil
+-- @param cmd string
+-- @param exec string|function
+-- @param attrs string|table
 function M.command(cmd, exec, attrs)
   validate(cmd, exec)
   attrs = merge_attrs(attrs)

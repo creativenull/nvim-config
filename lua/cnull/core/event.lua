@@ -1,5 +1,5 @@
 local api = vim.api
-local storefn = require('cnull.core.lib.storefn')
+local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
 local M = {}
 
 -- Create an :autocmd event, see :help :autocmd for information
@@ -11,9 +11,7 @@ local M = {}
 --   nested (boolean) = false
 --   clear (boolean) = false (if true then use :autocmd! instead)
 -- }
---
--- @param table opts
--- @return nil
+-- @param opts table
 function M.autocmd(opts)
   if opts.event == nil then
     error(debug.traceback('autocmd: `event` cannot be empty'))
@@ -31,7 +29,7 @@ function M.autocmd(opts)
 
   local execfn = nil
   if type(opts.exec) == 'function' then
-    execfn = storefn('events', opts.event, opts.exec)
+    execfn = store_lua_fn('events', opts.event, opts.exec)
   end
 
   local au = string.format(
@@ -51,9 +49,8 @@ function M.autocmd(opts)
 end
 
 -- Create an :augroup, see :help :augroup for information
--- @param string name
--- @param table autocmds - check M.autocmd() above
--- @return nil
+-- @param name string
+-- @param autocmds table
 function M.augroup(name, autocmds)
   if autocmds == nil or vim.tbl_isempty(autocmds) then
     error(debug.traceback('augroup: `autocmds` cannot be empty'))

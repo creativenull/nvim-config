@@ -4,7 +4,6 @@ local M = {
 }
 
 -- Initialize default nvim-lsp settings
--- @return nil
 function M.init()
   vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
@@ -31,9 +30,8 @@ function M.init()
 end
 
 -- Setup lsp server, given name and nvim-lsp configuration
--- @param string lspname
--- @param table lspopts
--- @return nil
+-- @param lspname string
+-- @param lspopts table
 function M.setup(lspname, lspopts)
   local default_opts = {
     on_attach = M.on_attach,
