@@ -63,6 +63,5 @@ core.setup({
     require('cnull.user.conceal')
     require('cnull.user.codeshot')
     require('cnull.user.options')
-    require('cnull.user.completion')
   end,
 })
