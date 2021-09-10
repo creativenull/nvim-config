@@ -16,7 +16,7 @@ ddc.patch_global('sourceOptions', {
     sorters = {'sorter_rank'},
   },
   ultisnips = {
-    mark = 'UltiSnips',
+    mark = 'US',
   },
   nvimlsp = {
     mark = 'LSP',

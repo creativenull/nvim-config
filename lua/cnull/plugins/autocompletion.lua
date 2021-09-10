@@ -14,13 +14,13 @@ local M = {
     -- {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
 
     -- ddc.vim
-    {'Shougo/ddc.vim', requires = {'vim-denops/denops.vim'}},
-    {'Shougo/ddc-sorter_rank', requires = {'Shougo/ddc.vim'}},
-    {'matsui54/ddc-matcher_fuzzy', requires = {'Shougo/ddc.vim'}},
-    {'Shougo/ddc-around', requires = {'Shougo/ddc.vim'}},
-    {'Shougo/ddc-nvim-lsp', requires = {'Shougo/ddc.vim'}},
-    {'matsui54/ddc-ultisnips', requires = {'Shougo/ddc.vim'}},
-    {'matsui54/ddc-nvim-lsp-doc', requires = {'Shougo/ddc.vim'}},
+    {'Shougo/ddc.vim'},
+    {'Shougo/ddc-sorter_rank'},
+    {'matsui54/ddc-matcher_fuzzy'},
+    {'Shougo/ddc-around'},
+    {'Shougo/ddc-nvim-lsp'},
+    {'matsui54/ddc-ultisnips'},
+    {'matsui54/ddc-nvim-lsp-doc'},
   },
 }
 
@@ -36,6 +36,25 @@ function M.after()
   -- nvim-cmp Config
   -- ---
   -- require('cnull.plugins.autocompletions.cmp')
+
+  local function get_termcode(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  end
+
+  function _G.tab_completion(default_key)
+    if vim.fn.pumvisible() == 1 then
+      if vim.call('UltiSnips#CanExpandSnippet') == 1 then
+        return get_termcode('<C-r>=UltiSnips#ExpandSnippet()<CR>')
+      else
+        return get_termcode('<C-y>')
+      end
+    else
+      return get_termcode(default_key)
+    end
+  end
+
+  local imap = require('cnull.core.keymap').imap
+  imap('<Tab>', [[v:lua.tab_completion('<Tab>')]], { expr = true })
 end
 
 return M
