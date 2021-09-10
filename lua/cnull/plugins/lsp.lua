@@ -7,7 +7,6 @@ local M = {
 
 function M.after()
   local nmap = require('cnull.core.keymap').nmap
-  local corelsp = require('cnull.core.lsp')
 
   local function on_attach(_, bufnr)
     local diag_opts = '{ width = 80, focusable = false, border = "single" }'
@@ -22,6 +21,7 @@ function M.after()
     nmap('<Leader>lw', '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics('.. diag_opts ..')<CR>', { bufnr = bufnr })
   end
 
+  local corelsp = require('cnull.core.lsp')
   corelsp.init()
   corelsp.on_attach = on_attach
   require('cnull.lsp').setup({'javascript', 'json', 'lua', 'php', 'typescript'})
