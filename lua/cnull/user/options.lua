@@ -53,3 +53,4 @@ vim.opt.signcolumn = 'yes'
 vim.opt.cmdheight = 2
 vim.opt.showtabline = 2
 vim.opt.laststatus = 2
+vim.opt.guicursor = {'n-v-c-sm:block', 'i-ci-ve:block', 'r-cr-o:hor20'}
