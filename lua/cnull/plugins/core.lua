@@ -1,14 +1,19 @@
 local M = {
   plugins = {
+    -- Deps
     {'nvim-lua/plenary.nvim'},
     {'nvim-lua/popup.nvim'},
-    {'steelsojka/pears.nvim'},
+    {'antoinemadec/FixCursorHold.nvim', opt = true},
+    {'lambdalisue/nerdfont.vim',  opt = true},
+    {'lambdalisue/fern-renderer-nerdfont.vim', opt = true},
     {'vim-denops/denops.vim'},
+
+    -- Core
+    {'steelsojka/pears.nvim'},
     {'creativenull/projectlocal-vim'},
     {'editorconfig/editorconfig-vim'},
     {'kevinhwang91/nvim-bqf'},
     {'mcchrish/nnn.vim', opt = true},
-    {'antoinemadec/FixCursorHold.nvim', opt = true},
     {'lambdalisue/fern.vim', opt = true},
     {'tpope/vim-abolish', opt = true},
     {'tpope/vim-surround', opt = true},
@@ -28,7 +33,7 @@ function M.after()
   -- nnn.vim/fern.vim Config
   -- ---
   function _G.NnnLoad()
-    if vim.fn.exists('g:nnn#loaded') ~= 1 then
+    if not vim.g['g:nnn#loaded'] then
       vim.cmd('packadd nnn.vim')
       require('nnn').setup({
         set_default_mappings = false,
@@ -46,18 +51,22 @@ function M.after()
   end
 
   function _G.FernLoad()
-    if vim.fn.exists('g:loaded_fern') ~= 1 and vim.fn.exists('g:loaded_fix_cursorhold_nvim ') ~= 1 then
+    vim.g['fern#renderer'] = 'nerdfont'
+
+    if not vim.g.loaded_fern and not vim.g.loaded_fix_cursorhold_nvim then
       vim.cmd('packadd FixCursorHold.nvim')
       vim.cmd('packadd fern.vim')
+      vim.cmd('packadd nerdfont.vim')
+      vim.cmd('packadd fern-renderer-nerdfont.vim')
     end
 
-    vim.cmd([[Fern . -reveal=%]])
+    vim.cmd('Fern . -reveal=%')
   end
 
   if vim.fn.has('win32') == 1 then
-    nmap('<Leader>ff', [[<Cmd>lua FernLoad()<CR>]])
+    nmap('<Leader>ff', '<Cmd>lua FernLoad()<CR>')
   else
-    nmap('<Leader>ff', [[<Cmd>lua NnnLoad()<CR>]])
+    nmap('<Leader>ff', '<Cmd>lua NnnLoad()<CR>')
   end
 
   -- pears.nvim Config
