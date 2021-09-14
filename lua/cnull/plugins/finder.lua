@@ -7,41 +7,25 @@ local M = {
 
 if finder == 'telescope' then
   M.plugins = { {'nvim-telescope/telescope.nvim'} }
+  M.after = function()
+    require('cnull.plugins.finders.telescope')
+  end
 elseif finder == 'snap' then
   M.plugins = { {'camspiers/snap'} }
+  M.after = function()
+    require('cnull.plugins.finders.snap')
+  end
 else
   finder = 'fzf'
   M.plugins = {
     {'junegunn/fzf'},
     {'junegunn/fzf.vim'},
   }
-end
-
-function M.before()
-  -- fzf.vim Config
-  -- ---
-  if finder == 'fzf' then
+  M.before = function()
     require('cnull.plugins.finders.fzf').before()
   end
-end
-
-function M.after()
-  -- fzf.vim Config
-  -- ---
-  if finder == 'fzf' then
+  M.after = function()
     require('cnull.plugins.finders.fzf').after()
-  end
-
-  -- telescope.nvim Config
-  -- ---
-  if finder == 'telescope' then
-    require('cnull.plugins.finders.telescope')
-  end
-
-  -- snap Config
-  -- ---
-  if finder == 'snap' then
-    require('cnull.plugins.finders.snap')
   end
 end
 

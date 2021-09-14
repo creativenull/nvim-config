@@ -15,37 +15,25 @@ if autocompletion == 'ddc' then
     {'matsui54/ddc-ultisnips'},
     {'matsui54/ddc-nvim-lsp-doc'},
   }
+  M.after = function()
+    require('cnull.plugins.autocompletions.ddc')
+  end
 elseif autocompletion == 'coq' then
   M.plugins = {
     {'ms-jpq/coq_nvim', opt = true, branch = 'coq'},
     {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
   }
+  M.after = function()
+    require('cnull.plugins.autocompletions.coq')
+  end
 else
-  autocompletion = 'cmp'
   M.plugins = {
     {'hrsh7th/nvim-cmp'},
     {'hrsh7th/cmp-nvim-lsp'},
     {'quangnguyen30192/cmp-nvim-ultisnips'},
   }
-end
-
-function M.after()
-  -- ddc.vim Config
-  -- ---
-  if autocompletion == 'ddc' then
-    require('cnull.plugins.autocompletions.ddc')
-  end
-
-  -- nvim-cmp Config
-  -- ---
-  if autocompletion == 'cmp' then
+  M.after = function()
     require('cnull.plugins.autocompletions.cmp')
-  end
-
-  -- coq_nvim Config
-  -- ---
-  if autocompletion == 'coq' then
-    require('cnull.plugins.autocompletions.coq')
   end
 end
 
