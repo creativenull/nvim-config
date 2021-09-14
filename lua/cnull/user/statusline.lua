@@ -1,10 +1,5 @@
 -- Deprecated: In favor of galaxyline at lua/cnull/plugins/ui/galaxyline.lua
 local augroup = require('cnull.core.event').augroup
-local synIDattr = vim.fn.synIDattr
-local synIDtrans = vim.fn.synIDtrans
-local hlID = vim.fn.hlID
-local bufnr = vim.fn.bufnr
-local exists = vim.fn.exists
 
 local highlights = {
   red = {
@@ -18,7 +13,7 @@ local highlights = {
 }
 
 local function highlight_color(hi, colortype)
-  return synIDattr(synIDtrans(hlID(hi)), colortype)
+  return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(hi)), colortype)
 end
 
 local function lsp_highlights()
@@ -47,7 +42,7 @@ local function get_diagnostic_count(bufnr)
 end
 
 local function lsp_status()
-  local bufnr = bufnr('')
+  local bufnr = vim.fn.bufnr('')
   if not vim.tbl_isempty(vim.lsp.buf_get_clients(bufnr)) then
     local clientnames = get_clientnames(bufnr)
     local errors, warnings = get_diagnostic_count(bufnr)
@@ -72,7 +67,7 @@ end
 
 function _G.RenderActiveStl()
   local branch = ''
-  if exists('g:loaded_gitbranch') == 1 then
+  if vim.fn.exists('g:loaded_gitbranch') == 1 then
     if vim.call('gitbranch#name') ~= '' then
       branch = '' .. vim.call('gitbranch#name')
     end
