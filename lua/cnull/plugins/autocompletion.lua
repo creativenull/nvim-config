@@ -1,19 +1,12 @@
+-- Choose one: ddc, coq, cmp (default)
+local autocompletion = 'cmp'
+
 local M = {
-  plugins = {
-    -- nvim-compe
-    -- {'hrsh7th/nvim-compe'},
+  plugins = {},
+}
 
-    -- nvim-cmp
-    -- {'hrsh7th/nvim-cmp'},
-    -- {'hrsh7th/cmp-buffer'},
-    -- {'hrsh7th/cmp-nvim-lsp'},
-    -- {'quangnguyen30192/cmp-nvim-ultisnips'},
-
-    -- coq_nvim
-    -- {'ms-jpq/coq_nvim', opt = true, branch = 'coq'},
-    -- {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
-
-    -- ddc.vim
+if autocompletion == 'ddc' then
+  M.plugins = {
     {'Shougo/ddc.vim'},
     {'Shougo/ddc-sorter_rank'},
     {'matsui54/ddc-matcher_fuzzy'},
@@ -21,40 +14,39 @@ local M = {
     {'Shougo/ddc-nvim-lsp'},
     {'matsui54/ddc-ultisnips'},
     {'matsui54/ddc-nvim-lsp-doc'},
-  },
-}
+  }
+elseif autocompletion == 'coq' then
+  M.plugins = {
+    {'ms-jpq/coq_nvim', opt = true, branch = 'coq'},
+    {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
+  }
+else
+  autocompletion = 'cmp'
+  M.plugins = {
+    {'hrsh7th/nvim-cmp'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'quangnguyen30192/cmp-nvim-ultisnips'},
+  }
+end
 
 function M.after()
   -- ddc.vim Config
   -- ---
-  require('cnull.plugins.autocompletions.ddc')
-
-  -- compe.nvim Config
-  -- ---
-  -- require('cnull.plugins.autocompletions.compe')
+  if autocompletion == 'ddc' then
+    require('cnull.plugins.autocompletions.ddc')
+  end
 
   -- nvim-cmp Config
   -- ---
-  -- require('cnull.plugins.autocompletions.cmp')
-
-  local function get_termcode(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  if autocompletion == 'cmp' then
+    require('cnull.plugins.autocompletions.cmp')
   end
 
-  function _G.tab_completion(default_key)
-    if vim.fn.pumvisible() == 1 then
-      if vim.call('UltiSnips#CanExpandSnippet') == 1 then
-        return get_termcode('<C-r>=UltiSnips#ExpandSnippet()<CR>')
-      else
-        return get_termcode('<C-y>')
-      end
-    else
-      return get_termcode(default_key)
-    end
+  -- coq_nvim Config
+  -- ---
+  if autocompletion == 'coq' then
+    require('cnull.plugins.autocompletions.coq')
   end
-
-  local imap = require('cnull.core.keymap').imap
-  imap('<Tab>', [[v:lua.tab_completion('<Tab>')]], { expr = true })
 end
 
 return M

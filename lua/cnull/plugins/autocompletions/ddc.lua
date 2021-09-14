@@ -42,3 +42,22 @@ augroup('ddc_user_events', {
     end,
   },
 })
+
+-- Tab completion
+local function termcodes(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+function _G.user_tab_completion(default_key)
+  if vim.fn.pumvisible() == 1 then
+    if vim.call('UltiSnips#CanExpandSnippet') == 1 then
+      return termcodes('<C-r>=UltiSnips#ExpandSnippet()<CR>')
+    else
+      return termcodes('<C-y>')
+    end
+  else
+    return termcodes(default_key)
+  end
+end
+
+imap('<Tab>', [[v:lua.user_tab_completion('<Tab>')]], { expr = true })

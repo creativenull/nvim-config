@@ -1,6 +1,6 @@
 local augroup = require('cnull.core.event').augroup
 
-vim.g.coq_settings = {
+local config = {
   ['auto_start'] = false,
   ['keymap.recommended'] = false,
   ['keymap.jump_to_mark'] = '<C-j>',
@@ -19,6 +19,7 @@ augroup('coq_user_events', {
   {
     event = 'FileType',
     exec = function()
+      vim.g.coq_settings = config
       vim.cmd('packadd coq_nvim')
       vim.cmd('packadd coq.artifacts')
       vim.cmd('COQnow')
