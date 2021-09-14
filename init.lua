@@ -60,8 +60,10 @@ core.setup({
 
   on_after = function()
     require('cnull.user.keymaps')
+    require('cnull.user.options')
+
+    -- Custom commands
     require('cnull.user.conceal')
     require('cnull.user.codeshot')
-    require('cnull.user.options')
   end,
 })
