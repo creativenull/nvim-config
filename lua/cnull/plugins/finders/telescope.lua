@@ -1,3 +1,4 @@
+local augroup = require('cnull.core.event').augroup
 local nmap = require('cnull.core.keymap').nmap
 local telescope = require('telescope')
 local telescope_builtin = require('telescope.builtin')
@@ -38,3 +39,10 @@ local function find_config_files()
 end
 
 nmap('<Leader>vf', find_config_files)
+
+augroup('telescope_user_events', {
+  {
+    event = 'ColorScheme',
+    exec = 'highlight TelescopeBorder guifg=#aaaaaa'
+  },
+})
