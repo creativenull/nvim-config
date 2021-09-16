@@ -1,11 +1,8 @@
--- Choose one: galaxyline, lualine (default)
-local statusline = 'lualine'
-
 local M = {
   plugins = {},
 }
 
-if statusline == 'galaxyline' then
+if _G.CNull.config.statusline == 'galaxyline' then
   M.plugins = { {'glepnir/galaxyline.nvim'} }
   M.after = function()
     require('cnull.plugins.ui.galaxyline')

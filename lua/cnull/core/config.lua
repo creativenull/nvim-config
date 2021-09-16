@@ -37,6 +37,9 @@ function M.init(config)
     userspace = config.userspace or 'nvim',
     runtimepath = config.runtimepath or string.format('%s/lua', fn.stdpath('config')),
     leader = config.leader or ',',
+    autocompletion = config.autocompletion or 'cmp',
+    finder = config.finder or 'fzf',
+    statusline = config.statusline or 'lualine',
     localleader = config.localleader or [[\]],
     theme = {
       name = config.theme.name or 'default',

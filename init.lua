@@ -31,16 +31,22 @@ end
 local core = require('cnull.core')
 core.setup({
   config = {
+    -- Leader key
     leader = ' ',
 
+    -- Choose one: ddc, coq, cmp (default)
+    autocompletion = 'cmp',
+
+    -- Choose one: telescope, snap, fzf (default)
+    finder = 'telescope',
+
+    -- Choose one: galaxyline, lualine (default)
+    statusline = 'lualine',
+
+    -- Colorscheme settings
     theme = {
       name = 'moonfly',
       transparent = true,
-
-      -- Events
-      on_before = function()
-        -- vim.g.nightfox_italic_comments = true
-      end,
     },
   },
 
@@ -62,7 +68,7 @@ core.setup({
     require('cnull.user.keymaps')
     require('cnull.user.options')
 
-    -- Custom commands
+    -- Custom user commands
     require('cnull.user.conceal')
     require('cnull.user.codeshot')
   end,

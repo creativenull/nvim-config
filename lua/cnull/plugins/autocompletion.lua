@@ -1,11 +1,8 @@
--- Choose one: ddc, coq, cmp (default)
-local autocompletion = 'cmp'
-
 local M = {
   plugins = {},
 }
 
-if autocompletion == 'ddc' then
+if _G.CNull.config.autocompletion == 'ddc' then
   M.plugins = {
     {'Shougo/ddc.vim'},
     {'Shougo/ddc-sorter_rank'},
@@ -18,7 +15,7 @@ if autocompletion == 'ddc' then
   M.after = function()
     require('cnull.plugins.autocompletions.ddc')
   end
-elseif autocompletion == 'coq' then
+elseif _G.CNull.config.autocompletion == 'coq' then
   M.plugins = {
     {'ms-jpq/coq_nvim', opt = true, branch = 'coq'},
     {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
