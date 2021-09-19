@@ -35,7 +35,7 @@ core.setup({
     leader = ' ',
 
     -- Choose one: ddc, coq, cmp (default)
-    autocompletion = 'cmp',
+    autocompletion = 'ddc',
 
     -- Choose one: telescope, snap, fzf (default)
     finder = 'telescope',
@@ -47,6 +47,9 @@ core.setup({
     theme = {
       name = 'moonfly',
       transparent = true,
+      on_before = function()
+        vim.g.moonflyNormalFloat = true
+      end,
     },
   },
 
