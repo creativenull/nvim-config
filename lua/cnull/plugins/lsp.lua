@@ -24,7 +24,7 @@ function M.after()
   local corelsp = require('cnull.core.lsp')
   corelsp.init()
   corelsp.on_attach = on_attach
-  require('cnull.lsp').setup({'javascript', 'json', 'lua', 'php', 'typescript'})
+  require('cnull.lsp').setup({'javascript', 'json', 'lua', 'php', 'typescript', 'vim'})
 
   local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })

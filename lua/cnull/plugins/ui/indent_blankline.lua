@@ -2,7 +2,7 @@ local synIDattr = vim.fn.synIDattr
 local synIDtrans = vim.fn.synIDtrans
 local hlID = vim.fn.hlID
 local bg = synIDattr(synIDtrans(hlID('Normal')), 'bg')
-local indent_hi = '#aaaaaa'
+local indent_hi = '#555555'
 
 if _G.CNull.config.theme.transparent then
   bg = 'NONE'
