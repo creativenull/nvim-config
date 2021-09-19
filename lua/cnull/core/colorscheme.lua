@@ -17,6 +17,7 @@ local function register_transparent_event(theme)
       { event = 'ColorScheme', exec = 'highlight ToolbarLine guibg=NONE' },
       { event = 'ColorScheme', exec = 'highlight Comment guifg=#888888' },
       { event = 'ColorScheme', exec = 'highlight Visual guifg=#333333 guibg=#aaaaaa' },
+      { event = 'ColorScheme', exec = 'highlight FloatBorder guifg=#aaaaaa guibg=NONE' },
     })
   end
 end
