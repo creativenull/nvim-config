@@ -51,6 +51,12 @@ core.setup({
         vim.g.moonflyNormalFloat = true
       end,
     },
+
+    plugins_config = {
+      init = {
+        compile_path = vim.fn.stdpath('data') .. '/packer_compiled.lua',
+      },
+    },
   },
 
   -- Events
