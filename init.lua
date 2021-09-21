@@ -43,7 +43,7 @@ core.setup({
     -- Choose one: galaxyline, lualine (default)
     statusline = 'lualine',
 
-    -- Colorscheme settings
+    -- Colorscheme config
     theme = {
       name = 'moonfly',
       transparent = true,
@@ -52,7 +52,8 @@ core.setup({
       end,
     },
 
-    plugins_config = {
+    -- Adjust packer config
+    plugins = {
       init = {
         compile_path = vim.fn.stdpath('data') .. '/packer_compiled.lua',
       },
@@ -76,6 +77,7 @@ core.setup({
   on_after = function()
     require('cnull.user.keymaps')
     require('cnull.user.options')
+    require('cnull.user.abbreviations')
 
     -- Custom user commands
     require('cnull.user.conceal')
