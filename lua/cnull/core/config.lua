@@ -47,7 +47,7 @@ function M.init(config)
       on_before = config.theme.on_before or nil,
       on_after = config.theme.on_after or nil,
     },
-    plugins_config = config.plugins_config or {}
+    plugins = config.plugins or {}
   }
 
   -- Global State to track config, events, commands, keymaps, etc

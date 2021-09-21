@@ -75,7 +75,7 @@ end
 -- Initial setup of the plugin manager
 -- @param config table
 function M.setup(config)
-  M.config = vim.tbl_extend('force', M.config, config.plugins_config)
+  M.config = vim.tbl_extend('force', M.config, config.plugins)
   M.modlist = getmodlist(M.config.modname, { runtimepath = config.runtimepath })
   local installing = false
 

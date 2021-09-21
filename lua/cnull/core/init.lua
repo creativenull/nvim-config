@@ -40,7 +40,7 @@ function M.setup(opts)
   end
 
   -- Plugins
-  if cfg.plugins_config then
+  if cfg.plugins then
     plugin.setup(cfg)
   end
 
