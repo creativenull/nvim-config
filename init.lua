@@ -34,8 +34,8 @@ core.setup({
     -- Leader key
     leader = ' ',
 
-    -- Choose one: ddc, coq, cmp (default)
-    autocompletion = 'ddc',
+    -- Choose one: ddc, coq, completion, cmp (default)
+    autocompletion = 'cmp',
 
     -- Choose one: telescope, snap, fzf (default)
     finder = 'telescope',
