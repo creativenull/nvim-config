@@ -5,12 +5,12 @@ local M = {
 if _G.CNull.config.finder == 'telescope' then
   M.plugins = { {'nvim-telescope/telescope.nvim'} }
   M.after = function()
-    require('cnull.plugins.finders.telescope')
+    pcall(require, 'cnull.plugins.finders.telescope')
   end
 elseif _G.CNull.config.finder == 'snap' then
   M.plugins = { {'camspiers/snap'} }
   M.after = function()
-    require('cnull.plugins.finders.snap')
+    pcall(require, 'cnull.plugins.finders.snap')
   end
 else
   M.plugins = {
@@ -18,10 +18,16 @@ else
     {'junegunn/fzf.vim'},
   }
   M.before = function()
-    require('cnull.plugins.finders.fzf').before()
+    local success, fzf = pcall(require, 'cnull.plugins.finders.fzf')
+    if success then
+      fzf.before()
+    end
   end
   M.after = function()
-    require('cnull.plugins.finders.fzf').after()
+    local success, fzf = pcall(require, 'cnull.plugins.finders.fzf')
+    if success then
+      fzf.after()
+    end
   end
 end
 
