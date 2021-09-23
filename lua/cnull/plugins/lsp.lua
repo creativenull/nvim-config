@@ -2,13 +2,19 @@ local M = {
   plugins = {
     {'neovim/nvim-lspconfig'},
     {'creativenull/diagnosticls-configs-nvim'},
+    {'RishabhRD/nvim-lsputils'},
   },
 }
 
 function M.after()
   local nmap = require('cnull.core.keymap').nmap
 
-  local function on_attach(_, bufnr)
+  local function on_attach(client, bufnr)
+    local success, completion = pcall(require, 'completion')
+    if success then
+      completion.on_attach(client)
+    end
+
     local diag_opts = '{ width = 80, focusable = false, border = "single" }'
 
     -- Keymaps
@@ -24,6 +30,13 @@ function M.after()
   local corelsp = require('cnull.core.lsp')
   corelsp.init()
   corelsp.on_attach = on_attach
+
+  -- nvim-lsputils Config
+  -- ---
+  vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
+    require('lsputil.codeAction').code_action_handler(nil, actions, nil, nil, nil)
+  end
+
   require('cnull.lsp').setup({'javascript', 'json', 'lua', 'php', 'typescript', 'vim'})
 
   local dlsconfig = require('diagnosticls-configs')
