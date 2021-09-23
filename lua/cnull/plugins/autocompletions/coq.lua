@@ -1,9 +1,11 @@
 local augroup = require('cnull.core.event').augroup
+local imap = require('cnull.core.keymap').imap
 
 local config = {
   ['auto_start'] = false,
   ['keymap.recommended'] = false,
   ['keymap.jump_to_mark'] = '<C-j>',
+  ['keymap.manual_complete'] = '<C-Space>',
   ['clients.tmux.enabled'] = false,
   ['clients.tree_sitter.enabled'] = false,
   ['clients.tags.enabled'] = false,
@@ -15,6 +17,8 @@ local config = {
   },
 }
 
+imap('<Tab>', 'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"', { expr = true})
+
 augroup('coq_user_events', {
   {
     event = 'FileType',
@@ -22,7 +26,7 @@ augroup('coq_user_events', {
       vim.g.coq_settings = config
       vim.cmd('packadd coq_nvim')
       vim.cmd('packadd coq.artifacts')
-      vim.cmd('COQnow')
+      pcall(vim.cmd, 'COQnow')
     end,
   },
 })
