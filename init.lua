@@ -40,7 +40,7 @@ core.setup({
     -- Choose one: telescope, snap, fzf (default)
     finder = 'telescope',
 
-    -- Choose one: galaxyline, lualine (default)
+    -- Choose one: galaxyline, feline, lualine (default)
     statusline = 'lualine',
 
     -- Colorscheme config
