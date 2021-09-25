@@ -7,7 +7,6 @@ local M = {
     {'lambdalisue/nerdfont.vim',  opt = true},
     {'lambdalisue/fern-renderer-nerdfont.vim', opt = true},
     {'vim-denops/denops.vim'},
-    {'RishabhRD/popfix'},
 
     -- Core
     {'steelsojka/pears.nvim'},

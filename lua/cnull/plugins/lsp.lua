@@ -2,6 +2,7 @@ local M = {
   plugins = {
     {'neovim/nvim-lspconfig'},
     {'creativenull/diagnosticls-configs-nvim'},
+    {'RishabhRD/popfix'},
     {'RishabhRD/nvim-lsputils'},
   },
 }
@@ -33,8 +34,15 @@ function M.after()
 
   -- nvim-lsputils Config
   -- ---
-  vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
-    require('lsputil.codeAction').code_action_handler(nil, actions, nil, nil, nil)
+  local lsputil_success, lsputil_code_action = pcall(require, 'lsputil.codeAction')
+  if lsputil_success then
+    if vim.fn.has('nvim-0.6') == 1 then
+      vim.lsp.handlers['textDocument/codeAction'] = lsputil_code_action.code_action_handler
+    else
+      vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
+        lsputil_code_action.code_action_handler(nil, actions, nil, nil, nil)
+      end
+    end
   end
 
   require('cnull.lsp').setup({'javascript', 'json', 'lua', 'php', 'typescript', 'vim'})
