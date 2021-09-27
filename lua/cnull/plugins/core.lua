@@ -47,7 +47,7 @@ function M.after()
       })
     end
 
-    vim.cmd([[NnnPicker %:p:h]])
+    vim.cmd('NnnPicker %:p:h')
   end
 
   function _G.FernLoad()

@@ -14,7 +14,7 @@ function M.before()
 
   -- emmet-vim Config
   vim.g.user_emmet_leader_key = '<C-q>'
-  vim.g.user_emmet_install_global = false
+  vim.g.user_emmet_install_global = 0
 end
 
 return M
