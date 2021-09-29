@@ -1,3 +1,8 @@
+local success, _ = pcall(require, 'nvim-treesitter')
+if not success then
+  return
+end
+
 local nmap = require('cnull.core.keymap').nmap
 
 require('nvim-biscuits').setup({

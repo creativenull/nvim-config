@@ -12,9 +12,11 @@ if bg == '' then
   bg = 'NONE'
 end
 
-vim.cmd(string.format('highlight IndentBlanklineHighlight guifg=%s guibg=%s', indent_hi, bg))
+vim.cmd(string.format('highlight! IndentBlanklineHighlight guifg=%s guibg=%s', indent_hi, bg))
 
-vim.g.indent_blankline_char = '│'
-vim.g.indent_blankline_filetype_exclude = {'help', 'markdown'}
-vim.g.indent_blankline_show_first_indent_level = false
-vim.g.indent_blankline_char_highlight_list = {'IndentBlanklineHighlight'}
+require('indent_blankline').setup({
+  char = '│',
+  buftype_exclude = {'help', 'markdown'},
+  char_highlight_list = {'IndentBlanklineHighlight'},
+  show_first_indent_level = false,
+})

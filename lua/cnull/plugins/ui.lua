@@ -8,7 +8,7 @@ local M = {
     {'nvim-treesitter/nvim-treesitter-refactor'},
     {'code-biscuits/nvim-biscuits'},
     {'lukas-reineke/indent-blankline.nvim', opt = true},
-    {'akinsho/nvim-bufferline.lua'},
+    {'akinsho/bufferline.nvim'},
     {'folke/todo-comments.nvim', opt = true},
     {'plasticboy/vim-markdown', opt = true},
   },
