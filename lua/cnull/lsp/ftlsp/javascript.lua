@@ -17,7 +17,9 @@ local deno_root = vim.fn.getcwd() .. '/import_map.json'
 
 local is_node = vim.fn.filereadable(node_root) == 1
 local is_deno = vim.fn.filereadable(deno_root) == 1
+
 if is_node then
+  -- Run tsserver only on Nodejs projects
   require('cnull.core.lsp').setup('tsserver', {
     filetypes = filetypes,
     root_dir = root_pattern('package.json', 'jsconfig.json'),
@@ -26,6 +28,7 @@ if is_node then
     },
   })
 elseif is_deno then
+  -- Run denols only on Deno projects
   require('cnull.core.lsp').setup('denols', {
     filetypes = filetypes,
     root_dir = root_pattern('import_map.json', '.denols'),
