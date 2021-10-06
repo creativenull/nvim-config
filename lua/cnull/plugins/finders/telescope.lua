@@ -24,7 +24,7 @@ nmap('<C-p>', find_files)
 
 -- Code finder
 local function live_grep()
-  telescope_builtin.live_grep({})
+  telescope_builtin.live_grep({ only_sort_text = true })
 end
 
 nmap('<C-t>', live_grep)
