@@ -1,13 +1,22 @@
 local M = {
   plugins = {
-    {'SirVer/ultisnips', opt = true},
-    {'honza/vim-snippets', opt = true},
     {'mattn/emmet-vim', opt = true},
   },
 }
 
+if _G.CNull.config.snippets == 'ultisnips' then
+  table.insert(M.plugins, {'SirVer/ultisnips'})
+  table.insert(M.plugins, {'honza/vim-snippets'})
+elseif _G.CNull.config.snippets == 'vsnip' then
+  table.insert(M.plugins, {'hrsh7th/vim-vsnip'})
+  table.insert(M.plugins, {'rafamadriz/friendly-snippets'})
+elseif _G.CNull.config.snippets == 'luasnip' then
+  table.insert(M.plugins, {'L3MON4D3/LuaSnip'})
+  table.insert(M.plugins, {'rafamadriz/friendly-snippets'})
+end
+
 function M.before()
-  -- ultisnips Config
+  -- UltiSnips Config
   vim.g.UltiSnipsExpandTrigger = '<C-q>.'
   vim.g.UltiSnipsJumpForwardTrigger = '<C-j>'
   vim.g.UltiSnipsJumpBackwardTrigger = '<C-k>'

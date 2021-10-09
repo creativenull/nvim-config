@@ -17,8 +17,6 @@ function _G.LoadCommonPackages()
   vim.cmd('packadd vim-repeat')
   vim.cmd('packadd vim-surround')
   vim.cmd('packadd kommentary')
-  vim.cmd('packadd ultisnips')
-  vim.cmd('packadd vim-snippets')
 
   vim.cmd('packadd indent-blankline.nvim')
   require('cnull.plugins.ui.indent_blankline')
@@ -42,6 +40,9 @@ core.setup({
 
     -- Choose one: galaxyline, feline, lualine (default)
     statusline = 'lualine',
+
+    -- Choose one: ultisnips, vsnip, luasnip (default)
+    snippets = 'luasnip',
 
     -- Colorscheme config
     theme = {

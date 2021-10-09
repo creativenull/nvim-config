@@ -1,47 +1,74 @@
 local augroup = require('cnull.core.event').augroup
 local cmp = require('cmp')
 
+-- LuaSnip Config
+-- ---
+local luasnip_ok, luasnip = pcall(require, 'luasnip')
+if luasnip_ok then
+  require("luasnip/loaders/from_vscode").load()
+end
+
+-- nvim-cmp Config
+-- ---
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
+      if vim.fn.exists('*vsnip#anonymous') == 1 then
+        vim.fn['vsnip#anonymous'](args.body)
+      end
+
+      if vim.fn.exists('*UltiSnips#Anon') == 1 then
+        vim.fn['UltiSnips#Anon'](args.body)
+      end
+
+      if luasnip_ok then
+        luasnip.lsp_expand(args.body)
+      end
     end,
   },
 
   mapping = {
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
   },
 
   -- You should specify your *installed* sources.
   sources = {
     { name = 'nvim_lsp' },
     { name = 'ultisnips' },
+    { name = 'vsnip' },
+    { name = 'luasnip' },
   },
 
   formatting = {
     format = function(entry, item)
       item.menu = ({
-        nvim_lsp = '[lsp]',
-        ultisnips = '[ultisnips]',
+        nvim_lsp = '[LSP]',
+        ultisnips = '[SNIPPET]',
+        vsnip = '[SNIPPET]',
+        luasnip = '[SNIPPET]',
       })[entry.source.name]
 
       return item
     end,
   },
+
+  documentation = {
+    border = 'single',
+  },
 })
 
--- Disable on other filetypes that are not needed
+-- Disable on filetypes not needed like prompt windows
 augroup('cmp_user_events', {
   {
     event = 'FileType',
-    pattern = 'TelescopePrompt',
+    pattern = {'TelescopePrompt'},
     exec = function()
       cmp.setup.buffer({
         completion = {
           autocomplete = false,
-        }
+        },
       })
     end,
   },

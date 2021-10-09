@@ -74,6 +74,9 @@ function M.after()
       linter = require('diagnosticls-configs.linters.phpcs'),
     }
   })
+
+  -- LSP Info global mapping
+  nmap('<Leader>li', '<Cmd>LspInfo<CR>')
 end
 
 return M

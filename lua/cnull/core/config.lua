@@ -38,6 +38,7 @@ function M.init(config)
     runtimepath = config.runtimepath or string.format('%s/lua', fn.stdpath('config')),
     leader = config.leader or ',',
     autocompletion = config.autocompletion or 'cmp',
+    snippets = config.snippets or 'luasnip',
     finder = config.finder or 'fzf',
     statusline = config.statusline or 'lualine',
     localleader = config.localleader or [[\]],

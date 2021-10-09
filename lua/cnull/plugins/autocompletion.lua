@@ -43,8 +43,16 @@ else
   M.plugins = {
     {'hrsh7th/nvim-cmp'},
     {'hrsh7th/cmp-nvim-lsp'},
-    {'quangnguyen30192/cmp-nvim-ultisnips'},
   }
+
+  if _G.CNull.config.snippets == 'ultisnips' then
+    table.insert(M.plugins, {'quangnguyen30192/cmp-nvim-ultisnips'})
+  elseif _G.CNull.config.snippets == 'vsnip' then
+    table.insert(M.plugins, {'hrsh7th/cmp-vsnip'})
+  elseif _G.CNull.config.snippets == 'luasnip' then
+    table.insert(M.plugins, {'saadparwaiz1/cmp_luasnip'})
+  end
+
   M.after = function()
     pcall(require, 'cnull.plugins.autocompletions.cmp')
   end
