@@ -9,9 +9,9 @@ This is my neovim config in lua, I use this to test out different lua plugins or
 ## Architecture
 
 ```
-├── after
-│   └── ftplugin           (Plugins to be loaded on the 'filetype' event)
 ├── init.lua               (Starting point)
+├── after
+│   └── ftplugin           (Plugins to be loaded on the 'FileType' event)
 ├── lua
 │   └── cnull
 │       ├── core           (Initial setup and utilities called from here)
