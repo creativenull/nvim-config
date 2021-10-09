@@ -31,15 +31,13 @@ elseif is_deno then
   -- Run denols only on Deno projects
   require('cnull.core.lsp').setup('denols', {
     filetypes = filetypes,
-    root_dir = root_pattern('import_map.json', '.denols'),
+    root_dir = root_pattern('deno.json', 'deno.jsonc'),
     init_options = {
       enable = true,
       lint = true,
       unstable = true,
       importMap = deno_root,
     },
-    flags = {
-      debounce_text_changes = 500,
-    },
+    flags = { debounce_text_changes = 500 },
   })
 end

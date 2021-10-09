@@ -4,7 +4,11 @@ local M = {
 }
 
 -- Initialize default nvim-lsp settings
-function M.init()
+function M.init(opts)
+  if opts == nil then
+    opts = { debug = false }
+  end
+
   vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
     virtual_text = false,
@@ -27,6 +31,11 @@ function M.init()
       'additionalTextEdits',
     },
   }
+
+  -- Turn on debug mode for nvim LSP client
+  if opts.debug then
+    vim.lsp.set_log_level('debug')
+  end
 end
 
 -- Setup lsp server, given name and nvim-lsp configuration
