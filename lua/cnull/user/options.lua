@@ -54,3 +54,15 @@ vim.opt.cmdheight = 2
 vim.opt.showtabline = 2
 vim.opt.laststatus = 2
 vim.opt.guicursor = {'n-v-c-sm:block', 'i-ci-ve:block', 'r-cr-o:hor20'}
+
+-- Built-in find and grep
+local augroup = require('cnull.core.event').augroup
+augroup('custom_finder_user_events', {
+  {
+    event = {'BufNew', 'BufEnter'},
+    exec = function()
+      local bufnr = vim.api.nvim_get_current_buf()
+      vim.api.nvim_buf_set_option(bufnr, 'path', '**')
+    end,
+  }
+})
