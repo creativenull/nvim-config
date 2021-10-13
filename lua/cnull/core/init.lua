@@ -1,5 +1,23 @@
 local M = {}
 
+local errmsg_pkg_required = 'not installed, install via OS pkg manager (required)'
+local errmsg_pkg_optional = 'not installed, install via OS pkg manager (optional)'
+
+-- Perform pre-requisite checks before setting any nvim config
+local function prereq_checks()
+  if vim.fn.executable('python3') == 0 then
+    error(string.format('%q %s', 'python3', errmsg_pkg_required))
+  end
+
+  if vim.fn.executable('rg') == 0 then
+    error(string.format('%q %s', 'ripgrep', errmsg_pkg_required))
+  end
+
+  if vim.fn.executable('bat') == 0 then
+    vim.api.nvim_err_writeln(string.format('%q %s', 'bat', errmsg_pkg_optional))
+  end
+end
+
 -- Set some defaults not needed for this config
 -- @param cfg table
 local function set_defaults(cfg)
@@ -8,9 +26,7 @@ local function set_defaults(cfg)
   vim.g.loaded_perl_provider = 0
 
   -- Python3 plugins support
-  if vim.env.PYTHON3_HOST_PROG ~= nil then
-    vim.g.python3_host_prog = vim.env.PYTHON3_HOST_PROG
-  end
+  vim.g.python3_host_prog = vim.fn.exepath('python3')
 
   -- Leader mappings
   vim.g.mapleader = cfg.leader
@@ -25,6 +41,9 @@ function M.setup(opts)
   local config = require('cnull.core.config')
   local plugin = require('cnull.core.plugin')
   local reload = require('cnull.core.reload')
+
+  -- Pre-requisites
+  prereq_checks()
 
   -- Default config
   local cfg = config.init(opts.config)

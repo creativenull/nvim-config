@@ -1,28 +1,28 @@
 local M = {
-  plugins = {},
+  plugins = {
+    -- galaxyline.nvim
+    -- {'glepnir/galaxyline.nvim'},
+
+    -- feline.nvim
+    -- {'famiu/feline.nvim', tag = 'v0.2'},
+
+    -- lualine
+    {'hoob3rt/lualine.nvim'},
+  },
 }
 
-if _G.CNull.config.statusline == 'galaxyline' then
-  M.plugins = {
-    {'glepnir/galaxyline.nvim'},
-  }
-  M.after = function()
-    require('cnull.plugins.statuslines.galaxyline')
-  end
-elseif _G.CNull.config.statusline == 'feline' then
-  M.plugins = {
-    {'famiu/feline.nvim', tag = 'v0.2'},
-  }
-  M.after = function()
-    require('cnull.plugins.statuslines.feline')
-  end
-else
-  M.plugins = {
-    {'hoob3rt/lualine.nvim'},
-  }
-  M.after = function()
-    require('cnull.plugins.statuslines.lualine')
-  end
+function M.after()
+  -- galaxyline.nvim Config
+  -- ---
+  -- require('cnull.plugins.statuslines.galaxyline')
+
+  -- feline.nvim Config
+  -- ---
+  -- require('cnull.plugins.statuslines.feline')
+
+  -- lualine.nvim Config
+  -- ---
+  require('cnull.plugins.statuslines.lualine')
 end
 
 return M

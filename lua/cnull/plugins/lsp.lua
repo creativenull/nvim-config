@@ -47,7 +47,7 @@ function M.after()
 
   require('cnull.lsp').setup({'javascript', 'json', 'lua', 'php', 'typescript', 'vim'})
 
-  local dlsconfig = require('diagnosticls-configs')
+  --[[ local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })
   dlsconfig.setup({
     lua = {
@@ -73,7 +73,7 @@ function M.after()
     php = {
       linter = require('diagnosticls-configs.linters.phpcs'),
     }
-  })
+  }) ]]
 
   -- LSP Info global mapping
   nmap('<Leader>li', '<Cmd>LspInfo<CR>')

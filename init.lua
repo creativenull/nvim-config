@@ -1,14 +1,9 @@
 -- Name: Arnold Chand
 -- Github: https://github.com/creativenull
--- My vimrc, pre-requisites:
+-- My vimrc, tested on Linux and Windows
 -- + python3
--- + nnn
 -- + ripgrep
 -- + bat
--- + Environment variables:
---   + $PYTHON3_HOST_PROG
---
--- Currently, tested on a Linux machine (maybe macOS, Windows is a bit of a stretch)
 -- =============================================================================
 
 -- Load packages on the filetype event in `after/ftplugin`
@@ -31,18 +26,6 @@ core.setup({
   config = {
     -- Leader key
     leader = ' ',
-
-    -- Choose one: ddc, coq, completion, cmp (default)
-    autocompletion = 'cmp',
-
-    -- Choose one: telescope, snap, fzf (default)
-    finder = 'telescope',
-
-    -- Choose one: galaxyline, feline, lualine (default)
-    statusline = 'lualine',
-
-    -- Choose one: ultisnips, vsnip, luasnip (default)
-    snippets = 'luasnip',
 
     -- Colorscheme config
     theme = {

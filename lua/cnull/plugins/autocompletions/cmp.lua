@@ -13,13 +13,13 @@ end
 cmp.setup({
   snippet = {
     expand = function(args)
-      if vim.fn.exists('*vsnip#anonymous') == 1 then
-        vim.fn['vsnip#anonymous'](args.body)
-      end
+      -- if vim.fn.exists('*vsnip#anonymous') == 1 then
+      --   vim.fn['vsnip#anonymous'](args.body)
+      -- end
 
-      if vim.fn.exists('*UltiSnips#Anon') == 1 then
-        vim.fn['UltiSnips#Anon'](args.body)
-      end
+      -- if vim.fn.exists('*UltiSnips#Anon') == 1 then
+      --   vim.fn['UltiSnips#Anon'](args.body)
+      -- end
 
       if luasnip_ok then
         luasnip.lsp_expand(args.body)
@@ -35,19 +35,19 @@ cmp.setup({
 
   -- You should specify your *installed* sources.
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'ultisnips' },
-    { name = 'vsnip' },
     { name = 'luasnip' },
+    { name = 'nvim_lsp' },
+    -- { name = 'ultisnips' },
+    -- { name = 'vsnip' },
   },
 
   formatting = {
     format = function(entry, item)
       item.menu = ({
-        nvim_lsp = '[LSP]',
-        ultisnips = '[SNIPPET]',
-        vsnip = '[SNIPPET]',
         luasnip = '[SNIPPET]',
+        nvim_lsp = '[LSP]',
+        -- ultisnips = '[SNIPPET]',
+        -- vsnip = '[SNIPPET]',
       })[entry.source.name]
 
       return item

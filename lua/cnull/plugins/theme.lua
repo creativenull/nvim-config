@@ -1,6 +1,6 @@
 local M = {
   plugins = {
-    {'norcalli/nvim-colorizer.lua', opt = true},
+    {'norcalli/nvim-colorizer.lua'},
     {'bluz71/vim-moonfly-colors'},
     {'bluz71/vim-nightfly-guicolors'},
     {'marko-cerovac/material.nvim'},
@@ -17,8 +17,7 @@ function M.after()
     {
       event = 'ColorScheme',
       exec = function()
-        vim.cmd('packadd nvim-colorizer.lua')
-        require('colorizer').setup()
+        require('colorizer').setup({'html', 'css', 'javascriptreact', 'typescriptreact'})
       end,
     },
   })
