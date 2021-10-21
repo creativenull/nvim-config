@@ -10,12 +10,7 @@ local M = {
 function M.after()
   local nmap = require('cnull.core.keymap').nmap
 
-  local function on_attach(client, bufnr)
-    local success, completion = pcall(require, 'completion')
-    if success then
-      completion.on_attach(client)
-    end
-
+  local function on_attach(_, bufnr)
     local diag_opts = '{ width = 80, focusable = false, border = "single" }'
 
     -- Keymaps
@@ -45,7 +40,7 @@ function M.after()
     end
   end
 
-  require('cnull.lsp').setup({'javascript', 'json', 'lua', 'typescript', 'vim'})
+  require('cnull.lsp').setup({'javascript', 'json', 'lua', 'typescript', 'vim', 'vue'})
 
   --[[ local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })

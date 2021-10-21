@@ -1,3 +1,4 @@
+-- Deprecated: https://github.com/nvim-lua/completion-nvim/commit/87b0f86da3dffef63b42845049c648b5d90f1c4d
 local M = {}
 
 M.before = function()
