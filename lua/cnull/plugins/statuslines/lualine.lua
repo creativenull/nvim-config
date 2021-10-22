@@ -48,6 +48,12 @@ lualine.setup({
         'diagnostics',
         sources = { 'nvim_lsp' },
         sections = { 'error', 'warn' },
+        diagnostics_color = {
+          error = { fg = '#ff6666' },
+          warn = { fg = '#eeee99' },
+          info = nil,
+          hint = nil,
+        },
       },
     },
   },
