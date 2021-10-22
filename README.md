@@ -6,7 +6,7 @@ This is my neovim config in lua, I use this to test out different lua plugins or
 
 ![image](https://user-images.githubusercontent.com/3767728/138486473-292e0671-b7a0-4118-83ac-4d9c89251a72.png)
 
-![image](https://user-images.githubusercontent.com/3767728/138486579-f4f98ee8-7961-4f86-8e52-ccd94fc68a5d.png)
+![image](https://user-images.githubusercontent.com/3767728/138497232-0c3cdbe0-6964-4950-8be2-aacb2c612a67.png)
 
 
 ## Requirements
