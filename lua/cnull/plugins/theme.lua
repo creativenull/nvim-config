@@ -17,7 +17,7 @@ function M.after()
     {
       event = 'ColorScheme',
       exec = function()
-        require('colorizer').setup({ 'html', 'css', 'javascriptreact', 'typescriptreact' })
+        require('colorizer').setup({ 'html', 'css', 'javascriptreact', 'typescriptreact', 'lua' })
       end,
     },
   })
