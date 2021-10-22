@@ -7,7 +7,7 @@ local M = {
     -- {'famiu/feline.nvim', tag = 'v0.2'},
 
     -- lualine
-    {'hoob3rt/lualine.nvim'},
+    { 'nvim-lualine/lualine.nvim' },
   },
 }
 
