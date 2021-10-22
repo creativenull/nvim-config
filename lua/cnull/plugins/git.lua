@@ -1,7 +1,7 @@
 local M = {
   plugins = {
-    {'lewis6991/gitsigns.nvim'},
-    {'TimUntersberger/neogit'},
+    { 'lewis6991/gitsigns.nvim' },
+    { 'TimUntersberger/neogit' },
   },
 }
 

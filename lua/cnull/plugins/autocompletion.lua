@@ -1,9 +1,9 @@
 local M = {
   plugins = {
     -- nvim-cmp
-    {'hrsh7th/nvim-cmp'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'saadparwaiz1/cmp_luasnip'},
+    { 'hrsh7th/nvim-cmp' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'saadparwaiz1/cmp_luasnip' },
 
     -- completion-nvim
     -- {'nvim-lua/completion-nvim'},

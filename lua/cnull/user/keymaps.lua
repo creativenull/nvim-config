@@ -6,7 +6,7 @@ local imap = keymap.imap
 
 -- Unbind default bindings for arrow keys, trust me this is for your own good
 nmap('<Up>', '')
-nmap('<Down>','')
+nmap('<Down>', '')
 nmap('<Left>', '')
 nmap('<Right>', '')
 vmap('<Up>', '')

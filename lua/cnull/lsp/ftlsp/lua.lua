@@ -9,7 +9,7 @@ table.insert(lua_rtp, 'lua/?.lua')
 table.insert(lua_rtp, 'lua/?/init.lua')
 
 require('cnull.core.lsp').setup('sumneko_lua', {
-  cmd = {'luals'},
+  cmd = { 'luals' },
   settings = {
     Lua = {
       runtime = {
@@ -20,7 +20,7 @@ require('cnull.core.lsp').setup('sumneko_lua', {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim', 'coq'},
+        globals = { 'vim', 'coq' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files

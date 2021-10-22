@@ -58,7 +58,7 @@ function M.augroup(name, autocmds)
 
   api.nvim_command('augroup ' .. name)
   api.nvim_command('autocmd!')
-  for _,exec in pairs(autocmds) do
+  for _, exec in pairs(autocmds) do
     M.autocmd(exec)
   end
   api.nvim_command('augroup END')

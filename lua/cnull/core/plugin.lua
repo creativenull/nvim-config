@@ -17,7 +17,7 @@ local M = {
 -- Trigger any before() function in a plugin file
 -- @param config table
 function M.trigger_before(config)
-  for _,modname in pairs(M.modlist) do
+  for _, modname in pairs(M.modlist) do
     local mod = require(modname)
     if mod.before and type(mod.before) == 'function' then
       mod.before(config)
@@ -28,7 +28,7 @@ end
 -- Trigger any before
 -- @param config table
 function M.trigger_after(config)
-  for _,modname in pairs(M.modlist) do
+  for _, modname in pairs(M.modlist) do
     local mod = require(modname)
     if mod.after and type(mod.after) == 'function' then
       mod.after(config)
@@ -42,10 +42,10 @@ function M.loadplugins()
   local plugin_names = {}
 
   -- Get plugin names from each file
-  for _,modname in pairs(M.modlist) do
+  for _, modname in pairs(M.modlist) do
     local mod = require(modname)
     if mod.plugins then
-      for _,plugin in pairs(mod.plugins) do
+      for _, plugin in pairs(mod.plugins) do
         table.insert(plugin_names, plugin)
       end
     else
@@ -66,7 +66,7 @@ function M.loadplugins()
 
   -- Add all plugins
   packer.startup(function(use)
-    for _,plugin in pairs(plugin_names) do
+    for _, plugin in pairs(plugin_names) do
       use(plugin)
     end
   end)

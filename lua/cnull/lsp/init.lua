@@ -8,7 +8,7 @@ function M.setup(filetypes)
     return
   end
 
-  for _,ft in pairs(filetypes) do
+  for _, ft in pairs(filetypes) do
     local ftmod = string.format('%s.ftlsp.%s', mod, ft)
     local success, err = pcall(require, ftmod)
     if not success then

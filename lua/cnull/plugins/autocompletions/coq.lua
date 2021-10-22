@@ -17,7 +17,11 @@ local config = {
   },
 }
 
-imap('<Tab>', 'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"', { expr = true})
+imap(
+  '<Tab>',
+  'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"',
+  { expr = true }
+)
 
 augroup('coq_user_events', {
   {
@@ -30,4 +34,3 @@ augroup('coq_user_events', {
     end,
   },
 })
-

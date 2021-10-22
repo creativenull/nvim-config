@@ -4,7 +4,7 @@ local M = {}
 -- @param config table
 -- @return table
 function M.init(config)
-  vim.validate({ config = {config, 'table'} })
+  vim.validate({ config = { config, 'table' } })
 
   local default_config = {
     userspace = config.userspace or 'nvim',
@@ -17,7 +17,7 @@ function M.init(config)
       on_before = config.theme.on_before or nil,
       on_after = config.theme.on_after or nil,
     },
-    plugins = config.plugins or {}
+    plugins = config.plugins or {},
   }
 
   -- Global State to track config, events, commands, keymaps, etc

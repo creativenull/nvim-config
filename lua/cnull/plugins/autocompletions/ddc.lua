@@ -9,11 +9,11 @@ local ddc = {
   },
 }
 
-ddc.patch_global('sources', {'nvimlsp', 'around', 'ultisnips'})
+ddc.patch_global('sources', { 'nvimlsp', 'around', 'ultisnips' })
 ddc.patch_global('sourceOptions', {
   ['_'] = {
-    matchers = {'matcher_fuzzy'},
-    sorters = {'sorter_rank'},
+    matchers = { 'matcher_fuzzy' },
+    sorters = { 'sorter_rank' },
   },
   ultisnips = {
     mark = 'US',
@@ -30,7 +30,7 @@ ddc.nvim_lsp_doc.enable()
 
 augroup('ddc_user_events', {
   {
-    event = {'BufEnter', 'BufNew'},
+    event = { 'BufEnter', 'BufNew' },
     exec = function()
       local bufnr = vim.fn.bufnr('')
       local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')

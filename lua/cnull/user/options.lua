@@ -2,14 +2,14 @@ local undodir = vim.fn.stdpath('cache') .. '/undo'
 
 if vim.fn.isdirectory(undodir) == 0 then
   if vim.fn.has('win32') == 1 then
-    vim.fn.system({'mkdir', undodir})
+    vim.fn.system({ 'mkdir', undodir })
   else
-    vim.fn.system({'mkdir', '-p', undodir})
+    vim.fn.system({ 'mkdir', '-p', undodir })
   end
 end
 
 -- Completion options
-vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
+vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
 vim.opt.shortmess:append('c')
 
 -- Search
@@ -42,7 +42,7 @@ vim.opt.undofile = true
 vim.opt.undodir = undodir
 vim.opt.undolevels = 10000
 vim.opt.history = 10000
-vim.opt.backspace = {'indent', 'eol', 'start'}
+vim.opt.backspace = { 'indent', 'eol', 'start' }
 vim.opt.ttimeoutlen = 50
 vim.opt.mouse = ''
 vim.opt.wildignorecase = true
@@ -53,16 +53,16 @@ vim.opt.signcolumn = 'yes'
 vim.opt.cmdheight = 2
 vim.opt.showtabline = 2
 vim.opt.laststatus = 2
-vim.opt.guicursor = {'n-v-c-sm:block', 'i-ci-ve:block', 'r-cr-o:hor20'}
+vim.opt.guicursor = { 'n-v-c-sm:block', 'i-ci-ve:block', 'r-cr-o:hor20' }
 
 -- Built-in find and grep
 local augroup = require('cnull.core.event').augroup
 augroup('custom_finder_user_events', {
   {
-    event = {'BufNew', 'BufEnter'},
+    event = { 'BufNew', 'BufEnter' },
     exec = function()
       local bufnr = vim.api.nvim_get_current_buf()
       vim.api.nvim_buf_set_option(bufnr, 'path', '**')
     end,
-  }
+  },
 })

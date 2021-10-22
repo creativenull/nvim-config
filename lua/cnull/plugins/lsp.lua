@@ -1,9 +1,9 @@
 local M = {
   plugins = {
-    {'neovim/nvim-lspconfig'},
-    {'creativenull/diagnosticls-configs-nvim'},
-    {'RishabhRD/popfix'},
-    {'RishabhRD/nvim-lsputils'},
+    { 'neovim/nvim-lspconfig' },
+    { 'creativenull/diagnosticls-configs-nvim' },
+    { 'RishabhRD/popfix' },
+    { 'RishabhRD/nvim-lsputils' },
   },
 }
 
@@ -20,7 +20,7 @@ function M.after()
     nmap('<Leader>lf', '<Cmd>lua vim.lsp.buf.formatting()<CR>', { bufnr = bufnr })
     nmap('<Leader>lh', '<Cmd>lua vim.lsp.buf.hover()<CR>', { bufnr = bufnr })
     nmap('<Leader>lr', '<Cmd>lua vim.lsp.buf.rename()<CR>', { bufnr = bufnr })
-    nmap('<Leader>lw', '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics('.. diag_opts ..')<CR>', { bufnr = bufnr })
+    nmap('<Leader>lw', '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics(' .. diag_opts .. ')<CR>', { bufnr = bufnr })
   end
 
   local corelsp = require('cnull.core.lsp')
@@ -40,32 +40,32 @@ function M.after()
     end
   end
 
-  require('cnull.lsp').setup({'javascript', 'json', 'lua', 'typescript', 'vim', 'vue'})
+  require('cnull.lsp').setup({ 'javascript', 'json', 'lua', 'typescript', 'vim', 'vue' })
 
-  --[[ local dlsconfig = require('diagnosticls-configs')
+  local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })
   dlsconfig.setup({
     lua = {
       linter = require('diagnosticls-configs.linters.luacheck'),
-      formatter = require('diagnosticls-configs.formatters.lua_format'),
+      formatter = require('diagnosticls-configs.formatters.stylua'),
     },
-    javascript = {
+    --[[ javascript = {
       linter = require('diagnosticls-configs.linters.eslint'),
       formatter = require('diagnosticls-configs.formatters.prettier'),
-    },
-    javascriptreact = {
+    }, ]]
+    --[[ javascriptreact = {
       linter = require('diagnosticls-configs.linters.eslint'),
       formatter = require('diagnosticls-configs.formatters.prettier'),
-    },
-    typescript = {
+    }, ]]
+    --[[ typescript = {
       linter = require('diagnosticls-configs.linters.eslint'),
       formatter = require('diagnosticls-configs.formatters.prettier'),
-    },
-    typescriptreact = {
+    }, ]]
+    --[[ typescriptreact = {
       linter = require('diagnosticls-configs.linters.eslint'),
       formatter = require('diagnosticls-configs.formatters.prettier'),
-    },
-  }) ]]
+    }, ]]
+  })
 end
 
 return M

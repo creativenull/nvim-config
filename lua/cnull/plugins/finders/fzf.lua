@@ -21,7 +21,7 @@ function M.after()
     fzf.vim.grep(sh, 1, fzf.vim.with_preview('right:50%', 'ctrl-/'), bang)
   end
 
-  command('Rg', 'lua FzfVimGrep(<q-args>, <bang>0)', {'-nargs=*', '-bang'})
+  command('Rg', 'lua FzfVimGrep(<q-args>, <bang>0)', { '-nargs=*', '-bang' })
 
   nmap('<C-p>', '<Cmd>Files<CR>')
   nmap('<C-t>', '<Cmd>Rg<CR>')

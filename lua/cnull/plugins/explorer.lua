@@ -1,6 +1,6 @@
 local M = {
   plugins = {
-    {'tamago324/lir.nvim'},
+    { 'tamago324/lir.nvim' },
   },
 }
 
@@ -25,22 +25,22 @@ function M.after()
       },
     },
     mappings = {
-      ['l']     = lir_actions.edit,
-      ['<CR>']  = lir_actions.edit,
+      ['l'] = lir_actions.edit,
+      ['<CR>'] = lir_actions.edit,
       ['<C-s>'] = lir_actions.split,
       ['<C-v>'] = lir_actions.vsplit,
       ['<C-t>'] = lir_actions.tabedit,
 
-      ['h']     = lir_actions.up,
-      ['q']     = lir_actions.quit,
+      ['h'] = lir_actions.up,
+      ['q'] = lir_actions.quit,
 
-      ['K']     = lir_actions.mkdir,
-      ['N']     = lir_actions.newfile,
-      ['R']     = lir_actions.rename,
-      ['@']     = lir_actions.cd,
-      ['Y']     = lir_actions.yank_path,
-      ['.']     = lir_actions.toggle_show_hidden,
-      ['D']     = lir_actions.delete,
+      ['K'] = lir_actions.mkdir,
+      ['N'] = lir_actions.newfile,
+      ['R'] = lir_actions.rename,
+      ['@'] = lir_actions.cd,
+      ['Y'] = lir_actions.yank_path,
+      ['.'] = lir_actions.toggle_show_hidden,
+      ['D'] = lir_actions.delete,
 
       ['J'] = function()
         lir_mark_actions.toggle_mark()

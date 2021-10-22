@@ -1,7 +1,7 @@
 local M = {
   plugins = {
     -- telescope.nvim
-    {'nvim-telescope/telescope.nvim'},
+    { 'nvim-telescope/telescope.nvim' },
 
     -- snap
     -- {'camspiers/snap'},

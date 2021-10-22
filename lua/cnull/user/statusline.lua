@@ -26,7 +26,7 @@ local function get_clientnames(bufnr)
   local clients = vim.lsp.buf_get_clients(bufnr)
   local clientnames_tbl = {}
 
-  for _,v in pairs(clients) do
+  for _, v in pairs(clients) do
     if v.name then
       table.insert(clientnames_tbl, v.name)
     end
@@ -48,7 +48,8 @@ local function lsp_status()
     local errors, warnings = get_diagnostic_count(bufnr)
     local total = errors + warnings
     if total > 0 then
-      return string.format('%sE%d%s %sW%d%s LSP [%s]',
+      return string.format(
+        '%sE%d%s %sW%d%s LSP [%s]',
         highlights.red.hlgroup,
         errors,
         '%*',
@@ -75,7 +76,8 @@ function _G.RenderActiveStl()
 
   local fileencoding = vim.opt.fileencoding:get()
   local fileformat = vim.opt.fileformat:get()
-  return string.format([[ %s | %s | %s %s %s | %s | %s | %s ]],
+  return string.format(
+    [[ %s | %s | %s %s %s | %s | %s | %s ]],
     '%t%m%r',
     branch,
     '%y',

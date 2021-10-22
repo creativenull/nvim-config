@@ -7,10 +7,15 @@ local M = {}
 -- @return nil
 local function validate(cmd, exec)
   local tableorstring = type(exec) == 'function' or type(exec) == 'string'
-  vim.validate {
+  vim.validate({
     cmd = { cmd, 'string' },
-    exec = { exec, function() return tableorstring end },
-  }
+    exec = {
+      exec,
+      function()
+        return tableorstring
+      end,
+    },
+  })
 end
 
 -- Merge attributes with defaults

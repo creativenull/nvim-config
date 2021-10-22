@@ -26,9 +26,9 @@ local function set_defaults(cfg)
   vim.g.loaded_matchparen = true
   vim.g.loaded_netrw = true
   vim.g.loaded_netrwPlugin = true
-  vim.g.loaded_tarPlugin= true
+  vim.g.loaded_tarPlugin = true
   vim.g.loaded_tar = true
-  vim.g.loaded_zipPlugin= true
+  vim.g.loaded_zipPlugin = true
   vim.g.loaded_zip = true
 
   vim.g.loaded_python_provider = 0

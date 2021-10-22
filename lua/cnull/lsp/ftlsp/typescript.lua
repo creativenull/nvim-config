@@ -14,7 +14,7 @@ if fn.executable(deno_exec) == 0 then
 end
 
 local root_pattern = require('lspconfig').util.root_pattern
-local filetypes = {'typescript', 'typescriptreact', 'typescript.tsx'}
+local filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' }
 local node_root = string.format('%s/package.json', fn.getcwd())
 local deno_root = string.format('%s/import_map.json', fn.getcwd())
 

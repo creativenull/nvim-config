@@ -2,7 +2,7 @@ local gl = require('galaxyline')
 local vcs = require('galaxyline.provider_vcs')
 local fileinfo = require('galaxyline.provider_fileinfo')
 local gls = gl.section
-gl.short_line_list = {'TelescopePrompt', 'nnn'}
+gl.short_line_list = { 'TelescopePrompt', 'nnn' }
 
 local colors = {
   bg = '#282a36',
@@ -30,27 +30,35 @@ end
 local function lsp_error_provider()
   local bufnr = vim.api.nvim_get_current_buf()
   local errors = vim.lsp.diagnostic.get_count(bufnr, [[Error]])
-  if errors ~= 0 then return string.format('E:%s ', errors) end
+  if errors ~= 0 then
+    return string.format('E:%s ', errors)
+  end
   return ''
 end
 
 local function lsp_warning_provider()
   local bufnr = vim.api.nvim_get_current_buf()
   local warnings = vim.lsp.diagnostic.get_count(bufnr, [[Warning]])
-  if warnings ~= 0 then return string.format('W:%s ', warnings) end
+  if warnings ~= 0 then
+    return string.format('W:%s ', warnings)
+  end
   return ''
 end
 
 local function lsp_text_provider()
   local bufnr = vim.api.nvim_get_current_buf('')
   local clients = vim.lsp.buf_get_clients(bufnr)
-  if vim.tbl_isempty(clients) then return '' end
+  if vim.tbl_isempty(clients) then
+    return ''
+  end
   return 'LSP'
 end
 
 local function buf_exists()
   local bufname = vim.fn.expand('%:t')
-  if vim.fn.empty(bufname) == 1 then return false end
+  if vim.fn.empty(bufname) == 1 then
+    return false
+  end
   return true
 end
 

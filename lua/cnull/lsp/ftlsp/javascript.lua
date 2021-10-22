@@ -11,7 +11,7 @@ if vim.fn.executable(deno_exec) == 0 then
 end
 
 local root_pattern = require('lspconfig').util.root_pattern
-local filetypes = {'javascript', 'javascriptreact', 'javascript.jsx'}
+local filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx' }
 local node_root = vim.fn.getcwd() .. '/package.json'
 local deno_root = vim.fn.getcwd() .. '/import_map.json'
 

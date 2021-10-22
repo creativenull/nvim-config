@@ -5,7 +5,7 @@ local cmp = require('cmp')
 -- ---
 local luasnip_ok, luasnip = pcall(require, 'luasnip')
 if luasnip_ok then
-  require("luasnip/loaders/from_vscode").load()
+  require('luasnip/loaders/from_vscode').load()
 end
 
 -- nvim-cmp Config
@@ -63,7 +63,7 @@ cmp.setup({
 augroup('cmp_user_events', {
   {
     event = 'FileType',
-    pattern = {'TelescopePrompt'},
+    pattern = { 'TelescopePrompt' },
     exec = function()
       cmp.setup.buffer({
         completion = {

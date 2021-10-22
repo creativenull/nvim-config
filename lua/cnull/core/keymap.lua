@@ -9,7 +9,7 @@ local M = {}
 local function validate(input, exec)
   local valid_strfn = type(exec) == 'string' or type(exec) == 'function'
   vim.validate({
-    input = {input, 'string'},
+    input = { input, 'string' },
     exec = {
       exec,
       function()

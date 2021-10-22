@@ -16,7 +16,7 @@ vim.cmd(string.format('highlight! IndentBlanklineHighlight guifg=%s guibg=%s', i
 
 require('indent_blankline').setup({
   char = '│',
-  buftype_exclude = {'help', 'markdown'},
-  char_highlight_list = {'IndentBlanklineHighlight'},
+  buftype_exclude = { 'help', 'markdown' },
+  char_highlight_list = { 'IndentBlanklineHighlight' },
   show_first_indent_level = false,
 })

@@ -12,7 +12,7 @@ local components = {
       },
     },
     {},
-    {}
+    {},
   },
   inactive = {
     {},

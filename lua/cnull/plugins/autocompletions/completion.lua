@@ -4,7 +4,7 @@ local M = {}
 M.before = function()
   vim.g.completion_confirm_key = '\\<C-y>'
   vim.g.completion_trigger_on_delete = true
-  vim.g.completion_matching_strategy_list = {'fuzzy', 'substring'}
+  vim.g.completion_matching_strategy_list = { 'fuzzy', 'substring' }
   vim.g.completion_matching_ignore_case = true
 end
 
@@ -14,7 +14,7 @@ M.after = function()
 
   augroup('completion_nvim_user_events', {
     {
-      event = {'BufEnter', 'BufNew'},
+      event = { 'BufEnter', 'BufNew' },
       exec = function()
         imap('<Tab>', 'pumvisible() ? "\\<C-y>" : "\\<Tab>"', { expr = true })
         imap('<C-Space>', '<Cmd>lua require"completion".triggerCompletion()<CR>')
