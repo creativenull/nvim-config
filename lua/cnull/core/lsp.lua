@@ -23,14 +23,20 @@ function M.init(opts)
   })
 
   M.capabilities = vim.lsp.protocol.make_client_capabilities()
-  M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-  M.capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      'documentation',
-      'detail',
-      'additionalTextEdits',
-    },
-  }
+
+  local cmp_ok, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+  if cmp_ok then
+    M.capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  else
+    M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+    M.capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = {
+        'documentation',
+        'detail',
+        'additionalTextEdits',
+      },
+    }
+  end
 
   -- Turn on debug mode for nvim LSP client
   if opts.debug then
