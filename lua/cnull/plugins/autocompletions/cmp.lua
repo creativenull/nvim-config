@@ -35,8 +35,8 @@ cmp.setup({
 
   -- You should specify your *installed* sources.
   sources = {
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
+    { name = 'luasnip' },
     -- { name = 'ultisnips' },
     -- { name = 'vsnip' },
   },
@@ -44,14 +44,26 @@ cmp.setup({
   formatting = {
     format = function(entry, item)
       item.menu = ({
-        luasnip = '[SNIPPET]',
         nvim_lsp = '[LSP]',
+        luasnip = '[SNIPPET]',
         -- ultisnips = '[SNIPPET]',
         -- vsnip = '[SNIPPET]',
       })[entry.source.name]
 
       return item
     end,
+  },
+
+  sorting = {
+    comparators = {
+      cmp.config.compare.sort_text,
+      cmp.config.compare.score,
+      cmp.config.compare.order,
+      cmp.config.compare.offset,
+      cmp.config.compare.kind,
+      cmp.config.compare.length,
+      cmp.config.compare.exact,
+    },
   },
 
   documentation = {
