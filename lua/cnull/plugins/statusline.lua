@@ -4,10 +4,10 @@ local M = {
     -- {'glepnir/galaxyline.nvim'},
 
     -- feline.nvim
-    -- {'famiu/feline.nvim', tag = 'v0.2'},
+    {'famiu/feline.nvim', tag = 'v0.3.3'},
 
     -- lualine
-    { 'nvim-lualine/lualine.nvim' },
+    -- { 'nvim-lualine/lualine.nvim' },
   },
 }
 
@@ -18,11 +18,11 @@ function M.after()
 
   -- feline.nvim Config
   -- ---
-  -- require('cnull.plugins.statuslines.feline')
+  require('cnull.plugins.statuslines.feline')
 
   -- lualine.nvim Config
   -- ---
-  require('cnull.plugins.statuslines.lualine')
+  -- require('cnull.plugins.statuslines.lualine')
 end
 
 return M
