@@ -11,6 +11,9 @@ end
 -- nvim-cmp Config
 -- ---
 cmp.setup({
+  completion = {
+    keyword_length = 3,
+  },
   snippet = {
     expand = function(args)
       -- if vim.fn.exists('*vsnip#anonymous') == 1 then
@@ -52,18 +55,6 @@ cmp.setup({
 
       return item
     end,
-  },
-
-  sorting = {
-    comparators = {
-      cmp.config.compare.sort_text,
-      cmp.config.compare.score,
-      cmp.config.compare.order,
-      cmp.config.compare.offset,
-      cmp.config.compare.kind,
-      cmp.config.compare.length,
-      cmp.config.compare.exact,
-    },
   },
 
   documentation = {
