@@ -74,6 +74,10 @@ local function mapper(mode, input, exec, opts)
   end
 end
 
+function M.map(input, exec, opts)
+  mapper('', input, exec, opts)
+end
+
 function M.nmap(input, exec, opts)
   mapper('n', input, exec, opts)
 end
