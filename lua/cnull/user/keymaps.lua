@@ -1,14 +1,14 @@
 local keymap = require('cnull.core.keymap')
-local nmap = keymap.nmap
-local vmap = keymap.vmap
-local tmap = keymap.tmap
-local imap = keymap.imap
+local nmap   = keymap.nmap
+local vmap   = keymap.vmap
+local tmap   = keymap.tmap
+local imap   = keymap.imap
 
 -- Unbind default bindings for arrow keys, trust me this is for your own good
-nmap('<Up>', '')
-nmap('<Down>', '')
-nmap('<Left>', '')
-nmap('<Right>', '')
+imap('<Up>', '')
+imap('<Down>', '')
+imap('<Left>', '')
+imap('<Right>', '')
 vmap('<Up>', '')
 vmap('<Down>', '')
 vmap('<Left>', '')
