@@ -76,4 +76,3 @@ nmap('<Leader>p', [["+p]])
 
 -- Disable Ex-mode and command history
 nmap('Q', '')
-nmap('q:', '')
