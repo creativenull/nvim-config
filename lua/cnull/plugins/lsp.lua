@@ -2,6 +2,7 @@ local M = {
   plugins = {
     { 'neovim/nvim-lspconfig' },
     { 'creativenull/diagnosticls-configs-nvim' },
+    { 'creativenull/efmls-configs-nvim' },
     { 'RishabhRD/popfix' },
     { 'RishabhRD/nvim-lsputils' },
   },
@@ -40,7 +41,7 @@ function M.after()
     end
   end
 
-  require('cnull.lsp').setup({ 'javascript', 'json', 'lua', 'typescript', 'vim', 'vue' })
+  require('cnull.lsp').setup({ 'javascript', 'json', 'typescript', 'vue', 'lua' })
 
   local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })
