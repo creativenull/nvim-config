@@ -1,7 +1,7 @@
 local M = {}
 
-local errmsg_pkg_required = 'not installed, install via OS pkg manager (required)'
-local errmsg_pkg_optional = 'not installed, install via OS pkg manager (optional)'
+local errmsg_pkg_required = '(required) not installed, install via OS package manager'
+local errmsg_pkg_optional = '(optional) not installed, install via OS package manager'
 
 -- Perform pre-requisite checks before setting any nvim config
 local function prereq_checks()
