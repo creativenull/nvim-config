@@ -3,10 +3,10 @@ local cmp = require('cmp')
 
 -- LuaSnip Config
 -- ---
-local luasnip_ok, luasnip = pcall(require, 'luasnip')
+--[[ local luasnip_ok, luasnip = pcall(require, 'luasnip')
 if luasnip_ok then
   require('luasnip/loaders/from_vscode').load()
-end
+end ]]
 
 -- nvim-cmp Config
 -- ---
@@ -16,17 +16,17 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      -- if vim.fn.exists('*vsnip#anonymous') == 1 then
-      --   vim.fn['vsnip#anonymous'](args.body)
-      -- end
-
-      -- if vim.fn.exists('*UltiSnips#Anon') == 1 then
-      --   vim.fn['UltiSnips#Anon'](args.body)
-      -- end
-
-      if luasnip_ok then
-        luasnip.lsp_expand(args.body)
+      if vim.fn.exists('*vsnip#anonymous') == 1 then
+        vim.fn['vsnip#anonymous'](args.body)
       end
+
+      --[[ if vim.fn.exists('*UltiSnips#Anon') == 1 then
+        vim.fn['UltiSnips#Anon'](args.body)
+      end ]]
+
+      --[[ if luasnip_ok then
+        luasnip.lsp_expand(args.body)
+      end ]]
     end,
   },
 
@@ -39,18 +39,18 @@ cmp.setup({
   -- You should specify your *installed* sources.
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    { name = 'vsnip' },
+    -- { name = 'luasnip' },
     -- { name = 'ultisnips' },
-    -- { name = 'vsnip' },
   },
 
   formatting = {
     format = function(entry, item)
       item.menu = ({
         nvim_lsp = '[LSP]',
-        luasnip = '[SNIPPET]',
+        vsnip = '[SNIPPET]',
+        -- luasnip = '[SNIPPET]',
         -- ultisnips = '[SNIPPET]',
-        -- vsnip = '[SNIPPET]',
       })[entry.source.name]
 
       return item

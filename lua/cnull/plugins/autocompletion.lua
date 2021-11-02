@@ -3,7 +3,7 @@ local M = {
     -- nvim-cmp
     { 'hrsh7th/nvim-cmp' },
     { 'hrsh7th/cmp-nvim-lsp' },
-    { 'saadparwaiz1/cmp_luasnip' },
+    { 'hrsh7th/cmp-vsnip' },
 
     -- completion-nvim
     -- {'nvim-lua/completion-nvim'},

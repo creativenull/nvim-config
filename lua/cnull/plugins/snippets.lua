@@ -1,8 +1,9 @@
 local M = {
   plugins = {
     { 'mattn/emmet-vim', opt = true },
+    { 'hrsh7th/vim-vsnip' },
     { 'rafamadriz/friendly-snippets' },
-    { 'L3MON4D3/LuaSnip' },
+    -- { 'L3MON4D3/LuaSnip' },
   },
 }
 
