@@ -25,7 +25,9 @@ function M.after()
   end
 
   local corelsp = require('cnull.core.lsp')
-  corelsp.init()
+  corelsp.init({
+    -- debug = true,
+  })
   corelsp.on_attach = on_attach
 
   -- nvim-lsputils Config
@@ -41,7 +43,7 @@ function M.after()
     end
   end
 
-  require('cnull.lsp').setup({ 'javascript', 'json', 'typescript', 'vue', 'lua' })
+  require('cnull.lsp').setup({ 'javascript', 'json', 'typescript', 'vue', 'lua', 'python' })
 
   local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })
