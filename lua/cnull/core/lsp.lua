@@ -28,6 +28,8 @@ function M.init(opts)
   if cmp_ok then
     M.capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
   else
+    M.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+    M.capabilities.textDocument.completion.completionItem.preselectSupport = true
     M.capabilities.textDocument.completion.completionItem.snippetSupport = true
     M.capabilities.textDocument.completion.completionItem.resolveSupport = {
       properties = {
