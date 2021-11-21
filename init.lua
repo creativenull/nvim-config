@@ -29,8 +29,8 @@ core.setup({
 
     -- Colorscheme config
     theme = {
-      name = 'moonfly',
-      transparent = true,
+      name = 'catppuccin',
+      transparent = false,
       on_before = function()
         vim.g.moonflyNormalFloat = true
       end,

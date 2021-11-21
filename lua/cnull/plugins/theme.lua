@@ -5,6 +5,7 @@ local M = {
     { 'bluz71/vim-nightfly-guicolors' },
     { 'marko-cerovac/material.nvim' },
     { 'EdenEast/nightfox.nvim' },
+    { 'catppuccin/nvim' },
   },
 }
 
@@ -21,6 +22,10 @@ function M.after()
       end,
     },
   })
+
+  -- catppuccin Config
+  -- ---
+  require('catppuccin').setup()
 end
 
 return M
