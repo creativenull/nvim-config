@@ -1,6 +1,16 @@
 local lsp_provider = require('feline.providers.lsp')
 
+-- Filename
+-- local primary_color = { bg = '#047857', fg = '#ffffff' }
+local primary_color = { bg = '#ea31b5', fg = '#ffffff' }
+
+-- LSP
+local lsp_hl = { bg = '#ffffff', fg = '#262626' }
+local lsp_error_hl = { bg = '#df0000', fg = '#ffffff' }
+local lsp_warning_hl = { bg = '#ff8700', fg = '#ffffff' }
+
 -- Line Info Provider - show line number and column number
+local line_info_hl = { bg = '#606060', fg = '#ffffff' }
 local function line_info_provider()
   local bufnr = vim.api.nvim_get_current_buf()
   local bufinfo = vim.fn.getbufinfo(bufnr)[1]
@@ -20,7 +30,7 @@ local function make_active_stl()
       name = 'file_info',
       opts = { colored_icon = false },
     },
-    hl = { bg = '#047857' },
+    hl = primary_color,
     right_sep = 'slant_right',
     left_sep = 'block',
   })
@@ -44,7 +54,7 @@ local function make_active_stl()
   -- Active Line Info {{{
   table.insert(active[3], {
     provider = line_info_provider,
-    hl = { bg = '#606060' },
+    hl = line_info_hl,
     left_sep = 'slant_left',
   })
   -- }}}
@@ -57,16 +67,10 @@ local function make_active_stl()
       end
       return ''
     end,
-    hl = {
-      fg = '#262626',
-      bg = '#ffffff',
-    },
+    hl = lsp_hl,
     left_sep = {
       str = 'slant_left',
-      hl = {
-        fg = '#ffffff',
-        bg = '#606060',
-      },
+      hl = { bg = '#606060', fg = '#ffffff' },
     },
   })
   -- }}}
@@ -80,16 +84,10 @@ local function make_active_stl()
     enabled = function()
       return lsp_provider.diagnostics_exist('Error')
     end,
-    hl = {
-      fg = '#ffffff',
-      bg = '#df0000',
-    },
+    hl = lsp_error_hl,
     left_sep = {
       str = 'slant_left',
-      hl = {
-        fg = '#df0000',
-        bg = '#ffffff',
-      },
+      hl = { bg = '#ffffff', fg = '#df0000' },
     },
   })
   -- }}}
@@ -104,10 +102,7 @@ local function make_active_stl()
     enabled = function()
       return lsp_provider.diagnostics_exist('Warning')
     end,
-    hl = {
-      fg = '#ffffff',
-      bg = '#ff8700',
-    },
+    hl = lsp_warning_hl,
     left_sep = {
       str = 'slant_left',
       hl = function()
@@ -115,15 +110,9 @@ local function make_active_stl()
         -- are being shown
         -- if has_errors() then
         if lsp_provider.diagnostics_exist('Error') then
-          return {
-            fg = '#ff8700',
-            bg = '#df0000',
-          }
+          return { bg = '#df0000', fg = '#ff8700' }
         else
-          return {
-            fg = '#ff8700',
-            bg = '#ffffff',
-          }
+          return { bg = '#ffffff', fg = '#ff8700' }
         end
       end,
     },
@@ -143,7 +132,7 @@ local function make_inactive_stl()
       name = 'file_info',
       opts = { colored_icon = false },
     },
-    hl = { bg = '#047857' },
+    hl = primary_color,
     right_sep = 'slant_right',
     left_sep = 'block',
   })
@@ -158,7 +147,7 @@ local function make_inactive_stl()
   -- Inactive Line Info {{{
   table.insert(inactive[2], {
     provider = line_info_provider,
-    hl = { bg = '#606060' },
+    hl = line_info_hl,
     left_sep = 'slant_left',
   })
   -- }}}
