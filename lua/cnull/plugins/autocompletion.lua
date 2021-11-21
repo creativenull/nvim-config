@@ -1,16 +1,16 @@
 local M = {
   plugins = {
     -- nvim-cmp
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-vsnip' },
+    -- { 'hrsh7th/nvim-cmp' },
+    -- { 'hrsh7th/cmp-nvim-lsp' },
+    -- { 'hrsh7th/cmp-vsnip' },
 
     -- completion-nvim
     -- {'nvim-lua/completion-nvim'},
 
     -- coq_nvim
-    -- {'ms-jpq/coq_nvim', opt = true, branch = 'coq'},
-    -- {'ms-jpq/coq.artifacts', opt = true, branch = 'artifacts'},
+    { 'ms-jpq/coq_nvim', branch = 'coq' },
+    { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
     -- ddc.vim
     -- {'Shougo/ddc.vim'},
@@ -27,12 +27,16 @@ function M.before()
   -- completion-nvim Config
   -- ---
   -- require('cnull.plugins.autocompletions.completion').before()
+
+  -- coq_nvim Config
+  -- ---
+  require('cnull.plugins.autocompletions.coq').before()
 end
 
 function M.after()
   -- nvim-cmp Config
   -- ---
-  require('cnull.plugins.autocompletions.cmp')
+  -- require('cnull.plugins.autocompletions.cmp')
 
   -- completion-nvim Config
   -- ---
@@ -40,7 +44,7 @@ function M.after()
 
   -- coq_nvim Config
   -- ---
-  -- require('cnull.plugins.autocompletions.coq')
+  require('cnull.plugins.autocompletions.coq').after()
 
   -- ddc.vim Config
   -- ---
