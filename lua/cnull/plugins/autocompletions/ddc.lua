@@ -1,32 +1,5 @@
 local augroup = require('cnull.core.event').augroup
 local imap = require('cnull.core.keymap').imap
-local ddc = {
-  patch_global = vim.fn['ddc#custom#patch_global'],
-  enable = vim.fn['ddc#enable'],
-  disable = vim.fn['ddc#disable'],
-  nvim_lsp_doc = {
-    enable = vim.fn['ddc_nvim_lsp_doc#enable'],
-  },
-}
-
-ddc.patch_global('sources', { 'nvimlsp', 'around', 'ultisnips' })
-ddc.patch_global('sourceOptions', {
-  ['_'] = {
-    matchers = { 'matcher_fuzzy' },
-    sorters = { 'sorter_rank' },
-  },
-  ultisnips = {
-    mark = 'US',
-  },
-  nvimlsp = {
-    mark = 'LSP',
-    forceCompletionPattern = '\\.|:|->',
-  },
-})
-
-imap('<C-Space>', [=[ddc#manual_complete()]=], { silent = true, expr = true })
-
-ddc.nvim_lsp_doc.enable()
 
 augroup('ddc_user_events', {
   {
@@ -35,13 +8,34 @@ augroup('ddc_user_events', {
       local bufnr = vim.fn.bufnr('')
       local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
       if ft == 'TelescopePrompt' then
-        ddc.disable()
+        vim.call('ddc#disable')
       else
-        ddc.enable()
+        vim.call('ddc#enable')
       end
     end,
   },
 })
+
+vim.call('ddc#custom#patch_global', {
+  backspaceCompletion = true,
+  autoCompleteDelay = 100,
+  sources = { 'nvimlsp', 'around', 'ultisnips' },
+  sourceOptions = {
+    ['_'] = {
+      matchers = { 'matcher_fuzzy' },
+      sorters = { 'sorter_rank' },
+    },
+    ultisnips = {
+      mark = 'US',
+    },
+    ['nvim-lsp'] = {
+      mark = 'LSP',
+      forceCompletionPattern = [[\.\w*|:\w*|->\w*]],
+    },
+  },
+})
+
+vim.call('ddc_nvim_lsp_doc#enable')
 
 -- Tab completion
 local function termcodes(str)
@@ -60,4 +54,5 @@ function _G.user_tab_completion(default_key)
   end
 end
 
-imap('<Tab>', [[v:lua.user_tab_completion('<Tab>')]], { expr = true })
+imap('<C-y>', 'v:lua.user_tab_completion("<C-y>")', { expr = true })
+imap('<C-Space>', 'ddc#manual_complete()', { silent = true, expr = true })
