@@ -6,6 +6,7 @@ local M = {
     { 'marko-cerovac/material.nvim' },
     { 'EdenEast/nightfox.nvim' },
     { 'catppuccin/nvim' },
+    { 'eddyekofo94/gruvbox-flat.nvim' },
   },
 }
 
@@ -25,7 +26,7 @@ function M.after()
 
   -- catppuccin Config
   -- ---
-  require('catppuccin').setup()
+  -- require('catppuccin').setup()
 end
 
 return M

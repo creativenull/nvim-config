@@ -29,10 +29,11 @@ core.setup({
 
     -- Colorscheme config
     theme = {
-      name = 'catppuccin',
+      name = 'gruvbox-flat',
       transparent = false,
       on_before = function()
         vim.g.moonflyNormalFloat = true
+        vim.g.gruvbox_flat_style = 'hard'
       end,
     },
 
