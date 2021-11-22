@@ -5,6 +5,8 @@ local config = {
   ['keymap.recommended'] = false,
   ['keymap.jump_to_mark'] = '<C-j>',
   ['keymap.manual_complete'] = '<C-Space>',
+  ['display.pum.fast_close'] = false,
+  ['display.preview.border'] = 'single',
   ['clients.tmux.enabled'] = false,
   ['clients.tree_sitter.enabled'] = false,
   ['clients.tags.enabled'] = false,
@@ -23,8 +25,8 @@ end
 function M.after()
   local imap = require('cnull.core.keymap').imap
   imap(
-    '<Tab>',
-    'pumvisible() ? (complete_info().selected == -1 ? "\\<C-e><Tab>" : "\\<C-y>") : "\\<Tab>"',
+    '<C-y>',
+    [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><C-y>" : "\<C-y>") : "\<C-y>"]],
     { expr = true }
   )
 end
