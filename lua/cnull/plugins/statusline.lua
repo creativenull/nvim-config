@@ -1,7 +1,7 @@
 local M = {
   plugins = {
     -- galaxyline.nvim
-    -- {'glepnir/galaxyline.nvim'},
+    -- { 'NTBBloodbath/galaxyline.nvim' },
 
     -- feline.nvim
     {'famiu/feline.nvim', tag = 'v0.3.3'},
