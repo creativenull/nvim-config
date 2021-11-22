@@ -1,7 +1,7 @@
 local M = {}
 
 local config = {
-  ['auto_start'] = true,
+  ['auto_start'] = 'shut-up',
   ['keymap.recommended'] = false,
   ['keymap.jump_to_mark'] = '<C-j>',
   ['keymap.manual_complete'] = '<C-Space>',
