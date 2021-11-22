@@ -1,16 +1,27 @@
+local cp = require('catppuccin.core.color_palette')
 local lsp_provider = require('feline.providers.lsp')
 
 -- Filename
--- local primary_color = { bg = '#047857', fg = '#ffffff' }
-local primary_color = { bg = '#ea31b5', fg = '#ffffff' }
+-- local filename_hl = { bg = '#047857', fg = '#ffffff' }
+local filename_hl = { bg = '#ea31b5', fg = '#ffffff' }
 
 -- LSP
 local lsp_hl = { bg = '#ffffff', fg = '#262626' }
 local lsp_error_hl = { bg = '#df0000', fg = '#ffffff' }
 local lsp_warning_hl = { bg = '#ff8700', fg = '#ffffff' }
 
+-- File Encoding
+local file_encoding_info_hl = { bg = '#606060', fg = '#ffffff' }
+
+-- Insert mode
+-- local insert_hl = { bg = '#005f87' }
+local insert_hl = { bg = cp.catppuccin12 }
+
+-- Visual mode
+-- local visual_hl = { bg = '#ff8700' }
+local visual_hl = { bg = cp.catppuccin12 }
+
 -- Line Info Provider - show line number and column number
-local line_info_hl = { bg = '#606060', fg = '#ffffff' }
 local function line_info_provider()
   local bufnr = vim.api.nvim_get_current_buf()
   local bufinfo = vim.fn.getbufinfo(bufnr)[1]
@@ -18,6 +29,15 @@ local function line_info_provider()
   local linenum = bufinfo.lnum
   local col = vim.fn.col('.')
   return string.format('  %s/%s  %s ', linenum, linecount, col)
+end
+
+local function is_insert_mode()
+  return vim.api.nvim_get_mode().mode == 'i'
+end
+
+local function is_visual_mode()
+  local editor = vim.api.nvim_get_mode()
+  return editor.mode == 'v' or editor.mode == 'V' or editor.mode == ''
 end
 
 local function make_active_stl()
@@ -30,9 +50,20 @@ local function make_active_stl()
       name = 'file_info',
       opts = { colored_icon = false },
     },
-    hl = primary_color,
-    right_sep = 'slant_right',
+    hl = filename_hl,
     left_sep = 'block',
+    right_sep = {
+      str = 'slant_right',
+      hl = function()
+        if is_insert_mode() then
+          return { bg = insert_hl.bg, fg = filename_hl.bg }
+        elseif is_visual_mode() then
+          return { bg = visual_hl.bg, fg = filename_hl.bg }
+        else
+          return { fg = filename_hl.bg }
+        end
+      end,
+    },
   })
   -- }}}
 
@@ -40,23 +71,53 @@ local function make_active_stl()
   table.insert(active[1], {
     provider = 'git_branch',
     left_sep = 'block',
+    hl = function()
+      if is_insert_mode() then
+        return insert_hl
+      elseif is_visual_mode() then
+        return visual_hl
+      else
+        return {}
+      end
+    end,
   })
   -- }}}
 
   -- Right
-  -- Active File Encoding {{{
-  table.insert(active[3], {
-    provider = 'file_encoding',
-    right_sep = 'block',
-  })
-  -- }}}
-
   -- Active Line Info {{{
   table.insert(active[3], {
     provider = line_info_provider,
-    hl = line_info_hl,
-    left_sep = 'slant_left',
+    hl = function()
+      if is_insert_mode() then
+        return insert_hl
+      elseif is_visual_mode() then
+        return visual_hl
+      else
+        return {}
+      end
+    end,
   })
+  table.insert(active[3], {
+    provider = ' ',
+    hl = file_encoding_info_hl,
+    left_sep = {
+      str = 'slant_left',
+      hl = function()
+        if is_insert_mode() then
+          return { bg = insert_hl.bg, fg = file_encoding_info_hl.bg }
+        elseif is_visual_mode() then
+          return { bg = visual_hl.bg, fg = file_encoding_info_hl.bg }
+        else
+          return { fg = file_encoding_info_hl.bg }
+        end
+      end,
+    },
+  })
+  -- }}}
+
+  -- Active File Encoding {{{
+  table.insert(active[3], { provider = 'file_encoding', hl = file_encoding_info_hl })
+  table.insert(active[3], { provider = ' ', hl = file_encoding_info_hl })
   -- }}}
 
   -- Active LSP Component {{{
@@ -132,24 +193,21 @@ local function make_inactive_stl()
       name = 'file_info',
       opts = { colored_icon = false },
     },
-    hl = primary_color,
+    hl = filename_hl,
     right_sep = 'slant_right',
     left_sep = 'block',
   })
   -- }}}
 
   -- Right
-  -- Inactive File Encoding {{{
-  table.insert(inactive[2], { provider = 'file_encoding' })
-  table.insert(inactive[2], { provider = ' ' })
+  -- Inactive Line Info {{{
+  table.insert(inactive[2], { provider = line_info_provider })
   -- }}}
 
-  -- Inactive Line Info {{{
-  table.insert(inactive[2], {
-    provider = line_info_provider,
-    hl = line_info_hl,
-    left_sep = 'slant_left',
-  })
+  -- Inactive File Encoding {{{
+  table.insert(inactive[2], { provider = ' ', hl = file_encoding_info_hl, left_sep = 'slant_left' })
+  table.insert(inactive[2], { provider = 'file_encoding', hl = file_encoding_info_hl })
+  table.insert(inactive[2], { provider = ' ', hl = file_encoding_info_hl })
   -- }}}
 
   return inactive
