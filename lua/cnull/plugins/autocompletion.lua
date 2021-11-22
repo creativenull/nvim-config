@@ -5,9 +5,6 @@ local M = {
     -- { 'hrsh7th/cmp-nvim-lsp' },
     -- { 'hrsh7th/cmp-vsnip' },
 
-    -- completion-nvim
-    -- {'nvim-lua/completion-nvim'},
-
     -- coq_nvim
     { 'ms-jpq/coq_nvim', branch = 'coq' },
     { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
@@ -24,10 +21,6 @@ local M = {
 }
 
 function M.before()
-  -- completion-nvim Config
-  -- ---
-  -- require('cnull.plugins.autocompletions.completion').before()
-
   -- coq_nvim Config
   -- ---
   require('cnull.plugins.autocompletions.coq').before()
@@ -37,10 +30,6 @@ function M.after()
   -- nvim-cmp Config
   -- ---
   -- require('cnull.plugins.autocompletions.cmp')
-
-  -- completion-nvim Config
-  -- ---
-  -- require('cnull.plugins.autocompletions.completion').after()
 
   -- coq_nvim Config
   -- ---
