@@ -30,9 +30,12 @@ core.setup({
     -- Colorscheme config
     theme = {
       name = 'gruvbox-flat',
-      transparent = false,
+      transparent = true,
       on_before = function()
+        -- moonfly
         vim.g.moonflyNormalFloat = true
+
+        -- gruvbox
         vim.g.gruvbox_flat_style = 'hard'
       end,
     },
