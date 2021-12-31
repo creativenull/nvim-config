@@ -24,6 +24,8 @@ function M.init(opts)
 
   M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
+  -- nvim-cmp Config
+  -- ---
   local cmp_ok, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
   if cmp_ok then
     M.capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
