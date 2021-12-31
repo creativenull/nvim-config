@@ -1,6 +1,6 @@
 local M = {
   plugins = {
-    { 'b3nj5m1n/kommentary', opt = true },
+    { 'numToStr/Comment.nvim', opt = true },
   },
 }
 
