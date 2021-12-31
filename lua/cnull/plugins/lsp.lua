@@ -3,8 +3,7 @@ local M = {
     { 'neovim/nvim-lspconfig' },
     { 'creativenull/diagnosticls-configs-nvim' },
     { 'creativenull/efmls-configs-nvim' },
-    { 'RishabhRD/popfix' },
-    { 'RishabhRD/nvim-lsputils' },
+    { 'onsails/lspkind-nvim' },
   },
 }
 
@@ -24,24 +23,11 @@ function M.after()
     nmap('<Leader>lw', '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics(' .. diag_opts .. ')<CR>', { bufnr = bufnr })
   end
 
-  local corelsp = require('cnull.core.lsp')
-  corelsp.init({
+  local nvimlsp = require('cnull.core.lsp')
+  nvimlsp.init({
     -- debug = true,
   })
-  corelsp.on_attach = on_attach
-
-  -- nvim-lsputils Config
-  -- ---
-  local lsputil_success, lsputil_code_action = pcall(require, 'lsputil.codeAction')
-  if lsputil_success then
-    if vim.fn.has('nvim-0.6') == 1 then
-      vim.lsp.handlers['textDocument/codeAction'] = lsputil_code_action.code_action_handler
-    else
-      vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
-        lsputil_code_action.code_action_handler(nil, actions, nil, nil, nil)
-      end
-    end
-  end
+  nvimlsp.on_attach = on_attach
 
   require('cnull.lsp').setup({ 'javascript', 'json', 'typescript', 'vue', 'lua', 'python' })
 
