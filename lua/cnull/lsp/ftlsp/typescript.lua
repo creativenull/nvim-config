@@ -16,7 +16,7 @@ end
 local root_pattern = require('lspconfig').util.root_pattern
 local filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' }
 local node_root = string.format('%s/package.json', fn.getcwd())
-local deno_root = string.format('%s/import_map.json', fn.getcwd())
+local deno_root = string.format('%s/deno.json', fn.getcwd())
 
 local is_node = fn.filereadable(node_root) == 1
 local is_deno = fn.filereadable(deno_root) == 1
@@ -33,7 +33,7 @@ elseif is_deno then
   -- Run denols only on Deno projects
   require('cnull.core.lsp').setup('denols', {
     filetypes = filetypes,
-    root_dir = root_pattern('import_map.json', '.denols'),
+    root_dir = root_pattern('deno.json', 'deno.jsonc'),
     init_options = {
       enable = true,
       lint = true,
