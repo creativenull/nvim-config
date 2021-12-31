@@ -1,3 +1,3 @@
-_G.LoadCommonPackages()
+_G.PackAddCommons()
 
 vim.cmd('packadd vim-markdown')
