@@ -29,14 +29,15 @@ core.setup({
 
     -- Colorscheme config
     theme = {
-      name = 'gruvbox-flat',
-      transparent = true,
+      name = 'kanagawa',
+      transparent = false,
       on_before = function()
         -- moonfly
         vim.g.moonflyNormalFloat = true
 
         -- gruvbox
         vim.g.gruvbox_flat_style = 'hard'
+        vim.g.gruvbox_transparent = true
       end,
     },
 
