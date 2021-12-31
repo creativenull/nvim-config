@@ -31,24 +31,26 @@ cmp.setup({
   },
 
   mapping = {
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
   },
 
   -- You should specify your *installed* sources.
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-    -- { name = 'luasnip' },
-    -- { name = 'ultisnips' },
-  },
+  }, {
+    name = 'buffer',
+  }),
 
   formatting = {
     format = function(entry, item)
       item.menu = ({
+        buffer = '[BUF]',
         nvim_lsp = '[LSP]',
-        vsnip = '[SNIPPET]',
+        vsnip = '[SNIP]',
         -- luasnip = '[SNIPPET]',
         -- ultisnips = '[SNIPPET]',
       })[entry.source.name]
