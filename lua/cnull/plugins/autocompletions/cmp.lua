@@ -20,13 +20,13 @@ cmp.setup({
         vim.fn['vsnip#anonymous'](args.body)
       end
 
-      --[[ if vim.fn.exists('*UltiSnips#Anon') == 1 then
-        vim.fn['UltiSnips#Anon'](args.body)
-      end ]]
+      -- if vim.fn.exists('*UltiSnips#Anon') == 1 then
+      --   vim.fn['UltiSnips#Anon'](args.body)
+      -- end
 
-      --[[ if luasnip_ok then
-        luasnip.lsp_expand(args.body)
-      end ]]
+      -- if luasnip_ok then
+      --   luasnip.lsp_expand(args.body)
+      -- end
     end,
   },
 
@@ -46,17 +46,14 @@ cmp.setup({
   }),
 
   formatting = {
-    format = function(entry, item)
-      item.menu = ({
+    format = require('lspkind').cmp_format({
+      with_text = true,
+      menu = {
         buffer = '[BUF]',
         nvim_lsp = '[LSP]',
         vsnip = '[SNIP]',
-        -- luasnip = '[SNIPPET]',
-        -- ultisnips = '[SNIPPET]',
-      })[entry.source.name]
-
-      return item
-    end,
+      },
+    }),
   },
 
   documentation = {
