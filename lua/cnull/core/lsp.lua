@@ -18,7 +18,16 @@ function M.init(opts)
   })
 
   -- Hover window settings
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { width = 80, border = 'rounded' })
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+    width = 80,
+    border = 'rounded',
+  })
+
+  -- Signature help window settings
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
+    width = 80,
+    border = 'rounded',
+  })
 
   -- LSP Default Capabilities
   M.capabilities = vim.lsp.protocol.make_client_capabilities()
