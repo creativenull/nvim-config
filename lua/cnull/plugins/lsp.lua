@@ -16,7 +16,7 @@ function M.after()
     -- Keymaps
     nmap('<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { bufnr = bufnr })
     nmap('<Leader>ld', '<Cmd>lua vim.lsp.buf.definition()<CR>', { bufnr = bufnr })
-    nmap('<Leader>le', '<Cmd>lua vim.diagnostic.set_loclist()<CR>', { bufnr = bufnr })
+    nmap('<Leader>le', '<Cmd>lua vim.diagnostic.setloclist()<CR>', { bufnr = bufnr })
     nmap('<Leader>lf', '<Cmd>lua vim.lsp.buf.formatting()<CR>', { bufnr = bufnr })
     nmap('<Leader>lh', '<Cmd>lua vim.lsp.buf.hover()<CR>', { bufnr = bufnr })
     nmap('<Leader>lr', '<Cmd>lua vim.lsp.buf.rename()<CR>', { bufnr = bufnr })
