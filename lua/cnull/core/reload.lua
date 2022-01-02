@@ -1,4 +1,5 @@
--- Reload all user config lua modules
+---Reload all user config lua modules
+---@return nil
 return function()
   for name, _ in pairs(package.loaded) do
     if name:match('^cnull') then

@@ -50,7 +50,9 @@ local function set_lsp_completion_capabilities()
   end
 end
 
--- Initialize default nvim-lsp settings
+---Initialize default nvim-lsp settings
+---@param opts table
+---@return nil
 function M.init(opts)
   if opts == nil or opts == {} then
     opts = { debug = false }
@@ -68,9 +70,9 @@ function M.init(opts)
   end
 end
 
--- Setup lsp server, given name and nvim-lsp configuration
--- @param lspname string
--- @param lspopts table
+---Setup lsp server, given name and nvim-lsp configuration
+---@param lspname string
+---@param lspopts table
 function M.setup(lspname, lspopts)
   local default_opts = {
     on_attach = M.on_attach,

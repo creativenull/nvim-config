@@ -2,16 +2,17 @@ local api = vim.api
 local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
 local M = {}
 
--- Create an :autocmd event, see :help :autocmd for information
--- opts = {
---   event (string|table) = (required)
---   exec (string|function) = (required)
---   pattren (string) = '*'
---   once (boolean) = false
---   nested (boolean) = false
---   clear (boolean) = false (if true then use :autocmd! instead)
--- }
--- @param opts table
+---@class VimEventOption
+---@field event string|table
+---@field exec string|function
+---@field pattern string = '*'
+---@field once boolean
+---@field nested boolean
+---@field clear boolean
+
+---Create an :autocmd event, see :help :autocmd for information
+---@param opts VimEventOption
+---@return nil
 function M.autocmd(opts)
   if opts.event == nil then
     error(debug.traceback('autocmd: `event` cannot be empty'))
@@ -48,9 +49,10 @@ function M.autocmd(opts)
   end
 end
 
--- Create an :augroup, see :help :augroup for information
--- @param name string
--- @param autocmds table
+---Create an :augroup, see :help :augroup for information
+---@param name string
+---@param autocmds VimEventOption[]
+---@return nil
 function M.augroup(name, autocmds)
   if autocmds == nil or vim.tbl_isempty(autocmds) then
     error(debug.traceback('augroup: `autocmds` cannot be empty'))

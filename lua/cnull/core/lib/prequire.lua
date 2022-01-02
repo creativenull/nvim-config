@@ -1,5 +1,6 @@
--- Require a module safely
--- @param string modname
+---Protected require, just like pcall but for require()
+---@param modname string
+---@return nil
 return function(modname)
   local success, mod_or_err = pcall(require, modname)
   if not success then

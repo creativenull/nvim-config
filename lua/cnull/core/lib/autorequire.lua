@@ -1,11 +1,11 @@
 local uv = vim.loop
 local M = {}
 
--- Get the filepath of a modulde name
--- assuming it's located from the stdpath('config') directory
--- @param modpath string
--- @param runtimepath string
--- @return string
+---Get the filepath of a modulde name
+---assuming it's located from the stdpath('config') directory
+---@param modpath string
+---@param runtimepath string
+---@return string
 local function get_filepath(modpath, runtimepath)
   local partialpath = vim.split(modpath, '.', true)
   partialpath = table.concat(partialpath, '/')
@@ -13,10 +13,11 @@ local function get_filepath(modpath, runtimepath)
   return filepath
 end
 
--- Automatically require all modules within a specified
--- file directory
--- @param modpath string
--- @param opts table
+---Automatically require all modules within a specified
+---file directory
+---@param modpath string
+---@param opts table
+---@return nil
 function M.autorequire(modpath, opts)
   local runtimepath = vim.fn.stdpath('config') .. '/lua'
   if opts.runtimepath then
@@ -48,10 +49,10 @@ function M.autorequire(modpath, opts)
   end
 end
 
--- Get all the module names in the file directory
--- @param modpath string
--- @param opts table
--- @return table
+---Get all the module names in the file directory
+---@param modpath string
+---@param opts table
+---@return table
 function M.getmodlist(modpath, opts)
   local runtimepath = vim.fn.stdpath('config') .. '/lua'
   if opts.runtimepath then

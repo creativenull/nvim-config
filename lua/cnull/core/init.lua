@@ -3,7 +3,8 @@ local M = {}
 local errmsg_pkg_required = '(required) not installed, install via OS package manager'
 local errmsg_pkg_optional = '(optional) not installed, install via OS package manager'
 
--- Perform pre-requisite checks before setting any nvim config
+---Perform pre-requisite checks before setting any nvim config
+---@return nil
 local function prereq_checks()
   if vim.fn.has('nvim-0.6') == 0 then
     error('nvim 0.6 and up is required for this config')
@@ -22,8 +23,8 @@ local function prereq_checks()
   end
 end
 
--- Set some defaults not needed for this config
--- @param cfg table
+---Set some defaults not needed for this config
+---@param cfg table
 local function set_defaults(cfg)
   vim.g.loaded_gzip = true
   vim.g.loaded_matchit = true
@@ -47,8 +48,8 @@ local function set_defaults(cfg)
   vim.g.maplocalleader = cfg.localleader
 end
 
--- Initial core setup
--- @param cfg table
+---Initial core setup
+---@param opts table
 function M.setup(opts)
   local colorscheme = require('cnull.core.colorscheme')
   local command = require('cnull.core.command')

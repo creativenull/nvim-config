@@ -14,8 +14,9 @@ local M = {
   modlist = {},
 }
 
--- Trigger any before() function in a plugin file
--- @param config table
+---Trigger any before() function in a plugin file
+---@param config table
+---@return nil
 function M.trigger_before(config)
   for _, modname in pairs(M.modlist) do
     local mod = require(modname)
@@ -25,8 +26,9 @@ function M.trigger_before(config)
   end
 end
 
--- Trigger any before
--- @param config table
+---Trigger any before
+---@param config table
+---@return nil
 function M.trigger_after(config)
   for _, modname in pairs(M.modlist) do
     local mod = require(modname)
@@ -36,7 +38,8 @@ function M.trigger_after(config)
   end
 end
 
--- Load all the plugins from plugin manager
+---Load all the plugins from plugin manager
+---@return nil
 function M.loadplugins()
   local packer = require('packer')
   local plugin_names = {}
@@ -72,8 +75,9 @@ function M.loadplugins()
   end)
 end
 
--- Initial setup of the plugin manager
--- @param config table
+---Initial setup of the plugin manager
+---@param config table
+---@return nil
 function M.setup(config)
   M.config = vim.tbl_extend('force', M.config, config.plugins)
   M.modlist = getmodlist(M.config.modname, { runtimepath = config.runtimepath })

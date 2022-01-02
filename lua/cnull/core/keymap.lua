@@ -3,9 +3,10 @@ local store_vlua_fn = require('cnull.core.lib.storefn').store_vlua_fn
 local DEFAULT_OPTS = { noremap = true, silent = true }
 local M = {}
 
--- Validate args for mapper()
--- @param input string
--- @param exec string|function
+---Validate args for mapper()
+---@param input string
+---@param exec string|function
+---@return nil
 local function validate(input, exec)
   local valid_strfn = type(exec) == 'string' or type(exec) == 'function'
   vim.validate({
@@ -19,9 +20,9 @@ local function validate(input, exec)
   })
 end
 
--- Merge opts with default keymap options
--- @param opts table
--- @return table
+---Merge opts with default keymap options
+---@param opts table
+---@return table
 local function merge_opts(opts)
   if opts and type(opts) == 'table' then
     opts = vim.tbl_extend('force', DEFAULT_OPTS, opts)
@@ -32,10 +33,10 @@ local function merge_opts(opts)
   return opts
 end
 
--- Set the right-hand-side as string or function
--- @param input string
--- @param exec string|function
--- @return string
+---Set the right-hand-side as string or function
+---@param input string
+---@param exec string|function
+---@return string
 local function set_exec(input, exec, opts)
   local execfn = nil
   if type(exec) == 'function' then
@@ -49,11 +50,12 @@ local function set_exec(input, exec, opts)
   return exec
 end
 
--- Generic key mapper to map keys globally or in buffer
--- @param mode string
--- @param input string
--- @param exec string|function
--- @param opts table|nil
+---Generic key mapper to map keys globally or in buffer
+---@param mode string
+---@param input string
+---@param exec string|function
+---@param opts table|nil
+---@return nil
 local function mapper(mode, input, exec, opts)
   validate(input, exec)
   opts = merge_opts(opts)
@@ -74,38 +76,65 @@ local function mapper(mode, input, exec, opts)
   end
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.map(input, exec, opts)
   mapper('', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.nmap(input, exec, opts)
   mapper('n', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.imap(input, exec, opts)
   mapper('i', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.vmap(input, exec, opts)
   mapper('v', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.tmap(input, exec, opts)
   mapper('t', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.cmap(input, exec, opts)
   mapper('c', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.xmap(input, exec, opts)
   mapper('x', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.omap(input, exec, opts)
   mapper('o', input, exec, opts)
 end
 
+---@param input string
+---@param exec string|function
+---@param opts table
 function M.smap(input, exec, opts)
   mapper('s', input, exec, opts)
 end

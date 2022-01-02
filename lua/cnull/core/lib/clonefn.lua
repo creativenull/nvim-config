@@ -1,7 +1,7 @@
--- Make a copy of a function
--- https://leafo.net/guides/function-cloning-in-lua.html
--- @param fn function
--- @return string
+---Make a copy of a function
+---https://leafo.net/guides/function-cloning-in-lua.html
+---@param fn function
+---@return string
 local function clone_fn(fn)
   local dumped = string.dump(fn)
   local cloned = loadstring(dumped)

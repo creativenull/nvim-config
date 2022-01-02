@@ -1,8 +1,8 @@
 local M = {}
 
--- Setup initial configuration for nvim config
--- @param config table
--- @return table
+---Setup initial configuration for nvim config
+---@param config table
+---@return table
 function M.init(config)
   vim.validate({ config = { config, 'table' } })
 
