@@ -43,6 +43,10 @@ local function make_active_stl()
     },
     hl = filename_hl,
     left_sep = 'block',
+  })
+  table.insert(active[1], {
+    provider = ' ',
+    hl = filename_hl,
     right_sep = {
       str = 'slant_right',
       hl = function()
@@ -177,8 +181,21 @@ local function make_inactive_stl()
       opts = { colored_icon = false },
     },
     hl = filename_hl,
-    right_sep = 'slant_right',
     left_sep = 'block',
+  })
+  table.insert(inactive[1], {
+    provider = ' ',
+    hl = filename_hl,
+    right_sep = {
+      str = 'slant_right',
+      hl = function()
+        if is_insert_mode() then
+          return { bg = insert_hl.bg, fg = filename_hl.bg }
+        else
+          return { fg = filename_hl.bg }
+        end
+      end,
+    },
   })
   -- }}}
 
