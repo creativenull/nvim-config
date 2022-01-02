@@ -1,8 +1,8 @@
 local mod = (...):gsub('%.init$', '')
 local M = {}
 
--- @param table lspname
--- @return void
+---@param filetypes table
+---@return nil
 function M.setup(filetypes)
   if not filetypes or vim.tbl_isempty(filetypes) then
     return
