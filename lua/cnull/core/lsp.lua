@@ -5,7 +5,7 @@ local M = {
 
 ---Set the default diagnostic settings from all sources
 ---@return nil
-local function set_default_diagnostic_config()
+local function set_lsp_diagnostic_config()
   vim.diagnostic.config({
     signs = true,
     underline = true,
@@ -50,6 +50,14 @@ local function set_lsp_completion_capabilities()
   end
 end
 
+local function set_lsp_diagnostic_signs()
+  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+  for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+  end
+
 ---Initialize default nvim-lsp settings
 ---@param opts table
 ---@return nil
@@ -58,7 +66,8 @@ function M.init(opts)
     opts = { debug = false }
   end
 
-  set_default_diagnostic_config()
+  set_lsp_diagnostic_config()
+  set_lsp_diagnostic_signs()
 
   set_lsp_borders({ width = 80, border = 'rounded' })
 
