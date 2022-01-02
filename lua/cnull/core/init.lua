@@ -5,6 +5,10 @@ local errmsg_pkg_optional = '(optional) not installed, install via OS package ma
 
 -- Perform pre-requisite checks before setting any nvim config
 local function prereq_checks()
+  if vim.fn.has('nvim-0.6') == 0 then
+    error('nvim 0.6 and up is required for this config')
+  end
+
   if vim.fn.executable('python3') == 0 then
     error(string.format('%q %s', 'python3', errmsg_pkg_required))
   end
