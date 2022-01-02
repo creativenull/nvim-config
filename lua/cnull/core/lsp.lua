@@ -5,7 +5,7 @@ local M = {
 
 -- Initialize default nvim-lsp settings
 function M.init(opts)
-  if opts == nil then
+  if opts == nil or opts == {} then
     opts = { debug = false }
   end
 
