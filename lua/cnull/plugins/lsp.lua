@@ -33,28 +33,6 @@ function M.after()
 
   local dlsconfig = require('diagnosticls-configs')
   dlsconfig.init({ on_attach = on_attach })
-  dlsconfig.setup({
-    lua = {
-      linter = require('diagnosticls-configs.linters.luacheck'),
-      formatter = require('diagnosticls-configs.formatters.stylua'),
-    },
-    --[[ javascript = {
-      linter = require('diagnosticls-configs.linters.eslint'),
-      formatter = require('diagnosticls-configs.formatters.prettier'),
-    }, ]]
-    --[[ javascriptreact = {
-      linter = require('diagnosticls-configs.linters.eslint'),
-      formatter = require('diagnosticls-configs.formatters.prettier'),
-    }, ]]
-    --[[ typescript = {
-      linter = require('diagnosticls-configs.linters.eslint'),
-      formatter = require('diagnosticls-configs.formatters.prettier'),
-    }, ]]
-    --[[ typescriptreact = {
-      linter = require('diagnosticls-configs.linters.eslint'),
-      formatter = require('diagnosticls-configs.formatters.prettier'),
-    }, ]]
-  })
 end
 
 return M
