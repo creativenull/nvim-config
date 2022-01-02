@@ -1,4 +1,5 @@
--- Deprecated: In favor of galaxyline at lua/cnull/plugins/ui/galaxyline.lua
+-- Deprecated: In favor of feline -> lua/cnull/plugins/ui/feline.lua
+-- ----------
 local augroup = require('cnull.core.event').augroup
 
 local highlights = {
