@@ -9,19 +9,18 @@ function M.init(opts)
     opts = { debug = false }
   end
 
-  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
+  -- Global diagnostic settings
+  vim.diagnostic.config({
     signs = true,
+    underline = true,
     update_in_insert = false,
+    virtual_text = false,
   })
 
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    width = 80,
-    border = 'single',
-    focusable = false,
-  })
+  -- Hover window settings
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { width = 80, border = 'rounded' })
 
+  -- LSP Default Capabilities
   M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
   -- nvim-cmp Config
