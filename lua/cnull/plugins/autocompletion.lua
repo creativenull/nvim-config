@@ -11,7 +11,7 @@ local M = {
     -- { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
     -- ddc.vim
-    -- { 'Shougo/ddc.vim' },
+    -- { 'Shougo/ddc.vim', tag = 'v1.2.0' },
     -- { 'Shougo/ddc-sorter_rank' },
     -- { 'matsui54/ddc-matcher_fuzzy' },
     -- { 'Shougo/ddc-around' },
