@@ -3,32 +3,31 @@ local M = {
   capabilities = nil,
 }
 
--- Initialize default nvim-lsp settings
-function M.init(opts)
-  if opts == nil or opts == {} then
-    opts = { debug = false }
-  end
-
-  -- Global diagnostic settings
+---Set the default diagnostic settings from all sources
+---@return nil
+local function set_default_diagnostic_config()
   vim.diagnostic.config({
     signs = true,
     underline = true,
     update_in_insert = false,
     virtual_text = false,
   })
+end
 
+---Set the defaults border settings for LSP floating windows
+---@param opts table Similar to nvim_open_win()
+---@return nil
+local function set_lsp_borders(opts)
   -- Hover window settings
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    width = 80,
-    border = 'rounded',
-  })
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, opts)
 
   -- Signature help window settings
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
-    width = 80,
-    border = 'rounded',
-  })
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, opts)
+end
 
+---Set autocompletion capabilities for each lsp server
+---@return nil
+local function set_lsp_completion_capabilities()
   -- LSP Default Capabilities
   M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -49,6 +48,19 @@ function M.init(opts)
       },
     }
   end
+end
+
+-- Initialize default nvim-lsp settings
+function M.init(opts)
+  if opts == nil or opts == {} then
+    opts = { debug = false }
+  end
+
+  set_default_diagnostic_config()
+
+  set_lsp_borders({ width = 80, border = 'rounded' })
+
+  set_lsp_completion_capabilities()
 
   -- Turn on debug mode for nvim LSP client
   if opts.debug then
