@@ -4,7 +4,7 @@ local M = {
     -- { 'NTBBloodbath/galaxyline.nvim' },
 
     -- feline.nvim
-    {'famiu/feline.nvim', tag = 'v0.3.3'},
+    { 'famiu/feline.nvim', tag = 'v0.4.3' },
 
     -- lualine
     -- { 'nvim-lualine/lualine.nvim' },

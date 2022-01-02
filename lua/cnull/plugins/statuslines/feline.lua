@@ -144,7 +144,7 @@ local function make_active_stl()
       return count .. ' ', icon
     end,
     enabled = function()
-      return lsp_provider.diagnostics_exist('Warning')
+      return lsp_provider.diagnostics_exist('Warn')
     end,
     hl = lsp_warning_hl,
     left_sep = {
