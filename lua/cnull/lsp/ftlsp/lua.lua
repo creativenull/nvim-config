@@ -1,4 +1,8 @@
 local exec = 'luals'
+if vim.fn.has('win32') then
+  exec = vim.fn.expand('$HOME/LocalApps/lua-language-server/bin/lua-language-server.exe')
+end
+
 if vim.fn.executable(exec) == 0 then
   vim.api.nvim_err_writeln(string.format('lsp: %q is not installed', exec))
   return
@@ -9,7 +13,7 @@ table.insert(lua_rtp, 'lua/?.lua')
 table.insert(lua_rtp, 'lua/?/init.lua')
 
 require('cnull.core.lsp').setup('sumneko_lua', {
-  cmd = { 'luals' },
+  cmd = { exec },
   settings = {
     Lua = {
       runtime = {
