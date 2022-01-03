@@ -1,5 +1,5 @@
 local exec = 'luals'
-if vim.fn.has('win32') then
+if vim.fn.has('win32') == 1 then
   exec = vim.fn.expand('$HOME/LocalApps/lua-language-server/bin/lua-language-server.exe')
 end
 
