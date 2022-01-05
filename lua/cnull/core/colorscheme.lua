@@ -28,7 +28,7 @@ end
 ---@param theme table
 ---@return nil
 local function set_colorscheme(theme)
-  -- trigger before events
+  -- Before colorshceme is set
   if theme.on_before then
     theme.on_before()
   end
@@ -41,7 +41,7 @@ local function set_colorscheme(theme)
     vim.g.colors_name = theme.name
   end
 
-  -- trigger after events
+  -- After colorshceme is set
   if theme.on_after then
     theme.on_after()
   end
