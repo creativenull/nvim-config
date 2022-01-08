@@ -201,11 +201,23 @@ local function make_inactive_stl()
 
   -- Right
   -- Inactive Line Info {{{
-  table.insert(inactive[2], { provider = line_info_provider })
+  table.insert(inactive[2], {
+    provider = ' ',
+    hl = file_encoding_info_hl,
+    left_sep = {
+      str = 'slant_left',
+      hl = function()
+        if is_insert_mode() then
+          return { bg = insert_hl.bg, fg = file_encoding_info_hl.bg }
+        else
+          return { fg = file_encoding_info_hl.bg }
+        end
+      end,
+    },
+  })
   -- }}}
 
   -- Inactive File Encoding {{{
-  table.insert(inactive[2], { provider = ' ', hl = file_encoding_info_hl, left_sep = 'slant_left' })
   table.insert(inactive[2], { provider = 'file_encoding', hl = file_encoding_info_hl })
   table.insert(inactive[2], { provider = ' ', hl = file_encoding_info_hl })
   -- }}}
