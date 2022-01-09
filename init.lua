@@ -42,7 +42,10 @@ core.setup({
         vim.g.gruvbox_transparent = true
 
         -- kanagawa
-        require('kanagawa').setup({ transparent = true })
+        require('kanagawa').setup({
+          transparent = true,
+          commentStyle = 'NONE',
+        })
       end,
     },
 
