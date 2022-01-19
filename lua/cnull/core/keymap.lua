@@ -1,6 +1,6 @@
 local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
 local store_vlua_fn = require('cnull.core.lib.storefn').store_vlua_fn
-local DEFAULT_OPTS = { noremap = true, silent = true }
+local DEFAULT_OPTS = { noremap = true }
 local M = {}
 
 ---Validate args for mapper()
