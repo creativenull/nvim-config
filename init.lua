@@ -33,6 +33,7 @@ core.setup({
     theme = {
       name = 'kanagawa',
       enable_transparent_features = true,
+      enable_custom_visual_hl = true,
       on_before = function()
         -- moonfly
         vim.g.moonflyNormalFloat = true

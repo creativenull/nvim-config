@@ -19,6 +19,12 @@ local function register_transparent_event(theme)
       { event = 'ColorScheme', exec = 'highlight! NormalFloat guibg=NONE' },
     })
   end
+
+  if theme.enable_custom_visual_hl then
+    augroup('visual_hl_user_events', {
+      { event = 'ColorScheme', exec = 'highlight! Visual guibg=#dddddd guifg=#333333' },
+    })
+  end
 end
 
 ---Set the colorscheme of vim
