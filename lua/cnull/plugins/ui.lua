@@ -5,6 +5,7 @@ local M = {
 
     -- UI Plugins
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects' },
     { 'nvim-treesitter/nvim-treesitter-refactor' },
     { 'code-biscuits/nvim-biscuits' },
     { 'lukas-reineke/indent-blankline.nvim', opt = true },
