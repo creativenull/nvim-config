@@ -11,9 +11,7 @@ end ]]
 -- nvim-cmp Config
 -- ---
 cmp.setup({
-  completion = {
-    keyword_length = 3,
-  },
+  completion = { keyword_length = 3 },
   snippet = {
     expand = function(args)
       if vim.fn.exists('*vsnip#anonymous') == 1 then
@@ -41,9 +39,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-  }, {
-    name = 'buffer',
-  }),
+  }, { name = 'buffer' }),
 
   formatting = {
     format = require('lspkind').cmp_format({
@@ -56,9 +52,7 @@ cmp.setup({
     }),
   },
 
-  documentation = {
-    border = 'single',
-  },
+  documentation = { border = 'single' },
 })
 
 -- Disable on filetypes not needed like prompt windows
