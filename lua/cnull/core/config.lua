@@ -14,6 +14,7 @@ function M.init(config)
     theme = {
       name = config.theme.name or 'default',
       transparent = config.theme.transparent or false,
+      enable_transparent_features = config.theme.enable_transparent_features or false,
       on_before = config.theme.on_before or nil,
       on_after = config.theme.on_after or nil,
     },

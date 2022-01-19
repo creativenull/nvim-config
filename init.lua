@@ -32,7 +32,7 @@ core.setup({
     -- Colorscheme config
     theme = {
       name = 'kanagawa',
-      transparent = false,
+      enable_transparent_features = true,
       on_before = function()
         -- moonfly
         vim.g.moonflyNormalFloat = true
