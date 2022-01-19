@@ -4,7 +4,7 @@ require('nvim-treesitter.configs').setup({
     'graphql',
     'html',
     'javascript',
-    'lua',
+    -- 'lua',
     'php',
     'typescript',
     'vue',
