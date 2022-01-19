@@ -6,7 +6,7 @@ local M = {}
 ---@return nil
 local function register_transparent_event(theme)
   if theme.enable_transparent_features then
-    augroup('transparent_bg_events', {
+    augroup('transparent_feature_user_events', {
       { event = 'ColorScheme', exec = 'highlight! SignColumn guibg=NONE' },
       { event = 'ColorScheme', exec = 'highlight! LineNr guibg=NONE' },
       { event = 'ColorScheme', exec = 'highlight! CursorLineNr guibg=NONE' },
