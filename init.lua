@@ -6,22 +6,6 @@
 -- + bat
 -- =============================================================================
 
--- Load packages on the filetype event in `after/ftplugin`
-function _G.PackAddCommons()
-  vim.cmd('packadd vim-abolish')
-  vim.cmd('packadd vim-repeat')
-  vim.cmd('packadd vim-surround')
-
-  vim.cmd('packadd Comment.nvim')
-  require('Comment').setup()
-
-  vim.cmd('packadd indent-blankline.nvim')
-  require('cnull.plugins.ui.indent_blankline')
-
-  vim.cmd('packadd todo-comments.nvim')
-  require('todo-comments').setup()
-end
-
 -- Initialize
 local core = require('cnull.core')
 core.setup({
