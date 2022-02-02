@@ -8,6 +8,7 @@ local M = {
     { 'catppuccin/nvim' },
     { 'eddyekofo94/gruvbox-flat.nvim' },
     { 'rebelot/kanagawa.nvim' },
+    { 'ray-x/starry.nvim' },
   },
 }
 
