@@ -15,7 +15,7 @@ core.setup({
 
     -- Colorscheme config
     theme = {
-      name = 'kanagawa',
+      name = 'material',
       enable_transparent_features = true,
       enable_custom_visual_hl = true,
       on_before = function()
@@ -25,6 +25,12 @@ core.setup({
         -- gruvbox
         vim.g.gruvbox_flat_style = 'hard'
         vim.g.gruvbox_transparent = true
+
+        -- starry
+        vim.g.starry_disable_background = true
+
+        -- material
+        vim.g.material_style = 'deep ocean'
 
         -- kanagawa
         require('kanagawa').setup({
