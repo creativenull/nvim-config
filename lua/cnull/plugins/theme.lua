@@ -25,10 +25,6 @@ function M.after()
       end,
     },
   })
-
-  -- catppuccin Config
-  -- ---
-  -- require('catppuccin').setup()
 end
 
 return M

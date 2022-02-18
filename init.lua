@@ -15,9 +15,9 @@ core.setup({
 
     -- Colorscheme config
     theme = {
-      name = 'material',
-      enable_transparent_features = true,
-      enable_custom_visual_hl = true,
+      name = 'catppuccin',
+      enable_transparent_features = false,
+      enable_custom_visual_hl = false,
       on_before = function()
         -- moonfly
         vim.g.moonflyNormalFloat = true
@@ -33,9 +33,17 @@ core.setup({
         vim.g.material_style = 'deep ocean'
 
         -- kanagawa
-        require('kanagawa').setup({
-          transparent = true,
-          commentStyle = 'NONE',
+        -- require('kanagawa').setup({
+        --   transparent = true,
+        --   commentStyle = 'NONE',
+        -- })
+
+        -- catppuccin
+        require('catppuccin').setup({
+          transparent_background = true,
+          styles = {
+            comments = 'NONE',
+          },
         })
       end,
     },
