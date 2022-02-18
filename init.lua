@@ -16,7 +16,7 @@ core.setup({
     -- Colorscheme config
     theme = {
       name = 'catppuccin',
-      enable_transparent_features = false,
+      enable_transparent_features = true,
       enable_custom_visual_hl = false,
       on_before = function()
         -- moonfly
