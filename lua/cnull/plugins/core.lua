@@ -15,12 +15,6 @@ local M = {
   },
 }
 
-function M.before()
-  vim.g.projectlocal = {
-    projectConfig = '.vim/init.lua',
-  }
-end
-
 function M.after()
   -- nvim-autopairs Config
   -- ---
