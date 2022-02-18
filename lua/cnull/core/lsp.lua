@@ -4,24 +4,17 @@ local M = {
 }
 
 ---Set the default diagnostic settings from all sources
+---@param opts table Check `vim.diagnostic.config()` for opts params
 ---@return nil
-local function set_lsp_diagnostic_config()
-  vim.diagnostic.config({
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    virtual_text = false,
-  })
+local function set_lsp_diagnostic_config(opts)
+  vim.diagnostic.config(opts)
 end
 
----Set the defaults border settings for LSP floating windows
----@param opts table Similar to nvim_open_win()
+---Set float options when invoked by LSP
+---@param opts table Similar to `nvim_open_win()`
 ---@return nil
-local function set_lsp_borders(opts)
-  -- Hover window settings
+local function set_lsp_float_opts(opts)
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, opts)
-
-  -- Signature help window settings
   vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, opts)
 end
 
@@ -33,9 +26,9 @@ local function set_lsp_completion_capabilities()
 
   -- nvim-cmp Config
   -- ---
-  local cmp_ok, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-  if cmp_ok then
-    M.capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local ok, nvim_cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+  if ok then
+    M.capabilities = nvim_cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
   else
     M.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
     M.capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -50,27 +43,49 @@ local function set_lsp_completion_capabilities()
   end
 end
 
-local function set_lsp_diagnostic_signs()
-  local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-  for type, icon in pairs(signs) do
+---Set LSP diagnostic signs
+---@param opts table
+---@return nil
+local function set_lsp_diagnostic_signs(opts)
+  for type, icon in pairs(opts) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
-  end
+end
 
 ---Initialize default nvim-lsp settings
 ---@param opts table
 ---@return nil
 function M.init(opts)
+  local defaults = {
+    debug = false,
+    float = {
+      width = 80,
+      border = 'rounded',
+    },
+    diagnostic = {
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      virtual_text = false,
+    },
+    signs = {
+      Error = ' ',
+      Warn = ' ',
+      Hint = ' ',
+      Info = ' ',
+    },
+  }
+
   if opts == nil or opts == {} then
-    opts = { debug = false }
+    opts = defaults
+  else
+    opts = vim.tbl_extend('force', defaults, opts)
   end
 
-  set_lsp_diagnostic_config()
-  set_lsp_diagnostic_signs()
-
-  set_lsp_borders({ width = 80, border = 'rounded' })
-
+  set_lsp_diagnostic_signs(opts.signs)
+  set_lsp_diagnostic_config(opts.diagnostic)
+  set_lsp_float_opts(opts.float)
   set_lsp_completion_capabilities()
 
   -- Turn on debug mode for nvim LSP client
