@@ -95,15 +95,15 @@ function M.init(opts)
 end
 
 ---Setup lsp server, given name and nvim-lsp configuration
----@param lspname string
----@param lspopts table
-function M.setup(lspname, lspopts)
-  local default_opts = {
+---@param server_name string
+---@param opts table
+function M.setup(server_name, opts)
+  local defaults = {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
   }
 
-  lspopts = vim.tbl_extend('force', default_opts, lspopts or {})
+  opts = vim.tbl_extend('force', defaults, opts)
 
   local success, lspconfig = pcall(require, 'lspconfig')
   if not success then
@@ -111,7 +111,7 @@ function M.setup(lspname, lspopts)
     return
   end
 
-  lspconfig[lspname].setup(lspopts)
+  lspconfig[server_name].setup(opts)
 end
 
 return M
