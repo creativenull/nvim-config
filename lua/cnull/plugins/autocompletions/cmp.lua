@@ -11,7 +11,6 @@ end ]]
 -- nvim-cmp Config
 -- ---
 cmp.setup({
-  completion = { keyword_length = 3 },
   snippet = {
     expand = function(args)
       if vim.fn.exists('*vsnip#anonymous') == 1 then
