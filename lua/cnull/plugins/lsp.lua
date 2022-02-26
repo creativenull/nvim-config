@@ -40,8 +40,16 @@ function M.after()
   })
   nvimlsp.on_attach = on_attach
 
-  local dlsconfig = require('diagnosticls-configs')
-  dlsconfig.init({ on_attach = on_attach })
+  -- projectlocal Config
+  -- ---
+  require('projectlocal.lsp').setup({
+    on_attach = on_attach,
+    capabilities = nvimlsp.capabilities,
+  })
+
+  -- diagnosticls-configs Config
+  -- ---
+  require('diagnosticls-configs').init({ on_attach = on_attach })
 end
 
 return M
