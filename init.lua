@@ -15,12 +15,17 @@ core.setup({
 
     -- Colorscheme config
     theme = {
-      name = 'catppuccin',
-      enable_transparent_features = true,
+      name = 'nightfly',
+      enable_transparent_features = false,
       enable_custom_visual_hl = false,
       on_before = function()
         -- moonfly
         vim.g.moonflyNormalFloat = true
+        vim.g.moonflyTransparent = true
+
+        -- nightfly
+        vim.g.nightflyNormalFloat = true
+        vim.g.nightflyTransparent = true
 
         -- gruvbox
         vim.g.gruvbox_flat_style = 'hard'
@@ -39,12 +44,12 @@ core.setup({
         -- })
 
         -- catppuccin
-        require('catppuccin').setup({
-          transparent_background = true,
-          styles = {
-            comments = 'NONE',
-          },
-        })
+        -- require('catppuccin').setup({
+        --   transparent_background = true,
+        --   styles = {
+        --     comments = 'NONE',
+        --   },
+        -- })
       end,
     },
 
