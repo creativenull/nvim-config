@@ -1,5 +1,8 @@
 local M = {}
 
+local required_externals = { 'deno', 'python3', 'rg', 'git', 'curl' }
+local optional_externals = { 'bat' }
+
 local errmsg_pkg_required = '(required) not installed, install via OS package manager'
 local errmsg_pkg_optional = '(optional) not installed, install via OS package manager'
 
@@ -10,16 +13,18 @@ local function prereq_checks()
     error('nvim 0.6 and up is required for this config')
   end
 
-  if vim.fn.executable('python3') == 0 then
-    error(string.format('%q %s', 'python3', errmsg_pkg_required))
+  -- Required checks
+  for _, rbin in pairs(required_externals) do
+    if vim.fn.executable(rbin) == 0 then
+      error(string.format('%q %s', rbin, errmsg_pkg_required))
+    end
   end
 
-  if vim.fn.executable('rg') == 0 then
-    error(string.format('%q %s', 'ripgrep', errmsg_pkg_required))
-  end
-
-  if vim.fn.executable('bat') == 0 then
-    vim.api.nvim_err_writeln(string.format('%q %s', 'bat', errmsg_pkg_optional))
+  -- Optional checks
+  for _, obin in pairs(optional_externals) do
+    if vim.fn.executable(obin) == 0 then
+      vim.api.nvim_err_writeln(string.format('%q %s', obin, errmsg_pkg_optional))
+    end
   end
 end
 
