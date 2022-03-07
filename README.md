@@ -4,9 +4,11 @@ This is my neovim config in lua, I use this to test out different lua plugins or
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/3767728/147891186-b5f8cfd9-8b59-4269-8b2c-5ce0a788c352.png)
+![image](https://user-images.githubusercontent.com/3767728/157122035-28a021e2-9eab-4b8b-9026-01996cc92e92.png)
 
-![image](https://user-images.githubusercontent.com/3767728/147891209-b65dc245-f0bc-49f5-bcba-afc810b2d316.png)
+![image](https://user-images.githubusercontent.com/3767728/157122242-9058909a-2af3-42c5-b8aa-5550c1012358.png)
+
+![image](https://user-images.githubusercontent.com/3767728/157122392-3a15ae65-f58b-491d-a5b5-db4fcb098cac.png)
 
 ## Requirements
 
