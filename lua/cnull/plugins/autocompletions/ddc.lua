@@ -1,58 +1,77 @@
 local augroup = require('cnull.core.event').augroup
 local imap = require('cnull.core.keymap').imap
 
-augroup('ddc_user_events', {
-  {
-    event = { 'BufEnter', 'BufNew' },
-    exec = function()
-      local bufnr = vim.fn.bufnr('')
-      local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
-      if ft == 'TelescopePrompt' then
-        vim.call('ddc#disable')
-      else
-        vim.call('ddc#enable')
-      end
-    end,
-  },
-})
-
 vim.call('ddc#custom#patch_global', {
   backspaceCompletion = true,
   autoCompleteDelay = 100,
-  sources = { 'nvimlsp', 'around', 'ultisnips' },
+  sources = { 'nvim-lsp', 'vsnip', 'around', 'buffer' },
   sourceOptions = {
     ['_'] = {
       matchers = { 'matcher_fuzzy' },
-      sorters = { 'sorter_rank' },
-    },
-    ultisnips = {
-      mark = 'US',
+      sorters = { 'sorter_fuzzy' },
+      converters = { 'converter_fuzzy' },
     },
     ['nvim-lsp'] = {
       mark = 'LSP',
+      maxCandidates = 10,
       forceCompletionPattern = [[\.\w*|:\w*|->\w*]],
+    },
+    vsnip = {
+      mark = 'S',
+      maxCandidates = 5,
+    },
+    around = {
+      mark = 'A',
+      maxCandidates = 3,
+    },
+    buffer = {
+      mark = 'B',
+      maxCandidates = 3,
+    }
+  },
+  sourceParams = {
+    kindLabels = {
+      Class = 'ﴯ Class',
+      Color = ' Color',
+      Constant = ' Cons',
+      Constructor = ' New',
+      Enum = ' Enum',
+      EnumMember = ' Enum',
+      Event = ' Event',
+      Field = 'ﰠ Field',
+      File = ' File',
+      Folder = ' Dir',
+      Function = ' Fun',
+      Interface = ' Int',
+      Keyword = ' Key',
+      Method = ' Method',
+      Module = ' Mod',
+      Operator = ' Op',
+      Property = 'ﰠ Prop',
+      Reference = ' Ref',
+      Snippet = ' Snip',
+      Struct = 'פּ Struct',
+      Text = ' Text',
+      TypeParameter = '',
+      Unit = '塞 Unit',
+      Value = ' Value',
+      Variable = ' Var',
     },
   },
 })
 
-vim.call('ddc_nvim_lsp_doc#enable')
+-- Complete trigger
+imap('<C-y>', [[pumvisible() ? (vsnip#expandable() ? "\<Plug>(vsnip-expand)" : "\<C-y>") : "\<C-y>"]], { expr = true })
 
--- Tab completion
-local function termcodes(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+-- Manual popup trigger
+imap('<C-Space>', 'ddc#map#manual_complete()', { silent = true, expr = true })
 
-function _G.user_tab_completion(default_key)
-  if vim.fn.pumvisible() == 1 then
-    if vim.call('UltiSnips#CanExpandSnippet') == 1 then
-      return termcodes('<C-r>=UltiSnips#ExpandSnippet()<CR>')
-    else
-      return termcodes('<C-y>')
-    end
-  else
-    return termcodes(default_key)
-  end
-end
-
-imap('<C-y>', 'v:lua.user_tab_completion("<C-y>")', { expr = true })
-imap('<C-Space>', 'ddc#manual_complete()', { silent = true, expr = true })
+augroup('ddc_user_events', {
+  {
+    event = 'VimEnter',
+    exec = function()
+      vim.call('popup_preview#enable')
+      vim.call('ddc#enable')
+    end,
+  },
+})

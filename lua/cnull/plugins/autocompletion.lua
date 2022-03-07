@@ -1,23 +1,23 @@
 local M = {
   plugins = {
     -- nvim-cmp
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-vsnip' },
-    { 'hrsh7th/cmp-buffer' },
+    -- { 'hrsh7th/nvim-cmp' },
+    -- { 'hrsh7th/cmp-nvim-lsp' },
+    -- { 'hrsh7th/cmp-vsnip' },
+    -- { 'hrsh7th/cmp-buffer' },
 
     -- coq_nvim
     -- { 'ms-jpq/coq_nvim', branch = 'coq' },
     -- { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 
     -- ddc.vim
-    -- { 'Shougo/ddc.vim', tag = 'v1.2.0' },
-    -- { 'Shougo/ddc-sorter_rank' },
-    -- { 'matsui54/ddc-matcher_fuzzy' },
-    -- { 'Shougo/ddc-around' },
-    -- { 'Shougo/ddc-nvim-lsp' },
-    -- { 'matsui54/ddc-ultisnips' },
-    -- { 'matsui54/ddc-nvim-lsp-doc' },
+    { 'Shougo/ddc.vim' },
+    { 'tani/ddc-fuzzy' },
+    { 'matsui54/denops-popup-preview.vim' },
+    { 'Shougo/ddc-nvim-lsp' },
+    { 'Shougo/ddc-around' },
+    { 'matsui54/ddc-buffer' },
+    { 'hrsh7th/vim-vsnip-integ' },
   },
 }
 
@@ -30,7 +30,7 @@ end
 function M.after()
   -- nvim-cmp Config
   -- ---
-  require('cnull.plugins.autocompletions.cmp')
+  -- require('cnull.plugins.autocompletions.cmp')
 
   -- coq_nvim Config
   -- ---
@@ -38,7 +38,7 @@ function M.after()
 
   -- ddc.vim Config
   -- ---
-  -- require('cnull.plugins.autocompletions.ddc')
+  require('cnull.plugins.autocompletions.ddc')
 end
 
 return M
