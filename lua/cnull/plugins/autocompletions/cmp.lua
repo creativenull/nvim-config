@@ -44,14 +44,14 @@ cmp.setup({
     format = require('lspkind').cmp_format({
       with_text = true,
       menu = {
-        buffer = '[BUF]',
-        nvim_lsp = '[LSP]',
-        vsnip = '[SNIP]',
+        buffer = '[B]',
+        nvim_lsp = '[LS]',
+        vsnip = '[S]',
       },
     }),
   },
 
-  documentation = { border = 'single' },
+  documentation = { border = 'rounded' },
 })
 
 -- Disable on filetypes not needed like prompt windows

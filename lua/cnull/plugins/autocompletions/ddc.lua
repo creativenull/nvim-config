@@ -12,7 +12,7 @@ vim.call('ddc#custom#patch_global', {
       converters = { 'converter_fuzzy' },
     },
     ['nvim-lsp'] = {
-      mark = 'LSP',
+      mark = 'LS',
       maxCandidates = 10,
       forceCompletionPattern = [[\.\w*|:\w*|->\w*]],
     },
