@@ -18,14 +18,27 @@ function M.autocmd(opts)
     error(debug.traceback('autocmd: `event` cannot be empty'))
   end
 
+  -- Set defaults
+  opts.once = opts.once and '++once' or ''
+  opts.nested = opts.nested and '++nested' or ''
+  opts.clear = opts.clear and '!' or ''
+
+  if opts.pattern == nil or opts.pattern == {} then
+    opts.pattern = '*'
+  end
+
   -- If event is table list, then join
-  if vim.tbl_islist(opts.event) and vim.tbl_count(opts.event) > 1 then
+  if type(opts.event) == 'table' and vim.tbl_count(opts.event) > 1 then
     opts.event = table.concat(opts.event, ',')
+  elseif type(opts.event) == 'table' and vim.tbl_count(opts.event) == 1 then
+    opts.event = opts.event[1]
   end
 
   -- If pattern is table list, then join
-  if vim.tbl_islist(opts.pattern) and vim.tbl_count(opts.pattern) > 1 then
+  if type(opts.pattern) == 'table' and vim.tbl_count(opts.pattern) > 1 then
     opts.pattern = table.concat(opts.pattern, ',')
+  elseif type(opts.pattern) == 'table' and vim.tbl_count(opts.pattern) == 1 then
+    opts.pattern = opts.pattern[1]
   end
 
   local execfn = nil
@@ -35,11 +48,11 @@ function M.autocmd(opts)
 
   local au = string.format(
     'autocmd%s %s %s %s %s %s',
-    opts.clear and '!' or '',
+    opts.clear,
     opts.event,
-    opts.pattern or '*',
-    opts.once and '++once' or '',
-    opts.nested and '++nested' or '',
+    opts.pattern,
+    opts.once,
+    opts.nested,
     execfn or opts.exec
   )
 
