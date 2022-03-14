@@ -1,8 +1,10 @@
 local M = {}
 
+-- Required tools
 local required_externals = { 'deno', 'python3', 'rg', 'git', 'curl' }
 local optional_externals = { 'bat' }
 
+-- Error message templates
 local errmsg_pkg_required = '(required) not installed, install via OS package manager'
 local errmsg_pkg_optional = '(optional) not installed, install via OS package manager'
 
