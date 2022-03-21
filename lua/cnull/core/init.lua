@@ -11,8 +11,9 @@ local errmsg_pkg_optional = '(optional) not installed, install via OS package ma
 ---Perform pre-requisite checks before setting any nvim config
 ---@return nil
 local function prereq_checks()
-  if vim.fn.has('nvim-0.6') == 0 then
-    error('nvim 0.6 and up is required for this config')
+  local min = 'nvim-0.7'
+  if vim.fn.has(min) == 0 then
+    error(string.format('%s nightly and up is required for this config', min))
   end
 
   -- Required checks
