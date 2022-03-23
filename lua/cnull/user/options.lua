@@ -71,6 +71,7 @@ vim.opt.cmdheight = 2
 vim.opt.showtabline = 2
 vim.opt.laststatus = 2
 vim.opt.guicursor = { 'n-v-c-sm:block', 'i-ci-ve:block', 'r-cr-o:hor20' }
+vim.opt.foldenable = false
 
 -- Built-in find and grep
 local augroup = require('cnull.core.event').augroup
