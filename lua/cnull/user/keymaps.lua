@@ -73,6 +73,3 @@ nmap('<Leader>mc', [[<Cmd>cmap<CR>]])
 -- Copy/Paste from clipboard
 nmap('<Leader>y', [["+y]])
 nmap('<Leader>p', [["+p]])
-
--- Disable Ex-mode and command history
-nmap('Q', '')
