@@ -2,7 +2,7 @@ local err = require('cnull.core.lib.err')
 local DEFAULT_OPTS = { noremap = true }
 local M = {}
 
----Validate args for mapper()
+---Validate user opts
 ---@param input string
 ---@param exec string|function
 ---@return nil
@@ -13,7 +13,7 @@ local function validate(input, exec)
   })
 end
 
----Merge opts with default keymap options
+---Merge default opts from user provided opts
 ---@param opts table
 ---@return table
 local function merge_opts(opts)
@@ -26,7 +26,7 @@ local function merge_opts(opts)
   return opts
 end
 
----Generic key mapper to map keys globally or in buffer
+---Map input to exec with provided mode and opts
 ---@param mode string
 ---@param input string
 ---@param exec string|function
@@ -37,6 +37,7 @@ local function mapper(mode, input, exec, opts)
 
   if not ok then
     err(errmsg)
+
     return
   end
 

@@ -1,16 +1,16 @@
 local err = require('cnull.core.lib.err')
 local M = {}
 
----Validate autocmd opts
+---Validate opts from user
 ---@param opts table
 ---@return nil
 local function validate_autocmd(opts)
   vim.validate({
     event = { opts.event, { 'string', 'table' } },
     exec = { opts.exec, { 'string', 'function' } },
-    group = { opts.group, { 'string' } },
 
     -- nullables
+    group = { opts.group, 'string', true },
     once = { opts.once, 'boolean', true },
     nested = { opts.nested, 'boolean', true },
     pattern = { opts.pattern, { 'string', 'table' }, true },
@@ -18,7 +18,7 @@ local function validate_autocmd(opts)
   })
 end
 
----Merge autocmd opts
+---Merge default opts with user provided opts
 ---@param opts table
 ---@return table
 local function merge_autocmd_defaults(opts)
@@ -52,6 +52,7 @@ local function autocmd(opts)
 
   if not ok then
     err(errmsg)
+
     return
   end
 
@@ -66,6 +67,11 @@ local function autocmd(opts)
   end
 end
 
+---Validate opts from user
+---@param name string
+---@param autocmds table
+---@param opts table
+---@return nil
 local function validate_augroup(name, autocmds, opts)
   vim.validate({
     name = { name, 'string' },
@@ -74,6 +80,9 @@ local function validate_augroup(name, autocmds, opts)
   })
 end
 
+---Merge default opts with user provided opts
+---@param opts table
+---@return table
 local function merge_augroup_defaults(opts)
   opts = opts or {}
   opts.clear = opts.clear or true
@@ -90,6 +99,7 @@ local function augroup(name, autocmds, opts)
 
   if not ok then
     err(errmsg)
+
     return
   end
 
@@ -99,6 +109,7 @@ local function augroup(name, autocmds, opts)
 
   if not ok then
     err(errmsg)
+
     return
   end
 

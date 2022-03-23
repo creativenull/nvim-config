@@ -1,3 +1,4 @@
+local err = require('cnull.core.lib.err')
 local M = {
   on_attach = nil,
   capabilities = nil,
@@ -27,6 +28,7 @@ local function set_lsp_completion_capabilities()
   -- nvim-cmp Config
   -- ---
   local ok, nvim_cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+
   if ok then
     M.capabilities = nvim_cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
   else
@@ -49,6 +51,7 @@ end
 local function set_lsp_diagnostic_signs(opts)
   for type, icon in pairs(opts) do
     local hl = 'DiagnosticSign' .. type
+
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 end
@@ -106,8 +109,9 @@ function M.setup(server_name, opts)
   opts = vim.tbl_extend('force', defaults, opts)
 
   local success, lspconfig = pcall(require, 'lspconfig')
+
   if not success then
-    vim.api.nvim_err_writeln('lspconfig: not installed')
+    err('lspconfig: not installed')
     return
   end
 

@@ -1,3 +1,4 @@
+local err = require('cnull.core.lib.err')
 local api = vim.api
 local fn = vim.fn
 local getmodlist = require('cnull.core.lib.autorequire').getmodlist
@@ -20,6 +21,7 @@ local M = {
 function M.trigger_before(config)
   for _, modname in pairs(M.modlist) do
     local mod = require(modname)
+
     if mod.before and type(mod.before) == 'function' then
       mod.before(config)
     end
@@ -47,12 +49,14 @@ function M.loadplugins()
   -- Get plugin names from each file
   for _, modname in pairs(M.modlist) do
     local mod = require(modname)
+
     if mod.plugins then
       for _, plugin in pairs(mod.plugins) do
         table.insert(plugin_names, plugin)
       end
     else
-      api.nvim_err_writeln('plugin: "M.plugins" is required to properly load plugins')
+      err('plugin: "M.plugins" is required to properly load plugins')
+
       return
     end
   end

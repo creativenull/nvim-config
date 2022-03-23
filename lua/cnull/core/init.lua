@@ -1,3 +1,4 @@
+local err = require('cnull.core.lib.err')
 local M = {}
 
 -- Required tools
@@ -12,6 +13,7 @@ local errmsg_pkg_optional = '(optional) not installed, install via OS package ma
 ---@return nil
 local function prereq_checks()
   local min = 'nvim-0.7'
+
   if vim.fn.has(min) == 0 then
     error(string.format('%s nightly and up is required for this config', min))
   end
@@ -26,7 +28,7 @@ local function prereq_checks()
   -- Optional checks
   for _, obin in pairs(optional_externals) do
     if vim.fn.executable(obin) == 0 then
-      vim.api.nvim_err_writeln(string.format('%q %s', obin, errmsg_pkg_optional))
+      err(string.format('%q %s', obin, errmsg_pkg_optional))
     end
   end
 end
@@ -73,6 +75,9 @@ function M.setup(opts)
 
   -- Set defaults
   set_defaults(cfg)
+
+  -- Register default augroup
+  vim.api.nvim_create_augroup('user_events', { clear = true })
 
   -- Before core setup
   if opts.on_before then

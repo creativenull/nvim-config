@@ -55,6 +55,7 @@ end
 ---@return nil
 function M.setup(cfg)
   local theme = cfg.theme
+
   register_transparent_event(theme)
   set_colorscheme(theme)
 end
