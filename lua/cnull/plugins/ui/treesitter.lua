@@ -10,7 +10,7 @@ require('nvim-treesitter.configs').setup({
     'vue',
   },
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = { enable = false },
   refactor = {
     highlight_definitions = { enable = true },
   },
