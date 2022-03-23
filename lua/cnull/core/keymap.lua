@@ -1,5 +1,4 @@
-local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
-local store_vlua_fn = require('cnull.core.lib.storefn').store_vlua_fn
+local err = require('cnull.core.lib.err')
 local DEFAULT_OPTS = { noremap = true }
 local M = {}
 
@@ -8,15 +7,9 @@ local M = {}
 ---@param exec string|function
 ---@return nil
 local function validate(input, exec)
-  local valid_strfn = type(exec) == 'string' or type(exec) == 'function'
   vim.validate({
     input = { input, 'string' },
-    exec = {
-      exec,
-      function()
-        return valid_strfn
-      end,
-    },
+    exec = { exec, { 'string', 'function' } },
   })
 end
 
@@ -33,23 +26,6 @@ local function merge_opts(opts)
   return opts
 end
 
----Set the right-hand-side as string or function
----@param input string
----@param exec string|function
----@return string
-local function set_exec(input, exec, opts)
-  local execfn = nil
-  if type(exec) == 'function' then
-    if opts.expr then
-      execfn = store_vlua_fn('keymaps', input, exec)
-    else
-      execfn = string.format('<Cmd>%s<CR>', store_lua_fn('keymaps', input, exec))
-    end
-  end
-  exec = execfn or exec
-  return exec
-end
-
 ---Generic key mapper to map keys globally or in buffer
 ---@param mode string
 ---@param input string
@@ -57,21 +33,29 @@ end
 ---@param opts table|nil
 ---@return nil
 local function mapper(mode, input, exec, opts)
-  validate(input, exec)
+  local ok, errmsg = pcall(validate, input, exec)
+
+  if not ok then
+    err(errmsg)
+    return
+  end
+
   opts = merge_opts(opts)
-  exec = set_exec(input, exec, opts)
 
   if opts.bufnr then
     local bufnr = opts.bufnr
     opts.bufnr = nil
-    local success, errmsg = pcall(vim.api.nvim_buf_set_keymap, bufnr, mode, input, exec, opts)
-    if not success then
-      vim.api.nvim_err_writeln(errmsg)
+
+    ok, errmsg = pcall(vim.keymap.set, mode, input, exec, vim.tbl_extend('force', { buffer = bufnr }, opts))
+
+    if not ok then
+      err(errmsg)
     end
   else
-    local success, errmsg = pcall(vim.api.nvim_set_keymap, mode, input, exec, opts)
-    if not success then
-      vim.api.nvim_err_writeln(errmsg)
+    ok, errmsg = pcall(vim.keymap.set, mode, input, exec, opts)
+
+    if not ok then
+      err(errmsg)
     end
   end
 end

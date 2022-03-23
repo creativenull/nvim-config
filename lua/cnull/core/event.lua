@@ -1,82 +1,113 @@
-local api = vim.api
-local store_lua_fn = require('cnull.core.lib.storefn').store_lua_fn
+local err = require('cnull.core.lib.err')
 local M = {}
 
----@class VimEventOption
----@field event string|table
----@field exec string|function
----@field pattern string = '*'
----@field once boolean
----@field nested boolean
----@field clear boolean
-
----Create an :autocmd event, see :help :autocmd for information
----@param opts VimEventOption
+---Validate autocmd opts
+---@param opts table
 ---@return nil
-function M.autocmd(opts)
-  if opts.event == nil then
-    error(debug.traceback('autocmd: `event` cannot be empty'))
+local function validate_autocmd(opts)
+  vim.validate({
+    event = { opts.event, { 'string', 'table' } },
+    exec = { opts.exec, { 'string', 'function' } },
+    group = { opts.group, { 'string' } },
+
+    -- nullables
+    once = { opts.once, 'boolean', true },
+    nested = { opts.nested, 'boolean', true },
+    pattern = { opts.pattern, { 'string', 'table' }, true },
+    desc = { opts.desc, { 'string' }, true }
+  })
+end
+
+---Merge autocmd opts
+---@param opts table
+---@return table
+local function merge_autocmd_defaults(opts)
+  opts = opts or {}
+  opts.once = opts.once or false
+  opts.nested = opts.nested or false
+  opts.group = opts.group or 'user_events'
+  opts.pattern = opts.pattern or '*'
+  opts.desc = opts.desc or 'Awesome autocmd from nightly'
+
+  if opts.buffer then
+    opts.pattern = nil
   end
 
-  -- Set defaults
-  opts.once = opts.once and '++once' or ''
-  opts.nested = opts.nested and '++nested' or ''
-  opts.clear = opts.clear and '!' or ''
-
-  if opts.pattern == nil or opts.pattern == {} then
-    opts.pattern = '*'
+  if type(opts.exec) == 'string' then
+    opts.command = opts.exec
+    opts.exec = nil
+  elseif type(opts.exec) == 'function' then
+    opts.callback = opts.exec
+    opts.exec = nil
   end
 
-  -- If event is table list, then join
-  if type(opts.event) == 'table' and vim.tbl_count(opts.event) > 1 then
-    opts.event = table.concat(opts.event, ',')
-  elseif type(opts.event) == 'table' and vim.tbl_count(opts.event) == 1 then
-    opts.event = opts.event[1]
+  return opts
+end
+
+---Create an :autocmd event, see :help nvim_create_autocmd
+---@param opts table
+---@return nil
+local function autocmd(opts)
+  local ok, errmsg = pcall(validate_autocmd, opts)
+
+  if not ok then
+    err(errmsg)
+    return
   end
 
-  -- If pattern is table list, then join
-  if type(opts.pattern) == 'table' and vim.tbl_count(opts.pattern) > 1 then
-    opts.pattern = table.concat(opts.pattern, ',')
-  elseif type(opts.pattern) == 'table' and vim.tbl_count(opts.pattern) == 1 then
-    opts.pattern = opts.pattern[1]
-  end
+  opts = merge_autocmd_defaults(opts)
+  local name = opts.event
+  opts.event = nil
 
-  local execfn = nil
-  if type(opts.exec) == 'function' then
-    execfn = store_lua_fn('events', opts.event, opts.exec)
-  end
+  ok, errmsg = pcall(vim.api.nvim_create_autocmd, name, opts)
 
-  local au = string.format(
-    'autocmd%s %s %s %s %s %s',
-    opts.clear,
-    opts.event,
-    opts.pattern,
-    opts.once,
-    opts.nested,
-    execfn or opts.exec
-  )
-
-  local success, errmsg = pcall(api.nvim_command, au)
-  if not success then
-    api.nvim_err_writeln(errmsg)
+  if not ok then
+    err(errmsg)
   end
 end
 
----Create an :augroup, see :help :augroup for information
+local function validate_augroup(name, autocmds, opts)
+  vim.validate({
+    name = { name, 'string' },
+    autocmds = { autocmds, 'table' },
+    opts = { opts, 'table', true },
+  })
+end
+
+local function merge_augroup_defaults(opts)
+  opts = opts or {}
+  opts.clear = opts.clear or true
+
+  return opts
+end
+
+---Create an :augroup, see :help nvim_create_augroup
 ---@param name string
----@param autocmds VimEventOption[]
+---@param autocmds table
 ---@return nil
-function M.augroup(name, autocmds)
-  if autocmds == nil or vim.tbl_isempty(autocmds) then
-    error(debug.traceback('augroup: `autocmds` cannot be empty'))
+local function augroup(name, autocmds, opts)
+  local ok, errmsg = pcall(validate_augroup, name, autocmds, opts)
+
+  if not ok then
+    err(errmsg)
+    return
   end
 
-  api.nvim_command('augroup ' .. name)
-  api.nvim_command('autocmd!')
-  for _, exec in pairs(autocmds) do
-    M.autocmd(exec)
+  opts = merge_augroup_defaults(opts)
+
+  ok, errmsg = pcall(vim.api.nvim_create_augroup, name, opts)
+
+  if not ok then
+    err(errmsg)
+    return
   end
-  api.nvim_command('augroup END')
+
+  for _, v in pairs(autocmds) do
+    M.autocmd(vim.tbl_extend('force', { group = name }, v))
+  end
 end
+
+M.autocmd = autocmd
+M.augroup = augroup
 
 return M

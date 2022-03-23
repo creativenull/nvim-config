@@ -14,19 +14,17 @@ function M.after()
   ---@param bufnr number
   ---@return nil
   local function set_keymaps(bufnr)
-    nmap('<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { bufnr = bufnr })
-    nmap('<Leader>ld', '<Cmd>lua vim.lsp.buf.definition()<CR>', { bufnr = bufnr })
-    nmap('<Leader>le', '<Cmd>lua vim.diagnostic.setloclist()<CR>', { bufnr = bufnr })
-    nmap('<Leader>lf', '<Cmd>lua vim.lsp.buf.formatting()<CR>', { bufnr = bufnr })
-    nmap('<Leader>lh', '<Cmd>lua vim.lsp.buf.hover()<CR>', { bufnr = bufnr })
-    nmap('<Leader>lr', '<Cmd>lua vim.lsp.buf.rename()<CR>', { bufnr = bufnr })
-
-    local diagopts = '{ width = 80, border = "rounded" }'
-    nmap(
-      '<Leader>lw',
-      string.format('<Cmd>lua vim.diagnostic.open_float(%d, %s)<CR>', bufnr, diagopts),
-      { bufnr = bufnr }
-    )
+    nmap('<Leader>la', vim.lsp.buf.code_action, { bufnr = bufnr })
+    nmap('<Leader>ld', vim.lsp.buf.definition, { bufnr = bufnr })
+    nmap('<Leader>le', vim.diagnostic.setloclist, { bufnr = bufnr })
+    nmap('<Leader>lf', vim.lsp.buf.formatting, { bufnr = bufnr })
+    nmap('<Leader>lh', vim.lsp.buf.hover, { bufnr = bufnr })
+    nmap('<Leader>lr', vim.lsp.buf.rename, { bufnr = bufnr })
+    nmap('<Leader>lw', function()
+      vim.diagnostic.open_float(bufnr, { width = 80, border = 'rounded' })
+    end, {
+      bufnr = bufnr,
+    })
   end
 
   ---Disable formatting from some servers

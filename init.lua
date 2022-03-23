@@ -65,15 +65,16 @@ core.setup({
 
   -- Events
   on_before = function()
-    local autocmd = require('cnull.core.event').autocmd
+    local augroup = require('cnull.core.event').augroup
 
     -- Highlight text yank
-    autocmd({
-      clear = true,
-      event = 'TextYankPost',
-      exec = function()
-        vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })
-      end,
+    augroup('yank_user_events', {
+      {
+        event = 'TextYankPost',
+        exec = function()
+          vim.highlight.on_yank({ higroup = 'Search', timeout = 500 })
+        end,
+      },
     })
   end,
 
