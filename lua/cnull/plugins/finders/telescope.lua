@@ -32,6 +32,7 @@ nmap('<C-t>', live_grep)
 -- Config file finder
 local function find_config_files()
   local configdir = vim.fn.stdpath('config')
+
   telescope_builtin.find_files({
     find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden', configdir },
     previewer = false,

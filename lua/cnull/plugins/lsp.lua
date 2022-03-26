@@ -20,6 +20,7 @@ function M.after()
     nmap('<Leader>lf', vim.lsp.buf.formatting, { bufnr = bufnr })
     nmap('<Leader>lh', vim.lsp.buf.hover, { bufnr = bufnr })
     nmap('<Leader>lr', vim.lsp.buf.rename, { bufnr = bufnr })
+
     nmap('<Leader>lw', function()
       vim.diagnostic.open_float(bufnr, { width = 80, border = 'rounded' })
     end, {
@@ -33,7 +34,7 @@ function M.after()
   local function modify_server(client)
     local servers = { 'tsserver', 'sumneko_lua' }
 
-    for _,server in pairs(servers) do
+    for _, server in pairs(servers) do
       if client.name == server and client.resolved_capabilities.document_formatting then
         client.resolved_capabilities.document_formatting = false
       end

@@ -15,7 +15,7 @@ local M = {
     { 'vim-denops/denops.vim' },
 
     -- Core (What is essential - for me at least)
-    -- ----
+    -- ------------------------------------------
 
     -- This is my own plugin to create project specific configurations, it's
     -- essentially a vim config that defers from your own config to meet the

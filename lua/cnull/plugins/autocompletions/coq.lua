@@ -24,6 +24,7 @@ end
 
 function M.after()
   local imap = require('cnull.core.keymap').imap
+
   imap(
     '<C-y>',
     [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><C-y>" : "\<C-y>") : "\<C-y>"]],

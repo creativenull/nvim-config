@@ -1,4 +1,5 @@
 local success, _ = pcall(require, 'nvim-treesitter')
+
 if not success then
   return
 end

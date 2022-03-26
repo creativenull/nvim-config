@@ -18,12 +18,14 @@ function M.after()
     show_hidden_files = true,
     devicons_enable = true,
     hide_cursor = true,
+
     float = {
       winblend = 0,
       win_opts = {
         border = 'single',
       },
     },
+
     mappings = {
       ['l'] = lir_actions.edit,
       ['<CR>'] = lir_actions.edit,
@@ -53,7 +55,10 @@ function M.after()
     },
   })
 
-  nmap('<Leader>ff', '<Cmd>lua require("lir.float").toggle()<CR>')
+  -- nmap('<Leader>ff', '<Cmd>lua require("lir.float").toggle()<CR>')
+  nmap('<Leader>ff', function()
+    require('lir.float').toggle()
+  end)
 end
 
 return M
