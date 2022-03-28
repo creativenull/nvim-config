@@ -21,9 +21,11 @@ function M.after()
 
     float = {
       winblend = 0,
-      win_opts = {
-        border = 'single',
-      },
+      win_opts = function()
+        return {
+          border = 'rounded',
+        }
+      end,
     },
 
     mappings = {
