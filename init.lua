@@ -58,7 +58,7 @@ core.setup({
     -- Adjust packer config
     plugins = {
       init = {
-        compile_path = vim.fn.stdpath('data') .. '/packer_compiled.lua',
+        compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
       },
     },
   },
