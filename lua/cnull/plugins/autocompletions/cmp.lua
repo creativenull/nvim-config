@@ -38,7 +38,8 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-  }, { name = 'buffer' }),
+    { name = 'buffer' },
+  }),
 
   formatting = {
     format = require('lspkind').cmp_format({
@@ -52,19 +53,4 @@ cmp.setup({
   },
 
   documentation = { border = 'rounded' },
-})
-
--- Disable on filetypes not needed like prompt windows
-augroup('cmp_user_events', {
-  {
-    event = 'FileType',
-    pattern = { 'TelescopePrompt' },
-    exec = function()
-      cmp.setup.buffer({
-        completion = {
-          autocomplete = false,
-        },
-      })
-    end,
-  },
 })
