@@ -1,3 +1,5 @@
+local augroup = require('cnull.core.event').augroup
+
 -- Windows specific
 if vim.fn.has('win32') == 1 then
   local shellcmdflag = {
@@ -6,17 +8,18 @@ if vim.fn.has('win32') == 1 then
     '-ExecutionPolicy RemoteSigned',
     '-Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
   }
+
   vim.opt.shell = 'pwsh'
   vim.opt.shellcmdflag = table.concat(shellcmdflag, ' ')
   vim.opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
   vim.opt.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
-  vim.opt.shellquote= ''
-  vim.opt.shellxquote= ''
+  vim.opt.shellquote = ''
+  vim.opt.shellxquote = ''
 end
 
--- Automatically create the undo directory
--- when it doesn't exist
+-- Ensure undo directory is created
 local undodir = vim.fn.stdpath('cache') .. '/undo'
+
 if vim.fn.isdirectory(undodir) == 0 then
   if vim.fn.has('win32') == 1 then
     vim.fn.system({ 'mkdir', undodir })
@@ -32,17 +35,12 @@ vim.opt.shortmess:append('c')
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
 
 -- Editor
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 8
 vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.smarttab = true
-vim.opt.autoindent = true
 vim.opt.showmatch = true
 vim.opt.wrap = false
 vim.opt.colorcolumn = '120'
@@ -74,10 +72,10 @@ vim.opt.guicursor = { 'n-v-c-sm:block', 'i-ci-ve:block', 'r-cr-o:hor20' }
 vim.opt.foldenable = false
 
 -- Built-in find and grep
-local augroup = require('cnull.core.event').augroup
 augroup('custom_finder_user_events', {
   {
     event = { 'BufNew', 'BufEnter' },
+
     exec = function()
       local bufnr = vim.api.nvim_get_current_buf()
       vim.api.nvim_buf_set_option(bufnr, 'path', '**')
