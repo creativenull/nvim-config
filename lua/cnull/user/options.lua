@@ -59,8 +59,11 @@ vim.opt.undolevels = 10000
 vim.opt.history = 10000
 vim.opt.backspace = { 'indent', 'eol', 'start' }
 vim.opt.ttimeoutlen = 50
-vim.opt.mouse = ''
 vim.opt.wildignorecase = true
+
+if vim.fn.has('wsl') == 0 then
+  vim.opt.mouse = 'nv'
+end
 
 -- UI
 vim.opt.hidden = true
