@@ -27,7 +27,7 @@ local function cmd(name, command, opts)
 
   opts = opts or {}
 
-  ok, errmsg = pcall(vim.api.nvim_add_user_command, name, command, opts)
+  ok, errmsg = pcall(vim.api.nvim_create_user_command, name, command, opts)
 
   if not ok then
     err(errmsg)
