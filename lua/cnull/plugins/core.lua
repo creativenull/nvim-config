@@ -52,6 +52,18 @@ local M = {
     -- the same for plugins that support vim-repeat API.
     { 'tpope/vim-repeat', opt = true },
 
+    -- Easily align text with a pivot
+    -- An example, if you have the following:
+    --
+    --   const hello = "Hello World"
+    --   const ok = "ok world"
+    --
+    -- Easy align with = as pivot:
+    --
+    --   const hello = "Hello World"
+    --   const ok    = "ok world"
+    --
+    { 'junegunn/vim-easy-align' }
   },
 }
 
