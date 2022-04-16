@@ -1,4 +1,3 @@
-local augroup = require('cnull.core.event').augroup
 local cmp = require('cmp')
 
 -- LuaSnip Config
@@ -28,10 +27,13 @@ cmp.setup({
   },
 
   mapping = {
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
   },
 
   -- You should specify your *installed* sources.
@@ -52,5 +54,10 @@ cmp.setup({
     }),
   },
 
-  documentation = { border = 'rounded' },
+  window = {
+    documentation = {
+      max_width = 80,
+      border = 'rounded',
+    },
+  },
 })
