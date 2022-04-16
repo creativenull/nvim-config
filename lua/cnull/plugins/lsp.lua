@@ -8,6 +8,7 @@ local M = {
 }
 
 function M.after()
+  local augroup = require('cnull.core.event').augroup
   local nmap = require('cnull.core.keymap').nmap
 
   ---Set keymaps when an LSP server attaches to the nvim client
@@ -70,6 +71,15 @@ function M.after()
   -- diagnosticls-configs Config
   -- ---
   require('diagnosticls-configs').init({ on_attach = on_attach })
+
+  augroup('nvimlsp_user_events', {
+    {
+      event = { 'CursorHold', 'CursorHoldI' },
+      exec = function()
+        vim.diagnostic.open_float(nil, { width = 80, border = 'rounded', focus = false, scope = 'cursor' })
+      end,
+    },
+  })
 end
 
 return M
