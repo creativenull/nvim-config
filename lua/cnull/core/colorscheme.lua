@@ -25,6 +25,11 @@ local function register_transparent_event(theme)
       { event = 'ColorScheme', exec = 'highlight! Visual guibg=#dddddd guifg=#333333' },
     })
   end
+
+  -- Custom highlights
+  augroup('custom_hl_events', {
+    { event = 'ColorScheme', exec = 'highlight! WinSeparator guibg=NONE' },
+  })
 end
 
 ---Set the colorscheme of vim

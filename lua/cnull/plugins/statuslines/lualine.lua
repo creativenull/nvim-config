@@ -115,6 +115,7 @@ require('lualine').setup({
     theme = theme,
     section_separators = { left = '', right = '' },
     disabled_filetypes = { 'TelescopePrompt' },
+    globalstatus = true,
   },
 
   sections = {
