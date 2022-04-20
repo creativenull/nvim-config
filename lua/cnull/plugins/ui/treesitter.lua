@@ -7,7 +7,7 @@ require('nvim-treesitter.configs').setup({
     'php',
     'typescript',
     'vue',
-    -- 'lua',
+    'lua',
   },
   highlight = { enable = true },
   indent = { enable = false },
