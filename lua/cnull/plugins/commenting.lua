@@ -1,6 +1,7 @@
 local M = {
   plugins = {
-    { 'numToStr/Comment.nvim', opt = true },
+    -- { 'numToStr/Comment.nvim', opt = true },
+    { 'tyru/caw.vim' },
   },
 }
 
