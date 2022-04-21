@@ -20,12 +20,12 @@ This is my neovim config in lua, I use this to test out different lua plugins or
 ├── init.lua               (Starting point)
 ├── after
 │   └── ftplugin           (Plugins to be loaded on the 'FileType' event)
-├── lua
-│   └── cnull
-│       ├── core           (Initial setup and utilities called from here)
-│       ├── lsp            (Everything LSP related, setup for the built-in LSP)
-│       ├── plugins        (Plugins organized by features instead of plugin names)
-│       └── user           (My custom user configuration independent of plugins)
+└── lua
+    └── cnull
+        ├── core           (Initial setup and utilities called from here)
+        ├── lsp            (Everything LSP related, setup for the built-in LSP)
+        ├── plugins        (Plugins organized by features instead of plugin names)
+        └── user           (My custom user configuration independent of plugins)
 ```
 
 ## Installation/Setup
