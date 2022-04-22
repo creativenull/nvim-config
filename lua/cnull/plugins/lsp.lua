@@ -14,31 +14,36 @@ function M.after()
   ---Set keymaps when an LSP server attaches to the nvim client
   ---@param bufnr number
   ---@return nil
-  local function set_keymaps(bufnr)
-    nmap('<Leader>la', vim.lsp.buf.code_action, { bufnr = bufnr })
-    nmap('<Leader>ld', vim.lsp.buf.definition, { bufnr = bufnr })
-    nmap('<Leader>le', vim.diagnostic.setloclist, { bufnr = bufnr })
-    nmap('<Leader>lf', vim.lsp.buf.formatting, { bufnr = bufnr })
-    nmap('<Leader>lh', vim.lsp.buf.hover, { bufnr = bufnr })
-    nmap('<Leader>lr', vim.lsp.buf.rename, { bufnr = bufnr })
+  local custom_keymaps = function(bufnr)
+    nmap('<Leader>la', vim.lsp.buf.code_action, { bufnr = bufnr, desc = 'LSP Code Action' })
+    nmap('<Leader>ld', vim.lsp.buf.definition, { bufnr = bufnr, desc = 'LSP Go-to Definition' })
+    nmap('<Leader>lh', vim.lsp.buf.hover, { bufnr = bufnr, desc = 'LSP Hover Documentation' })
+    nmap('<Leader>lr', vim.lsp.buf.rename, { bufnr = bufnr, desc = 'LSP Rename' })
+    nmap('<Leader>le', vim.diagnostic.setloclist, { bufnr = bufnr, desc = 'LSP Diagnostics in Location List' })
 
     nmap('<Leader>lw', function()
       vim.diagnostic.open_float(bufnr, { width = 80, border = 'rounded' })
     end, {
       bufnr = bufnr,
+      desc = 'LSP Diagnostic in Float Window',
     })
   end
 
-  ---Disable formatting from some servers
-  ---@param client any
+  ---Only call the formatting request for the given servers
+  ---Ref: https://github.com/neovim/nvim-lspconfig/wiki/Multiple-language-servers-FAQ
+  ---@param client table
+  ---@patam bufnr number
   ---@return nil
-  local function modify_server(client)
-    local servers = { 'tsserver', 'sumneko_lua' }
+  local custom_lsp_fmt = function(client, bufnr)
+    local servers = { 'diagnosticls', 'efm', 'null-ls' }
 
-    for _, server in pairs(servers) do
-      if client.name == server and client.resolved_capabilities.document_formatting then
-        client.resolved_capabilities.document_formatting = false
-      end
+    local fmt_fn = function()
+      local fmt_params = vim.lsp.util.make_formatting_params({})
+      client.request('textDocument/formatting', fmt_params, nil, bufnr)
+    end
+
+    if vim.tbl_contains(servers, client.name) then
+      nmap('<Leader>lf', fmt_fn, { bufnr = bufnr, desc = string.format('LSP Formatting w/ %s', client.name) })
     end
   end
 
@@ -47,19 +52,21 @@ function M.after()
   ---@param client any
   ---@param bufnr number
   ---@return nil
-  local function on_attach(client, bufnr)
-    modify_server(client)
-    set_keymaps(bufnr)
+  local on_attach = function(client, bufnr)
+    custom_keymaps(bufnr)
+    custom_lsp_fmt(client, bufnr)
   end
 
-  -- LSP info keymap
-  nmap('<Leader>li', '<Cmd>LspInfo<CR>')
-
+  -- Intialize lspconfig, to be used with nvimlsp.setup()
   local nvimlsp = require('cnull.core.lsp')
   nvimlsp.init({
+    on_attach = on_attach,
     -- debug = true,
   })
-  nvimlsp.on_attach = on_attach
+
+  -- Example to setup lsp servers after nvimlsp.init()
+  -- I don't use this because I use projectlocal below
+  -- nvimlsp.setup({ 'lua', 'tsserverr' })
 
   -- projectlocal Config
   -- ---
@@ -72,7 +79,11 @@ function M.after()
   -- ---
   require('diagnosticls-configs').init({ on_attach = on_attach })
 
+  -- Generic LSP info
+  nmap('<Leader>li', '<Cmd>LspInfo<CR>')
+
   augroup('nvimlsp_user_events', {
+    -- Show line diagnostic on cursor hover
     {
       event = { 'CursorHold', 'CursorHoldI' },
       exec = function()
