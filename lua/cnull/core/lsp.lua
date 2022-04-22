@@ -91,7 +91,11 @@ function M.init(opts)
   set_lsp_float_opts(opts.float)
   set_lsp_completion_capabilities()
 
-  -- Turn on debug mode for nvim LSP client
+  -- Add on_attach
+  if opts.on_attach then
+    M.on_attach = opts.on_attach
+  end
+
   if opts.debug then
     vim.lsp.set_log_level('debug')
   end
